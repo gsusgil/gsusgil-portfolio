@@ -1,16 +1,9 @@
 ---
-/* =========================
-   ProjectLayout.astro
-   - Usa BaseLayout (CSS global + modal + theme scripts)
-   - Añade CSS de proyectos
-   - Carga scripts de proyecto como assets Vite (?url)
-========================= */
-
 import BaseLayout from "./BaseLayout.astro";
 import ThemeToggle from "../components/ThemeToggle.astro";
-
 import "../styles/projects.css";
 
+/* ✅ URLs bundleadas por Vite */
 import igCarouselUrl from "../scripts/ig-carousel.js?url";
 import projectRevealUrl from "../scripts/project-reveal.js?url";
 
@@ -36,7 +29,7 @@ const { title = "Project", description = "" } = Astro.props;
     <slot />
   </main>
 
-  <!-- ✅ Scripts de proyectos (Vercel + local OK) -->
+  <!-- ✅ Scripts de proyectos -->
   <script type="module" src={igCarouselUrl}></script>
   <script type="module" src={projectRevealUrl}></script>
 </BaseLayout>

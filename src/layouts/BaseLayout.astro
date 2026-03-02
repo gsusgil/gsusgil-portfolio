@@ -4,9 +4,9 @@ import "../styles/components.css";
 
 import ResumeModal from "../components/ResumeModal.astro";
 
-/* ✅ URLs bundleadas por Vite (NO /scripts/...) */
-import themeScriptUrl from "../scripts/theme.js?url";
-import modalScriptUrl from "../scripts/modal.js?url";
+/* ✅ URLs bundleadas por Vite (sirven en local y Vercel) */
+import themeUrl from "../scripts/theme.js?url";
+import modalUrl from "../scripts/modal.js?url";
 
 const { title = "Portfolio", description = "Lorem ipsum portfolio." } = Astro.props;
 ---
@@ -19,7 +19,7 @@ const { title = "Portfolio", description = "Lorem ipsum portfolio." } = Astro.pr
     <meta name="description" content={description} />
     <title>{title}</title>
 
-    <!-- Bootstrap theme instantáneo -->
+    <!-- ✅ Bootstrap theme instantáneo (antes de pintar) -->
     <script>
       (function () {
         try {
@@ -38,8 +38,8 @@ const { title = "Portfolio", description = "Lorem ipsum portfolio." } = Astro.pr
     <slot />
     <ResumeModal />
 
-    <!-- ✅ Scripts globales bundleados (Vercel + local OK) -->
-    <script type="module" src={themeScriptUrl}></script>
-    <script type="module" src={modalScriptUrl}></script>
+    <!-- ✅ Scripts globales (NO inline imports, solo URLs bundleadas) -->
+    <script type="module" src={themeUrl}></script>
+    <script type="module" src={modalUrl}></script>
   </body>
 </html>

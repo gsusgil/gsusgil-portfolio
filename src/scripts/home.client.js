@@ -1,48 +1,34 @@
-import Lenis from "@studio-freight/lenis";
-import gsap from "gsap";
-import ScrollTrigger from "gsap/ScrollTrigger";
+/* =========================================================
+   HOME CLIENT ENTRY — (Vercel/Astro safe)
+   - Aquí SÍ puedes importar libs (Lenis/GSAP) porque Vite bundlea esto.
+   - NO referenciar esto como "/scripts/home.client.js"
+     -> SIEMPRE cargar con "?url" desde Astro.
+========================================================= */
 
+import Lenis from "@studio-freight/lenis";
+
+// Tus módulos (solo lógica DOM)
 import "./intro-gsap.js";
 import "./preview-follow.js";
 import "./contact.js";
 
-gsap.registerPlugin(ScrollTrigger);
-
-function init() {
-  if (typeof window === "undefined") return;
-  if (typeof document === "undefined") return;
-
+function initLenis() {
   const lenis = new Lenis({
     smoothWheel: true,
     smoothTouch: false,
   });
 
-  window.__lenis = lenis;
-
   function raf(time) {
     lenis.raf(time);
     requestAnimationFrame(raf);
   }
+
   requestAnimationFrame(raf);
-
-  lenis.on("scroll", ScrollTrigger.update);
-
-  ScrollTrigger.scrollerProxy(document.body, {
-    scrollTop(value) {
-      if (arguments.length) lenis.scrollTo(value, { immediate: true });
-      return lenis.scroll;
-    },
-    getBoundingClientRect() {
-      return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
-    },
-  });
-
-  ScrollTrigger.addEventListener("refresh", () => lenis.resize());
-  ScrollTrigger.refresh();
 }
 
+// DOM listo
 if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", init, { once: true });
+  document.addEventListener("DOMContentLoaded", initLenis, { once: true });
 } else {
-  init();
+  initLenis();
 }

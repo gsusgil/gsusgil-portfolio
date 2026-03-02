@@ -1,10 +1,11 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-
 import Intro from "../components/Intro.astro";
 import Hero from "../components/Hero.astro";
 import ProjectsList from "../components/ProjectsList.astro";
-import homeScriptUrl from "../scripts/home.client.js?url";
+
+/* ✅ Entry point bundleado por Vite (aquí vive Lenis + GSAP + preview + contact + intro) */
+import homeUrl from "../scripts/home.client.js?url";
 ---
 
 <BaseLayout title="Portfolio" description="Lorem ipsum portfolio landing.">
@@ -12,6 +13,6 @@ import homeScriptUrl from "../scripts/home.client.js?url";
   <Hero />
   <ProjectsList />
 
-  <!-- ✅ Entry point bundleado por Vite -->
-  <script type="module" src={homeScriptUrl}></script>
+  <!-- ✅ Cargar bundle (Vercel OK) -->
+  <script type="module" src={homeUrl}></script>
 </BaseLayout>
