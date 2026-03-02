@@ -1,9 +1,13 @@
 ---
+/* =========================================================
+   BASE LAYOUT
+   - CSS global + components
+   - Modal global (una sola vez)
+   - ✅ Scripts globales (theme + modal) bundleados por Vite
+========================================================= */
+
 import "../styles/global.css";
 import "../styles/components.css";
-
-import themeScriptUrl from "../scripts/theme.js?url";
-import modalScriptUrl from "../scripts/modal.js?url";
 
 import ResumeModal from "../components/ResumeModal.astro";
 
@@ -17,13 +21,24 @@ const { title = "Portfolio", description = "Lorem ipsum portfolio." } = Astro.pr
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="description" content={description} />
     <title>{title}</title>
+
+    <!-- (Opcional) Si quieres mantener tu theme bootstrap inline, puedes ponerlo aquí -->
   </head>
 
   <body>
     <slot />
+
+    <!-- ✅ Modal global montado una sola vez -->
     <ResumeModal />
 
-    <script type="module" src={themeScriptUrl}></script>
-    <script type="module" src={modalScriptUrl}></script>
+    <!-- =====================================================
+         ✅ Scripts globales
+         - Se importan así para que Vite los bundlee
+         - Evita 404 raros y rutas rotas en producción
+    ====================================================== -->
+    <script type="module">
+      import "../scripts/theme.js";
+      import "../scripts/modal.js";
+    </script>
   </body>
 </html>
