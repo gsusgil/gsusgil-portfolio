@@ -2,20 +2,16 @@ import Lenis from "@studio-freight/lenis";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 
-// Tus módulos
 import "./intro-gsap.js";
 import "./preview-follow.js";
 import "./contact.js";
 
-console.log("[home.client] loaded ✅");
+gsap.registerPlugin(ScrollTrigger);
 
-function initApp() {
+function init() {
   if (typeof window === "undefined") return;
   if (typeof document === "undefined") return;
 
-  gsap.registerPlugin(ScrollTrigger);
-
-  // 🔥 UNA sola instancia de Lenis
   const lenis = new Lenis({
     smoothWheel: true,
     smoothTouch: false,
@@ -29,23 +25,15 @@ function initApp() {
   }
   requestAnimationFrame(raf);
 
-  // 🔥 Conectar Lenis con ScrollTrigger
   lenis.on("scroll", ScrollTrigger.update);
 
   ScrollTrigger.scrollerProxy(document.body, {
     scrollTop(value) {
-      if (arguments.length) {
-        lenis.scrollTo(value, { immediate: true });
-      }
+      if (arguments.length) lenis.scrollTo(value, { immediate: true });
       return lenis.scroll;
     },
     getBoundingClientRect() {
-      return {
-        top: 0,
-        left: 0,
-        width: window.innerWidth,
-        height: window.innerHeight,
-      };
+      return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
     },
   });
 
@@ -53,9 +41,8 @@ function initApp() {
   ScrollTrigger.refresh();
 }
 
-// DOM ready
 if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", initApp, { once: true });
+  document.addEventListener("DOMContentLoaded", init, { once: true });
 } else {
-  initApp();
+  init();
 }

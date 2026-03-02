@@ -1,9 +1,9 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+
 import Intro from "../components/Intro.astro";
 import Hero from "../components/Hero.astro";
 import ProjectsList from "../components/ProjectsList.astro";
-
 import homeScriptUrl from "../scripts/home.client.js?url";
 ---
 
@@ -12,5 +12,6 @@ import homeScriptUrl from "../scripts/home.client.js?url";
   <Hero />
   <ProjectsList />
 
+  <!-- ✅ Entry point bundleado por Vite -->
   <script type="module" src={homeScriptUrl}></script>
 </BaseLayout>

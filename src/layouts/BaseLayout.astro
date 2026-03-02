@@ -1,15 +1,12 @@
 ---
-/* =========================================================
-   BASE LAYOUT
-   - CSS global + components
-   - Modal global (una sola vez)
-   - ✅ Scripts globales (theme + modal) bundleados por Vite
-========================================================= */
-
 import "../styles/global.css";
 import "../styles/components.css";
 
 import ResumeModal from "../components/ResumeModal.astro";
+
+/* ✅ URLs bundleadas por Vite (NO /scripts/...) */
+import themeScriptUrl from "../scripts/theme.js?url";
+import modalScriptUrl from "../scripts/modal.js?url";
 
 const { title = "Portfolio", description = "Lorem ipsum portfolio." } = Astro.props;
 ---
@@ -22,23 +19,27 @@ const { title = "Portfolio", description = "Lorem ipsum portfolio." } = Astro.pr
     <meta name="description" content={description} />
     <title>{title}</title>
 
-    <!-- (Opcional) Si quieres mantener tu theme bootstrap inline, puedes ponerlo aquí -->
+    <!-- Bootstrap theme instantáneo -->
+    <script>
+      (function () {
+        try {
+          const savedTheme = localStorage.getItem("theme");
+          const systemPrefersDark =
+            window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+          const resolvedTheme = savedTheme ? savedTheme : (systemPrefersDark ? "dark" : "light");
+          document.documentElement.setAttribute("data-theme", resolvedTheme);
+        } catch (err) {}
+      })();
+    </script>
   </head>
 
   <body>
     <slot />
-
-    <!-- ✅ Modal global montado una sola vez -->
     <ResumeModal />
 
-    <!-- =====================================================
-         ✅ Scripts globales
-         - Se importan así para que Vite los bundlee
-         - Evita 404 raros y rutas rotas en producción
-    ====================================================== -->
-    <script type="module">
-      import "../scripts/theme.js";
-      import "../scripts/modal.js";
-    </script>
+    <!-- ✅ Scripts globales bundleados (Vercel + local OK) -->
+    <script type="module" src={themeScriptUrl}></script>
+    <script type="module" src={modalScriptUrl}></script>
   </body>
 </html>

@@ -1,23 +1,42 @@
 ---
+/* =========================
+   ProjectLayout.astro
+   - Usa BaseLayout (CSS global + modal + theme scripts)
+   - Añade CSS de proyectos
+   - Carga scripts de proyecto como assets Vite (?url)
+========================= */
+
 import BaseLayout from "./BaseLayout.astro";
 import ThemeToggle from "../components/ThemeToggle.astro";
+
 import "../styles/projects.css";
+
+import igCarouselUrl from "../scripts/ig-carousel.js?url";
+import projectRevealUrl from "../scripts/project-reveal.js?url";
 
 const { title = "Project", description = "" } = Astro.props;
 ---
 
 <BaseLayout title={title} description={description}>
   <header class="siteNav">
-    ...
+    <div class="container siteNav__inner">
+      <a class="siteNav__brand" href="/" aria-label="Home">
+        <img class="siteNav__logo siteNav__logo--light" src="/logo-gsusgil-red.svg" alt="gsusgil" />
+        <img class="siteNav__logo siteNav__logo--dark"  src="/logo-gsusgil.svg" alt="gsusgil" />
+      </a>
+
+      <nav class="siteNav__actions" aria-label="Primary">
+        <a class="btn" href="/">Home</a>
+        <ThemeToggle />
+      </nav>
+    </div>
   </header>
 
   <main>
     <slot />
   </main>
 
-  <!-- ✅ Bundleado por Vite (GSAP funciona en Vercel) -->
-  <script type="module">
-    import "../scripts/ig-carousel.js";
-    import "../scripts/project-reveal.js";
-  </script>
+  <!-- ✅ Scripts de proyectos (Vercel + local OK) -->
+  <script type="module" src={igCarouselUrl}></script>
+  <script type="module" src={projectRevealUrl}></script>
 </BaseLayout>
