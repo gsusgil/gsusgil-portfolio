@@ -3,7 +3,10 @@
 // - Toggle panel sin mover layout
 // - Copy email
 // =========================================================
-(function () {
+function initContactTooltip() {
+  if (typeof window === "undefined") return;
+  if (typeof document === "undefined") return;
+
   const root = document.querySelector("[data-contact]");
   if (!root) return;
 
@@ -38,7 +41,6 @@
       copyBtn.textContent = "Copied";
       setTimeout(() => (copyBtn.textContent = "Copy"), 900);
     } catch {
-      // fallback cutre pero funciona
       const ta = document.createElement("textarea");
       ta.value = email;
       document.body.appendChild(ta);
@@ -49,4 +51,13 @@
       setTimeout(() => (copyBtn.textContent = "Copy"), 900);
     }
   });
-})();
+}
+
+// DOM ready
+if (typeof document !== "undefined") {
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initContactTooltip, { once: true });
+  } else {
+    initContactTooltip();
+  }
+}

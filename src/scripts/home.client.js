@@ -1,20 +1,21 @@
-/* =========================================================
-   SMOOTH SCROLL — Lenis + ScrollTrigger proxy
-   (No metas reveal aquí)
-========================================================= */
 import Lenis from "@studio-freight/lenis";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 
-function initSmoothScroll() {
+// Tus módulos
+import "./intro-gsap.js";
+import "./preview-follow.js";
+import "./contact.js";
+
+function initApp() {
   if (typeof window === "undefined") return;
   if (typeof document === "undefined") return;
 
   gsap.registerPlugin(ScrollTrigger);
 
+  // 🔥 UNA sola instancia de Lenis
   const lenis = new Lenis({
-    duration: 1.1,
-    smooth: true,
+    smoothWheel: true,
     smoothTouch: false,
   });
 
@@ -26,6 +27,7 @@ function initSmoothScroll() {
   }
   requestAnimationFrame(raf);
 
+  // 🔥 Conectar Lenis con ScrollTrigger
   lenis.on("scroll", ScrollTrigger.update);
 
   ScrollTrigger.scrollerProxy(document.body, {
@@ -50,12 +52,8 @@ function initSmoothScroll() {
 }
 
 // DOM ready
-if (typeof document !== "undefined") {
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initSmoothScroll, {
-      once: true,
-    });
-  } else {
-    initSmoothScroll();
-  }
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initApp, { once: true });
+} else {
+  initApp();
 }

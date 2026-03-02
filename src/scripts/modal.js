@@ -1,10 +1,7 @@
-/* =========================================================
-   MODAL — Resume fullscreen modal
-   - Open: #openResumeButton
-   - Close: overlay / button / ESC
-========================================================= */
+function initResumeModal() {
+  if (typeof window === "undefined") return;
+  if (typeof document === "undefined") return;
 
-(function initializeResumeModal() {
   const modalRoot = document.getElementById("resumeModal");
   const openButton = document.getElementById("openResumeButton");
   const closeButton = document.getElementById("closeResumeButton");
@@ -30,8 +27,13 @@
     modalRoot.classList.remove("is-open");
     modalRoot.setAttribute("aria-hidden", "true");
     lockBodyScroll(false);
-    if (lastFocusedElement && lastFocusedElement.focus) lastFocusedElement.focus();
+    if (lastFocusedElement?.focus) lastFocusedElement.focus();
   }
+
+  // 🔥 IMPORTANTE: evitar duplicados
+  openButton.removeEventListener("click", openModal);
+  closeButton.removeEventListener("click", closeModal);
+  overlay.removeEventListener("click", closeModal);
 
   openButton.addEventListener("click", openModal);
   closeButton.addEventListener("click", closeModal);
@@ -42,4 +44,15 @@
       closeModal();
     }
   });
-})();
+}
+
+// Primera carga
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initResumeModal);
+} else {
+  initResumeModal();
+}
+
+// 🔥 CLAVE PARA ASTRO
+document.addEventListener("astro:page-load", initResumeModal);
+document.addEventListener("astro:after-swap", initResumeModal);

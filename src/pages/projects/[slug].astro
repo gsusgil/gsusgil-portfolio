@@ -48,52 +48,47 @@ const more = projects.filter((p) => p.slug !== slug).slice(0, 3);
           </section>
         )}
 
-        {/* STAGE (scoreboard limpio) */}
+        {/* STAGE */}
         {m.type === "stage" && (
-  <section class="project__block project__stage" data-reveal>
+          <section class="project__block project__stage" data-reveal>
+            <div class="project__stageHeader">
+              <div class="project__stageNum">{m.stage}</div>
 
-    <div class="project__stageHeader">
-      <div class="project__stageNum">
-        {m.stage}
-      </div>
+              <div class="project__stageKPI">
+                <div class="project__stageKPIValue">{m.metrics?.ctr}</div>
+                <div class="project__stageKPILabel">CTR</div>
+              </div>
+            </div>
 
-      <div class="project__stageKPI">
-        <div class="project__stageKPIValue">{m.metrics?.ctr}</div>
-        <div class="project__stageKPILabel">CTR</div>
-      </div>
-    </div>
+            <div class="project__stageStats">
+              <div class="project__stat">
+                <div class="project__statLabel">Impressions</div>
+                <div class="project__statValue">{m.metrics?.impressions}</div>
+              </div>
+              <div class="project__stat">
+                <div class="project__statLabel">Clicks</div>
+                <div class="project__statValue">{m.metrics?.clicks}</div>
+              </div>
+              <div class="project__stat">
+                <div class="project__statLabel">CTR</div>
+                <div class="project__statValue">{m.metrics?.ctr}</div>
+              </div>
+            </div>
 
-    <div class="project__stageStats">
-      <div class="project__stat">
-        <div class="project__statLabel">Impressions</div>
-        <div class="project__statValue">{m.metrics?.impressions}</div>
-      </div>
-      <div class="project__stat">
-        <div class="project__statLabel">Clicks</div>
-        <div class="project__statValue">{m.metrics?.clicks}</div>
-      </div>
-      <div class="project__stat">
-        <div class="project__statLabel">CTR</div>
-        <div class="project__statValue">{m.metrics?.ctr}</div>
-      </div>
-    </div>
+            <div class="project__stageDid">
+              <div class="project__stageDidLabel">What I did</div>
+              <p class="project__stageDidText">{m.did}</p>
+            </div>
+          </section>
+        )}
 
-    <div class="project__stageDid">
-      <div class="project__stageDidLabel">What I did</div>
-      <p class="project__stageDidText">{m.did}</p>
-    </div>
-
-  </section>
-)}
-
-        {/* TEXT */}
+        {/* TEXT (FIX: sin </div> sobrante) */}
         {m.type === "text" && (
-  <section class="project__block" data-reveal>
-      <div class="project__introLabel">{m.h2}</div>
-      <p class="project__introText">{m.p}</p>
-    </div>
-  </section>
-)}
+          <section class="project__block" data-reveal>
+            <div class="project__introLabel">{m.h2}</div>
+            <p class="project__introText">{m.p}</p>
+          </section>
+        )}
 
         {/* IMAGE */}
         {m.type === "image" && (
@@ -112,83 +107,81 @@ const more = projects.filter((p) => p.slug !== slug).slice(0, 3);
 
         {/* CAROUSEL */}
         {m.type === "carousel" && (
-  <section class="project__block project__level" data-reveal>
-    {/* Header: número + stage + KPI */}
-    <div class="project__levelTop">
-      {m.num && <div class="project__levelNum">{m.num}</div>}
+          <section class="project__block project__level" data-reveal>
+            <div class="project__levelTop">
+              {m.num && <div class="project__levelNum">{m.num}</div>}
 
-      <div class="project__stageWrap">
-        <div class="project__stageHeader">
-          <h2 class="project__stageTitle">{m.stage}</h2>
+              <div class="project__stageWrap">
+                <div class="project__stageHeader">
+                  <h2 class="project__stageTitle">{m.stage}</h2>
 
-          <div class="project__stageKPI">
-            <div class="project__stageKPIValue">{m.metrics?.ctr}</div>
-            <div class="project__stageKPILabel">CTR</div>
-          </div>
-        </div>
+                  <div class="project__stageKPI">
+                    <div class="project__stageKPIValue">{m.metrics?.ctr}</div>
+                    <div class="project__stageKPILabel">CTR</div>
+                  </div>
+                </div>
 
-        <div class="project__stageStats" aria-label="Stage metrics">
-          <div class="project__stat">
-            <div class="project__statLabel">Impressions</div>
-            <div class="project__statValue">{m.metrics?.impressions}</div>
-          </div>
-          <div class="project__stat">
-            <div class="project__statLabel">Clicks</div>
-            <div class="project__statValue">{m.metrics?.clicks}</div>
-          </div>
-          <div class="project__stat">
-            <div class="project__statLabel">CTR</div>
-            <div class="project__statValue">{m.metrics?.ctr}</div>
-          </div>
-        </div>
+                <div class="project__stageStats" aria-label="Stage metrics">
+                  <div class="project__stat">
+                    <div class="project__statLabel">Impressions</div>
+                    <div class="project__statValue">{m.metrics?.impressions}</div>
+                  </div>
+                  <div class="project__stat">
+                    <div class="project__statLabel">Clicks</div>
+                    <div class="project__statValue">{m.metrics?.clicks}</div>
+                  </div>
+                  <div class="project__stat">
+                    <div class="project__statLabel">CTR</div>
+                    <div class="project__statValue">{m.metrics?.ctr}</div>
+                  </div>
+                </div>
 
-        <div class="project__stageDid">
-          <div class="project__stageDidLabel">What I did</div>
-          <p class="project__stageDidText">{m.did}</p>
-        </div>
-      </div>
-    </div>
+                <div class="project__stageDid">
+                  <div class="project__stageDidLabel">What I did</div>
+                  <p class="project__stageDidText">{m.did}</p>
+                </div>
+              </div>
+            </div>
 
-    {/* Carrusel */}
-    {m.layout === "grid" && (
-      <div class="ig-grid" aria-label={m.stage}>
-        {Array.from({ length: m.count }).map((_, i) => (
-          <figure class="ig-gridSlide">
-            <img
-              src={`${m.dir}/${pad2(i + 1)}.jpg`}
-              alt={`${m.stage} — slide ${i + 1}`}
-              loading="lazy"
-            />
-          </figure>
-        ))}
-      </div>
-    )}
+            {m.layout === "grid" && (
+              <div class="ig-grid" aria-label={m.stage}>
+                {Array.from({ length: m.count }).map((_, i) => (
+                  <figure class="ig-gridSlide">
+                    <img
+                      src={`${m.dir}/${pad2(i + 1)}.jpg`}
+                      alt={`${m.stage} — slide ${i + 1}`}
+                      loading="lazy"
+                    />
+                  </figure>
+                ))}
+              </div>
+            )}
 
-    {m.layout !== "grid" && (
-      <div class="ig-scrollWrap" aria-label={m.stage}>
-        <button class="ig-navBtn" type="button" aria-label="Previous" data-ig-prev>
-          ←
-        </button>
+            {m.layout !== "grid" && (
+              <div class="ig-scrollWrap" aria-label={m.stage}>
+                <button class="ig-navBtn" type="button" aria-label="Previous" data-ig-prev>
+                  ←
+                </button>
 
-        <div class="ig-scroll" data-ig-carousel>
-          {Array.from({ length: m.count }).map((_, i) => (
-            <figure class="ig-scrollSlide">
-              <img
-                src={`${m.dir}/${pad2(i + 1)}.jpg`}
-                alt={`${m.stage} — slide ${i + 1}`}
-                loading="lazy"
-              />
-            </figure>
-          ))}
-        </div>
+                <div class="ig-scroll" data-ig-carousel>
+                  {Array.from({ length: m.count }).map((_, i) => (
+                    <figure class="ig-scrollSlide">
+                      <img
+                        src={`${m.dir}/${pad2(i + 1)}.jpg`}
+                        alt={`${m.stage} — slide ${i + 1}`}
+                        loading="lazy"
+                      />
+                    </figure>
+                  ))}
+                </div>
 
-        <button class="ig-navBtn" type="button" aria-label="Next" data-ig-next>
-          →
-        </button>
-      </div>
-    )}
-  </section>
-)}
+                <button class="ig-navBtn" type="button" aria-label="Next" data-ig-next>
+                  →
+                </button>
+              </div>
+            )}
+          </section>
+        )}
 
         {/* VIDEO */}
         {m.type === "video" && (

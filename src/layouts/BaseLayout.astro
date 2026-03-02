@@ -2,7 +2,8 @@
 import "../styles/global.css";
 import "../styles/components.css";
 
-import themeScriptUrl from "../scripts/theme.js?url";
+
+
 import modalScriptUrl from "../scripts/modal.js?url";
 
 import ResumeModal from "../components/ResumeModal.astro";
@@ -39,7 +40,7 @@ const { title = "Portfolio", description = "Lorem ipsum portfolio." } = Astro.pr
     <ResumeModal />
 
     <!-- ✅ Scripts globales -->
-    <script type="module" src={themeScriptUrl}></script>
-    <script type="module" src={modalScriptUrl}></script>
+    <script type="module" src="/src/scripts/theme.js"></script>
+  <script type="module" src="/src/scripts/modal.js"></script>
   </body>
 </html>

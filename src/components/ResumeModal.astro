@@ -1,29 +1,47 @@
 ---
 /* =========================================================
    RESUME MODAL — Fullscreen PDF modal
-   - Open: button #openResumeButton
-   - Close: overlay or close button or ESC
-   - Lógica: /src/scripts/modal.js
 ========================================================= */
 ---
 
 <div class="modal" id="resumeModal" aria-hidden="true">
   <div class="modal__overlay" id="resumeOverlay"></div>
 
-  <div class="modal__panel" role="dialog" aria-modal="true" aria-label="Resume PDF">
+  <div
+    class="modal__panel"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Resume PDF"
+  >
     <div class="modal__bar">
       <strong>Resume</strong>
 
       <div class="modal__actions">
-        <a class="btn" href="/resume.pdf" download style="padding:8px 12px;">Download</a>
-        <button class="btn" id="closeResumeButton" type="button" style="padding:8px 12px;">
+        <a
+          class="btn"
+          href="/resume/CV_JesusGil_GraphicDesigner.pdf"
+          download
+          style="padding:8px 12px;"
+        >
+          Download
+        </a>
+
+        <button
+          class="btn"
+          id="closeResumeButton"
+          type="button"
+          style="padding:8px 12px;"
+        >
           Close
         </button>
       </div>
     </div>
 
     <div class="modal__body">
-      <iframe src="/resume.pdf#view=FitH" title="Resume PDF"></iframe>
+      <iframe
+        src="/resume/CV_JesusGil_GraphicDesigner.pdf#view=FitH"
+        title="Resume PDF"
+      ></iframe>
     </div>
   </div>
 </div>

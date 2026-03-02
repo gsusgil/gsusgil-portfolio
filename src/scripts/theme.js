@@ -5,10 +5,10 @@
    - Respeta el sistema si el usuario no eligió nada
 ========================================================= */
 
-(function initializeThemeController() {
-  // =========================
-  // Helpers: leer / escribir tema
-  // =========================
+function initThemeController() {
+  if (typeof window === "undefined") return;
+  if (typeof document === "undefined") return;
+
   const THEME_STORAGE_KEY = "theme";
 
   function getCurrentTheme() {
@@ -18,15 +18,13 @@
   function persistTheme(themeValue) {
     try {
       localStorage.setItem(THEME_STORAGE_KEY, themeValue);
-    } catch (err) {
-      // Puede fallar en modo privado; no pasa nada.
-    }
+    } catch {}
   }
 
   function getPersistedTheme() {
     try {
       return localStorage.getItem(THEME_STORAGE_KEY);
-    } catch (err) {
+    } catch {
       return null;
     }
   }
@@ -37,35 +35,25 @@
     updateThemeLabel(themeValue);
   }
 
-  // =========================
-  // UI: actualizar label del botón
-  // =========================
   const themeToggleButton = document.getElementById("themeToggleButton");
   const themeToggleLabel = document.getElementById("themeToggleLabel");
 
   function updateThemeLabel(themeValue) {
     if (!themeToggleLabel) return;
-    themeToggleLabel.textContent = themeValue === "dark" ? "Dark" : "Light";
+    themeToggleLabel.textContent =
+      themeValue === "dark" ? "Dark" : "Light";
   }
 
-  // =========================
-  // Init: sincronizar label con tema actual
-  // =========================
   updateThemeLabel(getCurrentTheme());
 
-  // =========================
-  // Evento: click toggle
-  // =========================
   if (themeToggleButton) {
     themeToggleButton.addEventListener("click", () => {
-      const nextTheme = getCurrentTheme() === "dark" ? "light" : "dark";
+      const nextTheme =
+        getCurrentTheme() === "dark" ? "light" : "dark";
       setTheme(nextTheme);
     });
   }
 
-  // =========================
-  // Opcional: si NO hay preferencia guardada, seguir cambios del sistema
-  // =========================
   const hasUserPreference = Boolean(getPersistedTheme());
   const systemThemeMediaQuery = window.matchMedia
     ? window.matchMedia("(prefers-color-scheme: dark)")
@@ -78,4 +66,12 @@
       updateThemeLabel(systemTheme);
     });
   }
-})();
+}
+
+if (typeof document !== "undefined") {
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initThemeController, { once: true });
+  } else {
+    initThemeController();
+  }
+}

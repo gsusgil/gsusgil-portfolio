@@ -11,10 +11,15 @@ import ProjectsList from "../components/ProjectsList.astro";
   <Hero />
   <ProjectsList />
 
+
   <!-- ✅ Scripts HOME (bundleados por Vite) -->
   <script type="module">
     import "../scripts/intro-gsap.js";
     import "../scripts/preview-follow.js";
     import "../scripts/contact.js";
   </script>
+=======
+  <!-- JS SOLO CLIENTE -->
+  <script type="module" src="/src/scripts/home.client.js"></script>
+>>>>>>> aa5899d (fix: resume modal script loading)
 </BaseLayout>
