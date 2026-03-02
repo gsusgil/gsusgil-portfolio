@@ -7,6 +7,8 @@ import "./intro-gsap.js";
 import "./preview-follow.js";
 import "./contact.js";
 
+console.log("[home.client] loaded ✅");
+
 function initApp() {
   if (typeof window === "undefined") return;
   if (typeof document === "undefined") return;

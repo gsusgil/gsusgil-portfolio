@@ -1,9 +1,10 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-
 import Intro from "../components/Intro.astro";
 import Hero from "../components/Hero.astro";
 import ProjectsList from "../components/ProjectsList.astro";
+
+import homeScriptUrl from "../scripts/home.client.js?url";
 ---
 
 <BaseLayout title="Portfolio" description="Lorem ipsum portfolio landing.">
@@ -11,15 +12,5 @@ import ProjectsList from "../components/ProjectsList.astro";
   <Hero />
   <ProjectsList />
 
-
-  <!-- ✅ Scripts HOME (bundleados por Vite) -->
-  <script type="module">
-    import "../scripts/intro-gsap.js";
-    import "../scripts/preview-follow.js";
-    import "../scripts/contact.js";
-  </script>
-=======
-  <!-- JS SOLO CLIENTE -->
-  <script type="module" src="/src/scripts/home.client.js"></script>
->>>>>>> aa5899d (fix: resume modal script loading)
+  <script type="module" src={homeScriptUrl}></script>
 </BaseLayout>
