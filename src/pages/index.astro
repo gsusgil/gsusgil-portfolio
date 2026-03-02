@@ -4,11 +4,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Intro from "../components/Intro.astro";
 import Hero from "../components/Hero.astro";
 import ProjectsList from "../components/ProjectsList.astro";
-
-// ✅ Vite genera URLs válidas
-import introGsapUrl from "../scripts/intro-gsap.js?url";
-import previewFollowUrl from "../scripts/preview-follow.js?url";
-import contactUrl from "../scripts/contact.js?url";
 ---
 
 <BaseLayout title="Portfolio" description="Lorem ipsum portfolio landing.">
@@ -16,8 +11,10 @@ import contactUrl from "../scripts/contact.js?url";
   <Hero />
   <ProjectsList />
 
-  <!-- ✅ Scripts home (solo lo que es del home) -->
-  <script type="module" src={introGsapUrl}></script>
-  <script type="module" src={previewFollowUrl}></script>
-  <script type="module" src={contactUrl}></script>
+  <!-- ✅ Scripts HOME (bundleados por Vite) -->
+  <script type="module">
+    import "../scripts/intro-gsap.js";
+    import "../scripts/preview-follow.js";
+    import "../scripts/contact.js";
+  </script>
 </BaseLayout>
