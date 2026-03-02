@@ -1,57 +1,69 @@
 /* =========================================================
    INTRO (GSAP) — “Entrar por el logo” con máscara
-   - Anima --mask-size en #introMaskLayer
+   - Anima mask-size REAL (maskSize y webkitMaskSize)
    - Pin + scrub
-   - Corta el intro AL FINAL (sin fade rosa)
-   - Funciona igual en light y dark (la máscara se decide por CSS)
+   - Corta el intro AL FINAL
 ========================================================= */
 
 import gsap from "gsap";
-import ScrollTrigger from "gsap/ScrollTrigger";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-(function initializeIntroMaskScroll() {
+function initializeIntroMaskScroll() {
+  if (typeof window === "undefined" || typeof document === "undefined") return;
+
+  console.log("[intro-gsap] init");
+
   const introSection = document.getElementById("introSection");
   const introMaskLayer = document.getElementById("introMaskLayer");
+
+  console.log("[intro-gsap] elements", {
+    introSection: !!introSection,
+    introMaskLayer: !!introMaskLayer,
+  });
 
   if (!introSection || !introMaskLayer) return;
 
   const prefersReducedMotion =
-    window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.matchMedia &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   if (prefersReducedMotion) {
     introSection.style.display = "none";
     return;
   }
 
-  // =========================================================
-  // AJUSTES (toca solo esto)
-  // =========================================================
-  const maskStart = "22vh";      // tamaño inicial del logo-máscara
-  const maskEnd = "9000vh";      // tamaño final (sube a 8000vh si hace falta)
-  const scrollLength = 520;      // menor = menos scroll “vacío” (350–750)
-  const cutAt = 0.94;           // cuándo “cortamos” el intro (0.96–0.995)
+  // AJUSTES
+  const maskStart = "22vh";
+  const maskEnd = "9000vh";
+  const scrollLength = 520;
+  const cutAt = 0.94;
 
-  // =========================================================
-  // Reset limpio (importante para volver arriba sin glitches)
-  // =========================================================
   function resetIntroToStart() {
-  introSection.style.display = "";
-  introSection.style.opacity = "1";
-  introSection.style.pointerEvents = "";
-  introMaskLayer.style.setProperty("--mask-size", maskStart);
-}
+    introSection.style.display = "";
+    introSection.style.opacity = "1";
+    introSection.style.pointerEvents = "";
+
+    // 1) Tu variable (por si tu CSS la usa)
+    introMaskLayer.style.setProperty("--mask-size", maskStart);
+
+    // 2) Propiedades reales (por si tu CSS NO usa la variable)
+    introMaskLayer.style.webkitMaskSize = maskStart;
+    introMaskLayer.style.maskSize = maskStart;
+  }
 
   resetIntroToStart();
 
-  // Evita duplicados en HMR (si guardas muchas veces)
+  // Mata solo ESTE trigger
   ScrollTrigger.getAll().forEach((t) => {
     if (t?.vars?.id === "introMaskPin") t.kill(true);
   });
 
-  // Refresca al cargar assets para que el pin calcule bien
+  // Refrescos extra (en prod ayuda cuando cambian fuentes/imagenes)
   window.addEventListener("load", () => ScrollTrigger.refresh(), { once: true });
+  setTimeout(() => ScrollTrigger.refresh(), 250);
+  setTimeout(() => ScrollTrigger.refresh(), 800);
 
   const tl = gsap.timeline({
     scrollTrigger: {
@@ -64,35 +76,42 @@ gsap.registerPlugin(ScrollTrigger);
       anticipatePin: 1,
       invalidateOnRefresh: true,
 
-      // Al salir por abajo, que no bloquee interacción
       onLeave: () => {
         introSection.style.pointerEvents = "none";
       },
-
-      // Al volver desde abajo, vuelve a ser interactivo/visible
       onEnterBack: () => {
         introSection.style.pointerEvents = "";
         introSection.style.opacity = "1";
         introSection.style.display = "";
       },
-
-      // CLAVE: al volver arriba del todo, reset perfecto
       onLeaveBack: () => {
         resetIntroToStart();
-      }
-    }
+      },
+    },
   });
 
-  // =========================================================
-  // Animación principal: crecer máscara (sin tocar opacity)
-  // =========================================================
-  tl.to(introMaskLayer, { "--mask-size": maskEnd, ease: "none" }, 0);
+  // Anima TODO: variable + maskSize real
+  tl.to(
+    introMaskLayer,
+    {
+      "--mask-size": maskEnd,
+      webkitMaskSize: maskEnd,
+      maskSize: maskEnd,
+      ease: "none",
+    },
+    0
+  );
 
-  // =========================================================
-  // Corte FINAL (sin “rosa”):
-  // - No hacemos fade gradual del rojo.
-  // - Lo escondemos casi al final, cuando la máscara ya llenó.
-  // =========================================================
   tl.set(introSection, { opacity: 0 }, cutAt);
   tl.set(introSection, { display: "none", pointerEvents: "none" }, cutAt + 0.001);
-})();
+
+  console.log("[intro-gsap] ready");
+}
+
+if (typeof document !== "undefined") {
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initializeIntroMaskScroll, { once: true });
+  } else {
+    initializeIntroMaskScroll();
+  }
+}
