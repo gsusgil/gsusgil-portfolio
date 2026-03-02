@@ -2,8 +2,7 @@
 import "../styles/global.css";
 import "../styles/components.css";
 
-
-
+import themeScriptUrl from "../scripts/theme.js?url";
 import modalScriptUrl from "../scripts/modal.js?url";
 
 import ResumeModal from "../components/ResumeModal.astro";
@@ -18,29 +17,13 @@ const { title = "Portfolio", description = "Lorem ipsum portfolio." } = Astro.pr
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="description" content={description} />
     <title>{title}</title>
-
-    <script>
-      (function () {
-        try {
-          const savedTheme = localStorage.getItem("theme");
-          const systemPrefersDark =
-            window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-
-          const resolvedTheme = savedTheme ? savedTheme : (systemPrefersDark ? "dark" : "light");
-          document.documentElement.setAttribute("data-theme", resolvedTheme);
-        } catch (err) {}
-      })();
-    </script>
   </head>
 
   <body>
     <slot />
-
-    <!-- ✅ Modal global (una sola vez) -->
     <ResumeModal />
 
-    <!-- ✅ Scripts globales -->
-    <script type="module" src="/src/scripts/theme.js"></script>
-  <script type="module" src="/src/scripts/modal.js"></script>
+    <script type="module" src={themeScriptUrl}></script>
+    <script type="module" src={modalScriptUrl}></script>
   </body>
 </html>
