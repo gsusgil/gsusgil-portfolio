@@ -1,0 +1,48 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import ThemeToggle from "../components/ThemeToggle.astro";
+import "../styles/projects.css";
+
+/* =========================================================
+   Scripts: Vite genera URLs válidas con ?url
+   - NO uses /src/... en el navegador
+========================================================= */
+import projectRevealUrl from "../scripts/project-reveal.js?url";
+import igCarouselUrl from "../scripts/ig-carousel.js?url";
+// import smoothScrollUrl from "../scripts/smooth-scroll.js?url"; // lo activamos luego
+
+const { title = "Project", description = "" } = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <!-- =====================================================
+       Sticky nav para páginas de proyecto
+  ====================================================== -->
+  <header class="siteNav">
+    <div class="container siteNav__inner">
+      <a class="siteNav__brand" href="/" aria-label="Home">
+        <img class="siteNav__logo siteNav__logo--light" src="/logo-gsusgil-red.svg" alt="gsusgil" />
+        <img class="siteNav__logo siteNav__logo--dark"  src="/logo-gsusgil.svg" alt="gsusgil" />
+      </a>
+
+      <nav class="siteNav__actions" aria-label="Primary">
+        <a class="btn" href="/">Home</a>
+        <ThemeToggle />
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <slot />
+  </main>
+
+  <!-- =====================================================
+       Scripts (orden importa)
+       1) carrusel (botones)
+       2) reveal (gsap)
+       (Lenis luego)
+  ====================================================== -->
+  <script type="module" src={igCarouselUrl}></script>
+  <script type="module" src={projectRevealUrl}></script>
+  <!-- <script type="module" src={smoothScrollUrl}></script> -->
+</BaseLayout>

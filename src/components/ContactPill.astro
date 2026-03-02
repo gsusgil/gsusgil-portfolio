@@ -1,0 +1,29 @@
+---
+/* =========================================================
+   CONTACT (Tooltip)
+   - Button triggers a tooltip bubble
+   - Tooltip contains: copy email + open mailto
+   - Logic: /src/scripts/contact.js
+========================================================= */
+---
+
+<div class="contact-tooltip" id="contactTooltip">
+  <button class="btn btn--accent" id="contactTooltipButton" type="button" aria-expanded="false">
+    Contact
+  </button>
+
+  <div class="tooltip-bubble" id="contactTooltipBubble" role="tooltip" aria-hidden="true">
+    <div class="tooltip-row">
+      <span class="small">Email</span>
+      <button class="btn tooltip-copy" id="copyEmailButton" type="button" data-email="hello@yourdomain.com">
+        Copy
+      </button>
+    </div>
+
+    <button class="tooltip-email" id="emailActionButton" type="button" data-email="hello@yourdomain.com">
+      hello@yourdomain.com
+    </button>
+
+    <div class="small tooltip-toast" id="copyToast" style="display:none;">Copied ✓</div>
+  </div>
+</div>

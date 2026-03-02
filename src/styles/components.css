@@ -1,0 +1,598 @@
+/* =========================================================
+   COMPONENTS
+   - Buttons (no shadows)
+   - Pills
+   - Intro
+   - Projects list + hover border draw
+   - Modal
+========================================================= */
+
+/* ---------- Buttons ---------- */
+.btn{
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  padding: 12px 14px;
+  border-radius: var(--radius-8);
+  border: 1px solid var(--border-strong);
+  background: transparent;
+  color: var(--text);
+
+  cursor: pointer;
+  transition: color var(--dur-250) var(--ease-out),
+              border-color var(--dur-250) var(--ease-out),
+              transform var(--dur-150) var(--ease-out);
+}
+
+/* “Trimpath” sin SVG: 4 líneas como backgrounds */
+.btn::after{
+  content:"";
+  position:absolute;
+  inset: -1px;
+  border-radius: calc(var(--radius-8) + 1px);
+  pointer-events:none;
+
+  /* 4 lados (top, right, bottom, left) */
+  background:
+    linear-gradient(var(--accent), var(--accent)) top left / 0% 1px no-repeat,
+    linear-gradient(var(--accent), var(--accent)) top right / 1px 0% no-repeat,
+    linear-gradient(var(--accent), var(--accent)) bottom right / 0% 1px no-repeat,
+    linear-gradient(var(--accent), var(--accent)) bottom left / 1px 0% no-repeat;
+
+  transition:
+    background-size var(--dur-400) var(--ease-out);
+}
+
+.btn:hover{
+  border-color: transparent; /* opcional: deja solo el “draw” */
+}
+
+/* Secuencia simple: primero horizontales, luego verticales */
+.btn:hover::after{
+  background-size:
+    100% 1px,  /* top */
+    1px 100%,  /* right */
+    100% 1px,  /* bottom */
+    1px 100%;  /* left */
+}
+
+/* ---------- Pills ---------- */
+.pill{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+}
+
+/* ---------- Intro ---------- */
+.intro{
+  min-height: 100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position: relative;
+}
+
+.intro__logo{
+  width: min(520px, 80vw);
+  height: auto;
+}
+
+/* =========================================================
+   PROJECTS LIST — Lista textual
+   - Sin tags / sin fecha
+   - Hover: líneas separadoras pasan a rojo (accent)
+========================================================= */
+
+/* Kicker ("Selected projects") */
+.projects__kicker{
+  font-size: 18px;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  margin-bottom: 24px;
+}
+
+/* ---------- Row ---------- */
+.project-row{
+  font-size: 28px;
+  display: grid;
+  grid-template-columns: 64px 1fr; /* ✅ ya no hay columna derecha */
+  gap: 18px;
+  padding: 22px 0;
+
+  border-top: 1px solid var(--border);
+  align-items: start;
+
+  /* ✅ Transiciones claras (más “premium”) */
+  transition:
+    transform var(--dur-250) var(--ease-out),
+    border-color var(--dur-250) var(--ease-out);
+}
+
+.project-row:last-child{
+  border-bottom: 1px solid var(--border);
+  transition: border-color var(--dur-250) var(--ease-out);
+}
+
+/* ✅ Hover con línea roja visible */
+.project-row:hover{
+  transform: translateY(-3px);
+  border-top-color: var(--accent);
+}
+
+/* Hover coherente con el título */
+.project-row:hover .project-row__num{
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* ✅ Si es el último, también pinta la línea inferior */
+.project-row:hover:last-child{
+  border-bottom-color: var(--accent);
+}
+
+/* Número */
+.project-row__num{
+  color: var(--muted);
+  font-weight: 600;
+}
+
+/* Contenido */
+.project-row__body{
+  min-width: 0; /* evita overflow raro */
+}
+
+/* Título */
+.project-row__title{
+  font-size: 26px;
+  line-height: 1.15;
+  font-weight: 700;
+  color: var(--title);
+  margin-bottom: 6px;
+
+  transition: color var(--dur-250) var(--ease-out);
+}
+
+/* (Opcional pero queda mejor): refuerza interacción */
+.project-row:hover .project-row__title{
+  color: var(--accent);
+}
+
+/* Descripción */
+.project-row__excerpt{
+  color: var(--muted);
+  margin: 0;
+}
+
+
+
+/* =========================================================
+   FLOATING PREVIEW (desktop only)
+   - Lo mueve preview-follow.js
+========================================================= */
+
+.preview-float{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 700px;
+  height: 400px;
+
+  border-radius: var(--radius-16);
+  border: 1px solid var(--border);
+  background: var(--bg);
+  overflow: hidden;
+
+  opacity: 0;
+  pointer-events: none;
+
+  /* Lo “sacamos” de pantalla cuando no se usa */
+  transform: translate3d(-9999px, -9999px, 0);
+
+  transition: opacity var(--dur-150) var(--ease-out);
+}
+
+.preview-float__img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.preview-float__label{
+  position: absolute;
+  left: 14px;
+  bottom: 12px;
+  right: 14px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+
+  padding: 10px 12px;
+  border-radius: var(--radius-12);
+  border: 1px solid var(--border);
+
+  background: rgba(0,0,0,0.04);
+  color: var(--text);
+}
+
+html[data-theme="dark"] .preview-float__label{
+  background: rgba(255,255,255,0.06);
+}
+
+/* =========================================================
+   MOBILE
+   - Sin preview flotante
+========================================================= */
+@media (max-width: 900px){
+  .preview-float{ display: none; }
+  .project-row{ grid-template-columns: 44px 1fr; }
+}
+
+/* Mobile: simplificar */
+@media (max-width: 900px){
+  .preview-float{ display:none; }
+  .project-row{ grid-template-columns: 44px 1fr; }
+  .project-row__meta{ display:none; }
+}
+
+/* ---------- Modal ---------- */
+.modal{
+  position: fixed;
+  inset: 0;
+  display:none;
+  z-index: 50;
+}
+
+.modal.is-open{
+  display:block;
+}
+
+.modal__overlay{
+  position:absolute;
+  inset:0;
+  background: rgba(0,0,0,0.55);
+}
+
+.modal__panel{
+  position:absolute;
+  inset: 24px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-16);
+  overflow: hidden;
+
+  display:flex;
+  flex-direction: column;
+}
+
+.modal__bar{
+  display:flex;
+  justify-content: space-between;
+  align-items:center;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.modal__actions{
+  display:flex;
+  gap: 10px;
+}
+
+.modal__body{
+  flex:1;
+  overflow:auto;
+}
+
+.modal__body iframe{
+  width:100%;
+  height:100%;
+  border:0;
+}
+
+/* =========================================================
+   INTRO — Mask reveal (estable, sin “rosa”)
+========================================================= */
+
+.intro{
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  position: relative;
+  z-index: 9999;
+  overflow: hidden;
+  background: var(--intro-bg);
+}
+
+/* Hint */
+.intro__hint{
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 22px;
+  text-align: center;
+  opacity: 0.7;
+}
+
+/* Logo solo “decorativo” (no se anima) */
+.intro__logoWrap{
+  width: min(520px, 80vw);
+  display: grid;
+  place-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.intro__logo{
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* =========================================================
+   MASK LAYER (esto es lo que “crece”)
+   - Fondo: color real de la página
+   - Máscara: tu SVG
+   - Tamaño: controlado por variable --mask-size
+========================================================= */
+
+.intro__maskLayer{
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+
+  background: var(--intro-reveal);
+
+  /* La magia: máscara con SVG */
+  --mask-size: 22vh; /* valor inicial (GSAP lo sobreescribe) */
+
+  -webkit-mask-image: var(--intro-mask-url);
+  mask-image: var(--intro-mask-url);
+
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+
+  -webkit-mask-position: center;
+  mask-position: center;
+
+  -webkit-mask-size: var(--mask-size);
+  mask-size: var(--mask-size);
+
+  /* Evita “shimmer” raro en algunos setups */
+  will-change: -webkit-mask-size, mask-size;
+  transform: translateZ(0);
+}
+
+/* =========================================================
+   THEME BINDINGS
+   - Light: fondo rojo, “página” blanca, máscara = logo light
+   - Dark: fondo blanco, “página” dark suave, máscara = logo dark
+========================================================= */
+
+:root{
+  --intro-bg: #ff4d4d;
+  --intro-reveal: #ffffff;
+  --intro-mask-url: url("/logo-gsusgil.svg");
+}
+
+/* Dark “relajado” (no negro puro) */
+html[data-theme="dark"]{
+  --intro-bg: #ffffff;
+  --intro-reveal: #121217; /* <- dark suave que combina con el rojo */
+  --intro-mask-url: url("/logo-gsusgil-dark.svg");
+}
+
+
+/* =========================================================
+   HERO LAYOUT (alineación + espaciado)
+   - Centra logo arriba
+   - Títulos centrados
+   - CTA row (Contact / Resume) centrado
+========================================================= */
+
+.hero{
+  padding: 84px 0 64px;
+}
+
+.hero__top{
+  position: relative;
+  display: grid;
+  place-items: center;
+  margin-bottom: 34px;
+}
+
+/* Logo arriba centrado */
+.hero__brand{
+  display:flex;
+  justify-content:center;
+  width:100%;
+}
+
+.hero__logo{
+  height: 34px;
+  width: auto;
+  display:block;
+}
+
+.hero__logo--dark{ display:none; }
+html[data-theme="dark"] .hero__logo--light{ display:none; }
+html[data-theme="dark"] .hero__logo--dark{ display:block; }
+
+/* Toggle arriba a la derecha */
+.hero__toggle{
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+/* Textos */
+.hero__content{
+  text-align: center;
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.hero__content h1{
+  font-size: 54px;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.hero__content h2{
+  margin-top: 18px;
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: .8;
+  font-weight: 400; /* “light” */
+}
+
+/* CTAs centrados */
+.hero__ctaRow{
+  margin-top: 28px;
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+/* Mobile */
+@media (max-width: 640px){
+  .hero{ padding: 64px 0 52px; }
+
+  .hero__content h1{
+    font-size: 36px;
+    line-height: 1.1;
+  }
+
+  .hero__content h2{
+    font-size: 18px;
+    line-height: 1.55;
+  }
+}
+
+/* =========================================================
+   CONTACT TOOLTIP (no “salto” de layout)
+   - Botón Contact abre tooltip
+   - Tooltip contiene Email + Copy (y opcional mailto)
+========================================================= */
+
+.contactTip{
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Panel tooltip */
+.contactTip__panel{
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%) translateY(6px);
+  width: min(340px, 86vw);
+  padding: 12px 12px;
+
+  border-radius: var(--radius-12);
+  border: 1px solid var(--border);
+  background: var(--bg);
+  z-index: 30;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--dur-150) var(--ease-out),
+              transform var(--dur-150) var(--ease-out);
+}
+
+/* Flechita */
+.contactTip__panel::before{
+  content:"";
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 10px;
+  height: 10px;
+  background: var(--bg);
+  border-left: 1px solid var(--border);
+  border-top: 1px solid var(--border);
+}
+
+/* Abierto */
+.contactTip.is-open .contactTip__panel{
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+.contactTip__row{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.contactTip__label{
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.contactTip__email{
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--text);
+  padding: 8px 10px;
+  border-radius: var(--radius-8);
+  border: 1px solid var(--border);
+  background: transparent;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+.siteNav{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: color-mix(in srgb, var(--bg) 86%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+
+.siteNav__inner{
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.siteNav__brand{
+  display: inline-flex;
+  align-items: center;
+}
+
+.siteNav__logo{
+  height: 28px;
+  width: auto;
+  display: block;
+}
+
+.siteNav__logo--dark{ display:none; }
+html[data-theme="dark"] .siteNav__logo--light{ display:none; }
+html[data-theme="dark"] .siteNav__logo--dark{ display:block; }
+
+.siteNav__actions{
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}

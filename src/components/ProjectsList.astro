@@ -1,0 +1,44 @@
+<!-- =========================================================
+  PROJECTS LIST — Lista textual (sin tags / sin fecha)
+  - Desktop: hover muestra preview flotante siguiendo el cursor
+  - Mobile: no preview (tap va directo al proyecto)
+  - Lógica: /src/scripts/preview-follow.js
+========================================================= -->
+
+---
+import { projects } from "../data/projects";
+
+---
+
+<section class="section" aria-label="Selected projects">
+  <div class="container">
+    <div class="small projects__kicker">Selected projects</div>
+
+    <div id="projectsList">
+      {projects.map((p, i) => (
+        <a
+          class="project-row"
+          href={`/projects/${p.slug}`}
+          data-preview={p.preview}
+          data-title={p.title}
+        >
+          <div class="project-row__num">{String(i + 1).padStart(2, "0")}</div>
+
+          <div class="project-row__body">
+            <div class="project-row__title">{p.title}</div>
+            <p class="project-row__excerpt">{p.lede}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+
+  <div class="preview-float" id="previewFloat" aria-hidden="true">
+    <img class="preview-float__img" id="previewImage" alt="" />
+    <div class="preview-float__label">
+      <span id="previewTitle">Project</span>
+      <span>View</span>
+    </div>
+  </div>
+</section>
+</section>

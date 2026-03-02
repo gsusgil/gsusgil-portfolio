@@ -1,0 +1,58 @@
+/* =========================================================
+   TOKENS
+   - Variables base del sistema
+   - Temas: light / dark mediante [data-theme]
+========================================================= */
+
+:root{
+  /* Typography */
+  --font-sans: Helvetica, Arial, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  /* Radii */
+  --radius-8: 8px;
+  --radius-12: 12px;
+  --radius-16: 16px;
+
+  /* Layout */
+  --container-max: 1120px;
+  --container-pad: 24px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
+  --dur-150: 150ms;
+  --dur-250: 250ms;
+  --dur-400: 400ms;
+
+  /* Focus ring */
+  --focus: 0 0 0 3px rgba(255, 77, 77, .25);
+
+  /* =========================
+     LIGHT THEME (default)
+  ========================== */
+  --bg: #ffffff;
+  --surface: rgba(0,0,0,0.02);
+  --text: #332929;
+  --muted: rgba(51, 41, 41, 0.70);
+  --title: #ff4d4d;
+  --border: rgba(51, 41, 41, 0.18);
+  --border-strong: rgba(51, 41, 41, 0.28);
+
+  --accent: #ff4d4d;
+  --accent-contrast: #ffffff;
+}
+
+/* =========================
+   DARK THEME
+========================== */
+html[data-theme="dark"]{
+  --bg: #121216;                 /* carbón suave */
+  --surface: rgba(255,255,255,0.06);
+  --title: rgba(255,255,255,0.96);
+  --accent: #ff4d4d;
+  --surface: rgba(255,255,255,0.05);
+  --text: rgba(242, 238, 238, 0.92);
+  --muted: rgba(242, 238, 238, 0.70);
+  --border: rgba(242, 238, 238, 0.18);
+  --border-strong: rgba(242, 238, 238, 0.28);
+  --accent-contrast: #0b0b0d;
+}

@@ -1,0 +1,72 @@
+---
+/* =========================================================
+   HERO
+   - Logo centrado arriba (placeholder)
+   - Theme toggle arriba derecha
+   - H1/H2 centrados
+   - CTAs centrados (Contact + Resume)
+========================================================= */
+
+import ThemeToggle from "./ThemeToggle.astro";
+---
+
+<section class="hero section" aria-label="Hero">
+  <div class="container">
+
+    <!-- =========================
+         Top row (logo + theme)
+    ========================== -->
+    <div class="hero__top">
+      <!-- Logo placeholder centrado -->
+      <div class="hero__brand" aria-label="Brand">
+        <img class="hero__logo hero__logo--light" src="/logo-gsusgil-red.svg" alt="gsusgil" />
+        <img class="hero__logo hero__logo--dark"  src="/logo-gsusgil.svg"      alt="gsusgil" />
+      </div>
+
+      <!-- Theme toggle (derecha arriba) -->
+      <div class="hero__toggle">
+        <ThemeToggle />
+      </div>
+    </div>
+
+    <!-- =========================
+         Content (H1 / H2 / CTAs)
+    ========================== -->
+    <div class="hero__content">
+      <h1>Strategic Brand Systems</h1>
+      <h2>Strong visual foundations for sustainable growth</h2>
+
+      <div class="hero__ctaRow">
+        <!-- =========================
+             Contact tooltip (no layout jump)
+        ========================== -->
+        <div class="contactTip" data-contact>
+          <button class="btn btn--accent" type="button" data-contact-btn>
+            Contact
+          </button>
+
+          <div class="contactTip__panel" role="dialog" aria-label="Contact options">
+            <div class="contactTip__label">Email</div>
+
+            <div class="contactTip__row">
+              <div class="contactTip__email" data-email>hello@yourdomain.com</div>
+
+              <button class="btn" type="button" data-copy-btn>Copy</button>
+              <!-- Si quieres mailto directo:
+              <a class="btn" href="mailto:hello@yourdomain.com">Mail</a>
+              -->
+            </div>
+          </div>
+        </div>
+
+        <!-- =========================
+             Resume button (abre modal)
+        ========================== -->
+       <button class="btn" type="button" id="openResumeButton">
+       Resume <span class="small">PDF</span>
+       </button>
+      </div>
+    </div>
+
+  </div>
+</section>

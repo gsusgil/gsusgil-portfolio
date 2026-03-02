@@ -1,0 +1,143 @@
+/* =========================================================
+   GLOBAL
+   - Reset + base styles
+   - Tipografía + layout + headings
+========================================================= */
+
+@import "./tokens.css";
+
+/* Reset mínimo */
+*{ box-sizing:border-box; }
+html, body{ height:100%; }
+body{ margin:0; }
+
+img, svg, video{ max-width:100%; height:auto; display:block; }
+button, input, textarea{ font: inherit; }
+
+::selection{
+  background: rgba(255,77,77,.25);
+}
+
+body{
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Layout helpers */
+.container{
+  width: min(var(--container-max), 100%);
+  margin: 0 auto;
+  padding: 0 var(--container-pad);
+}
+
+.section{
+  padding: 72px 0;
+}
+
+/* Typography */
+h1, h2, h3, p{ margin:0; }
+
+h1{
+  color: var(--title);
+  font-weight: 800;
+  font-size: 38px;
+  line-height: 39.5px;
+  letter-spacing: -0.02em;
+  text-align: center;
+}
+
+h2{
+  color: var(--text);
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 1.5; /* “auto” sensato */
+  text-align: center;
+  margin-top: 14px;
+  color: var(--muted);
+}
+
+h3{
+  color: var(--title);
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+p{
+  font-size: 18px;
+  line-height: 21px;
+  color: var(--text);
+}
+
+.small{
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--muted);
+}
+
+a{
+  color: inherit;
+  text-decoration: none;
+}
+
+a:focus-visible,
+button:focus-visible{
+  outline: none;
+  box-shadow: var(--focus);
+  border-radius: var(--radius-8);
+}
+
+/* Mobile typography */
+@media (max-width: 640px){
+  .section{ padding: 56px 0; }
+
+  h1{
+    font-size: 32px;
+    line-height: 36px;
+  }
+
+  h2{
+    font-size: 18px;
+    line-height: 1.55;
+  }
+
+  p{
+    font-size: 16px;
+    line-height: 18px;
+  }
+}
+/* =========================================================
+   BACKDROP — glow suave (dark)
+   - Mantiene el fondo relajante
+   - Acento rojo muy sutil
+========================================================= */
+
+html[data-theme="dark"] body{
+  position: relative;
+  overflow-x: hidden;
+}
+
+html[data-theme="dark"] body::before{
+  content:"";
+  position: fixed;
+  inset: -20%;
+  pointer-events: none;
+  z-index: 0;
+
+  /* glow rojo suave + viñeta oscura */
+  background:
+    radial-gradient(900px 500px at 50% 10%, rgba(255,77,77,0.18), transparent 60%),
+    radial-gradient(700px 400px at 15% 35%, rgba(255,77,77,0.10), transparent 55%),
+    radial-gradient(900px 700px at 80% 70%, rgba(0,0,0,0.0), rgba(0,0,0,0.35) 70%);
+  filter: blur(10px);
+}
+
+/* Importante: tu contenido por encima del glow */
+body > *{
+  position: relative;
+  z-index: 1;
+}
