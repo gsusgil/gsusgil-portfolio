@@ -1,8 +1,9 @@
+// astro.config.mjs
 // @ts-check
 import { defineConfig } from "astro/config";
-import vercel from "@astrojs/vercel/static"; // ✅ Static, NO serverless
+import vercel from "@astrojs/vercel/static";
 
 export default defineConfig({
-  output: "static", // ✅ sitio estático
+  output: "static",       // ✅ Sitio estático (cero serverless functions)
   adapter: vercel(),
 });
