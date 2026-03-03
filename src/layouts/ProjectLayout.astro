@@ -3,7 +3,6 @@ import BaseLayout from "./BaseLayout.astro";
 import ThemeToggle from "../components/ThemeToggle.astro";
 import "../styles/projects.css";
 
-/* ✅ URLs bundleadas por Vite */
 import igCarouselUrl from "../scripts/ig-carousel.js?url";
 import projectRevealUrl from "../scripts/project-reveal.js?url";
 
@@ -29,7 +28,7 @@ const { title = "Project", description = "" } = Astro.props;
     <slot />
   </main>
 
-  <!-- ✅ Scripts de proyectos -->
+  <!-- ✅ Scripts bundleados -->
   <script type="module" src={igCarouselUrl}></script>
   <script type="module" src={projectRevealUrl}></script>
 </BaseLayout>

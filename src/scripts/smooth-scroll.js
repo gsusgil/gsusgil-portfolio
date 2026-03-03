@@ -1,24 +1,20 @@
 /* =========================================================
-   SMOOTH SCROLL — Lenis + ScrollTrigger proxy
-   (No metas reveal aquí)
+   SMOOTH SCROLL — Lenis helper (opcional)
 ========================================================= */
-import Lenis from "@studio-freight/lenis";
-import gsap from "gsap";
-import ScrollTrigger from "gsap/ScrollTrigger";
 
-function initSmoothScroll() {
-  if (typeof window === "undefined") return;
-  if (typeof document === "undefined") return;
+import Lenis from "lenis";
 
-  gsap.registerPlugin(ScrollTrigger);
+export function createLenis() {
+  const prefersReducedMotion =
+    window.matchMedia &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (prefersReducedMotion) return null;
 
   const lenis = new Lenis({
-    duration: 1.1,
-    smooth: true,
+    smoothWheel: true,
     smoothTouch: false,
   });
-
-  window.__lenis = lenis;
 
   function raf(time) {
     lenis.raf(time);
@@ -26,36 +22,5 @@ function initSmoothScroll() {
   }
   requestAnimationFrame(raf);
 
-  lenis.on("scroll", ScrollTrigger.update);
-
-  ScrollTrigger.scrollerProxy(document.body, {
-    scrollTop(value) {
-      if (arguments.length) {
-        lenis.scrollTo(value, { immediate: true });
-      }
-      return lenis.scroll;
-    },
-    getBoundingClientRect() {
-      return {
-        top: 0,
-        left: 0,
-        width: window.innerWidth,
-        height: window.innerHeight,
-      };
-    },
-  });
-
-  ScrollTrigger.addEventListener("refresh", () => lenis.resize());
-  ScrollTrigger.refresh();
-}
-
-// DOM ready
-if (typeof document !== "undefined") {
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initSmoothScroll, {
-      once: true,
-    });
-  } else {
-    initSmoothScroll();
-  }
+  return lenis;
 }
