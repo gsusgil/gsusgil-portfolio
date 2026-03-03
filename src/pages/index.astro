@@ -1,18 +1,14 @@
 ---
-/* src/pages/index.astro */
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Intro from "../components/Intro.astro";
 import Hero from "../components/Hero.astro";
 import ProjectsList from "../components/ProjectsList.astro";
 
 /**
- * ✅ Entry points bundleados (Vercel OK)
- * - home.client.js puede importar Lenis/GSAP/etc porque Vite lo empaqueta.
- * - preview-follow.js y contact.js también deben ir bundleados, NO /scripts/...
+ * ✅ Entry point bundleado:
+ * home.client.js puede importar gsap/lenis porque Vite lo bundlea.
  */
 import homeUrl from "../scripts/home.client.js?url";
-import previewUrl from "../scripts/preview-follow.js?url";
-import contactUrl from "../scripts/contact.js?url";
 ---
 
 <BaseLayout title="Portfolio" description="Lorem ipsum portfolio landing.">
@@ -20,8 +16,6 @@ import contactUrl from "../scripts/contact.js?url";
   <Hero />
   <ProjectsList />
 
-  <!-- ✅ NUNCA /scripts/... — siempre URL bundlada -->
+  <!-- ✅ Cargar el bundle como URL (NUNCA inline import) -->
   <script type="module" src={homeUrl}></script>
-  <script type="module" src={previewUrl}></script>
-  <script type="module" src={contactUrl}></script>
 </BaseLayout>

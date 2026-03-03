@@ -1,11 +1,10 @@
 ---
-/* src/layouts/ProjectLayout.astro */
 import BaseLayout from "./BaseLayout.astro";
 import ThemeToggle from "../components/ThemeToggle.astro";
 import "../styles/projects.css";
 
 /**
- * ✅ Scripts bundleados por Vite (Vercel OK)
+ * ✅ Scripts bundleados: generan URL final y funcionan en Vercel
  */
 import igCarouselUrl from "../scripts/ig-carousel.js?url";
 import projectRevealUrl from "../scripts/project-reveal.js?url";
@@ -32,7 +31,7 @@ const { title = "Project", description = "" } = Astro.props;
     <slot />
   </main>
 
-  <!-- ✅ Scripts de proyecto (BUNDLEADOS) -->
+  <!-- ✅ Scripts (orden importa) -->
   <script type="module" src={igCarouselUrl}></script>
   <script type="module" src={projectRevealUrl}></script>
 </BaseLayout>

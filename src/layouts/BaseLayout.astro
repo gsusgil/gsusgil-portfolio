@@ -1,14 +1,13 @@
 ---
-/* src/layouts/BaseLayout.astro */
 import "../styles/global.css";
 import "../styles/components.css";
 
 import ResumeModal from "../components/ResumeModal.astro";
 
 /**
- * ✅ IMPORTANTÍSIMO:
- * - Estos imports con ?url hacen que Vite los bundlee y Astro los sirva como /_astro/xxxx.js
- * - Así NO aparece el error "Failed to resolve module specifier lenis/gsap" en Vercel.
+ * ✅ IMPORTANTE:
+ * Estos ?url generan URLs finales (/_astro/xxxxx.js) que funcionan en Vercel.
+
  */
 import themeUrl from "../scripts/theme.js?url";
 import modalUrl from "../scripts/modal.js?url";
@@ -24,17 +23,17 @@ const { title = "Portfolio", description = "Lorem ipsum portfolio." } = Astro.pr
     <meta name="description" content={description} />
     <title>{title}</title>
 
-    <!-- ✅ Tema “instantáneo” (evita flash) -->
+    <!-- (Opcional) setear tema ANTES de pintar para evitar flash -->
     <script>
       (function () {
         try {
-          const savedTheme = localStorage.getItem("theme");
-          const systemPrefersDark =
+          const saved = localStorage.getItem("theme");
+          const systemDark =
             window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
 
-          const resolvedTheme = savedTheme ? savedTheme : (systemPrefersDark ? "dark" : "light");
-          document.documentElement.setAttribute("data-theme", resolvedTheme);
-        } catch (err) {}
+          const theme = saved ? saved : (systemDark ? "dark" : "light");
+          document.documentElement.setAttribute("data-theme", theme);
+        } catch (_) {}
       })();
     </script>
   </head>
@@ -43,7 +42,7 @@ const { title = "Portfolio", description = "Lorem ipsum portfolio." } = Astro.pr
     <slot />
     <ResumeModal />
 
-    <!-- ✅ Scripts globales (BUNDLEADOS) -->
+    <!-- ✅ Scripts globales (bundleados por Vite) -->
     <script type="module" src={themeUrl}></script>
     <script type="module" src={modalUrl}></script>
   </body>
