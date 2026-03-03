@@ -4,7 +4,7 @@
    - Mata triggers viejos para evitar duplicados
    - Refresca cuando imágenes decodifican (layout estable)
 ========================================================= */
-import { gsap } from "gsap";
+import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 function initProjectReveal() {

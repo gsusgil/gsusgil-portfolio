@@ -1,6 +1,5 @@
 function initIgCarousel() {
-  if (typeof window === "undefined") return;
-  if (typeof document === "undefined") return;
+  if (typeof window === "undefined" || typeof document === "undefined") return;
 
   function scrollBySlide(track, dir) {
     const first = track.querySelector(".ig-scrollSlide");
@@ -19,15 +18,26 @@ function initIgCarousel() {
     const next = wrap.querySelector("[data-ig-next]");
     if (!track || !prev || !next) return;
 
+    // Evitar duplicados en after-swap
+    if (wrap.dataset.igBound === "1") return;
+    wrap.dataset.igBound = "1";
+
     prev.addEventListener("click", () => scrollBySlide(track, -1));
     next.addEventListener("click", () => scrollBySlide(track, 1));
   });
 }
 
-if (typeof document !== "undefined") {
+function boot() {
+  if (typeof document === "undefined") return;
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", initIgCarousel, { once: true });
   } else {
     initIgCarousel();
   }
+
+  // Navegación Astro
+  document.addEventListener("astro:page-load", initIgCarousel);
+  document.addEventListener("astro:after-swap", initIgCarousel);
 }
+
+boot();

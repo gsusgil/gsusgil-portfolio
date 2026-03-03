@@ -1,49 +1,41 @@
 ---
 import "../styles/global.css";
 import "../styles/components.css";
-
 import ResumeModal from "../components/ResumeModal.astro";
-
-/**
- * ✅ IMPORTANTE:
- * Estos ?url generan URLs finales (/_astro/xxxxx.js) que funcionan en Vercel.
-
- */
-import themeUrl from "../scripts/theme.js?url";
-import modalUrl from "../scripts/modal.js?url";
 
 const { title = "Portfolio", description = "Lorem ipsum portfolio." } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="es" data-theme="dark">
+<html lang="es">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="description" content={description} />
     <title>{title}</title>
 
-    <!-- (Opcional) setear tema ANTES de pintar para evitar flash -->
+    <!-- Setear tema ANTES de pintar para evitar flash -->
     <script>
-      (function () {
-        try {
-          const saved = localStorage.getItem("theme");
-          const systemDark =
-            window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-
-          const theme = saved ? saved : (systemDark ? "dark" : "light");
-          document.documentElement.setAttribute("data-theme", theme);
-        } catch (_) {}
-      })();
-    </script>
+  (function () {
+    try {
+      const key = "theme";
+      const saved = localStorage.getItem(key);
+      const systemDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+      const theme = saved ? saved : (systemDark ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", theme);
+    } catch (_) {}
+  })();
+</script>
   </head>
 
   <body>
     <slot />
     <ResumeModal />
 
-    <!-- ✅ Scripts globales (bundleados por Vite) -->
-    <script type="module" src={themeUrl}></script>
-    <script type="module" src={modalUrl}></script>
+    <!-- ✅ Astro/Vite bundlea estos imports (NO intentan cargar /scripts/...) -->
+    <script>
+      import "../scripts/theme.js";
+      import "../scripts/modal.js";
+    </script>
   </body>
 </html>

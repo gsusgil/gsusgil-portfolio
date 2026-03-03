@@ -3,12 +3,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Intro from "../components/Intro.astro";
 import Hero from "../components/Hero.astro";
 import ProjectsList from "../components/ProjectsList.astro";
-
-/**
- * ✅ Entry point bundleado:
- * home.client.js puede importar gsap/lenis porque Vite lo bundlea.
- */
-import homeUrl from "../scripts/home.client.js?url";
 ---
 
 <BaseLayout title="Portfolio" description="Lorem ipsum portfolio landing.">
@@ -16,6 +10,8 @@ import homeUrl from "../scripts/home.client.js?url";
   <Hero />
   <ProjectsList />
 
-  <!-- ✅ Cargar el bundle como URL (NUNCA inline import) -->
-  <script type="module" src={homeUrl}></script>
+  <!-- ✅ Entry point bundleado (GSAP/Lenis OK) -->
+  <script>
+    import "../scripts/home.client.js";
+  </script>
 </BaseLayout>

@@ -141,3 +141,7 @@ body > *{
   position: relative;
   z-index: 1;
 }
+
+html:not([data-theme]) {
+  visibility: hidden;
+}

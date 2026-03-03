@@ -55,3 +55,6 @@ if (document.readyState === "loading") {
 } else {
   initHomeClient();
 }
+
+document.addEventListener("astro:page-load", initHomeClient);
+document.addEventListener("astro:after-swap", initHomeClient);
