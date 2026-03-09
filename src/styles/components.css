@@ -344,29 +344,30 @@
 .modal{
   position: fixed;
   inset: 0;
-  display:none;
-  z-index: 50;
+  display: none;
+  z-index: 100;
 }
 
 .modal.is-open{
-  display:block;
+  display: block;
 }
 
 .modal__overlay{
-  position:absolute;
-  inset:0;
+  position: absolute;
+  inset: 0;
   background: rgba(0,0,0,0.55);
+  z-index: 1;
 }
 
 .modal__panel{
-  position:absolute;
+  position: absolute;
   inset: 24px;
+  z-index: 2;
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: var(--radius-16);
   overflow: hidden;
-
-  display:flex;
+  display: flex;
   flex-direction: column;
 }
 
