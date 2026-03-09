@@ -4,7 +4,7 @@ export default {
   title: "Event Visual Identity",
   kicker: "Selected project",
   lede: "ZIGURAT Student Week — evolving architectural identity across editions",
-  preview: "/thumbs/project-3.jpg",
+  preview: "/thumbs/event-thumbnail.png",
   modules: [
     {
       type: "intro",

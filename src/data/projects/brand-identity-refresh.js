@@ -5,7 +5,7 @@ export default {
   title: "Brand Identity Refresh",
   kicker: "Selected project",
   lede: "Refreshing a photography brand identity through typographic refinement and a distinctive monogram system.",
-  preview: "/thumbs/project-4.jpg",
+  preview: "/thumbs/paula-belil-thumbnail.png",
 
   modules: [
 

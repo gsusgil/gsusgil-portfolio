@@ -1,63 +1,141 @@
-// =========================================================
-// CONTACT TOOLTIP
-// - Toggle panel sin mover layout
-// - Copy email
-// =========================================================
+/* =========================================================
+   CONTACT TOOLTIP
+   - Toggle tooltip
+   - Copy email
+   - Open mailto
+========================================================= */
+
 function initContactTooltip() {
-  if (typeof window === "undefined") return;
-  if (typeof document === "undefined") return;
+  if (typeof window === "undefined" || typeof document === "undefined") return;
 
-  const root = document.querySelector("[data-contact]");
-  if (!root) return;
+  const root = document.getElementById("contactTooltip");
+  const btn = document.getElementById("contactTooltipButton");
+  const panel = document.getElementById("contactTooltipBubble");
+  const copyBtn = document.getElementById("copyEmailButton");
+  const emailBtn = document.getElementById("emailActionButton");
+  const toast = document.getElementById("copyToast");
 
-  const btn = root.querySelector("[data-contact-btn]");
-  const panel = root.querySelector(".contactTip__panel");
-  const copyBtn = root.querySelector("[data-copy-btn]");
-  const emailEl = root.querySelector("[data-email]");
+  if (!root || !btn || !panel || !copyBtn || !emailBtn) return;
 
-  if (!btn || !panel || !copyBtn || !emailEl) return;
-
-  function close() {
-    root.classList.remove("is-open");
+  function openTooltip() {
+    root.classList.add("is-open");
+    btn.setAttribute("aria-expanded", "true");
+    panel.setAttribute("aria-hidden", "false");
   }
 
-  btn.addEventListener("click", (e) => {
-    e.preventDefault();
-    root.classList.toggle("is-open");
-  });
+  function closeTooltip() {
+    root.classList.remove("is-open");
+    btn.setAttribute("aria-expanded", "false");
+    panel.setAttribute("aria-hidden", "true");
+  }
 
-  document.addEventListener("click", (e) => {
-    if (!root.contains(e.target)) close();
-  });
+  function toggleTooltip() {
+    const isOpen = root.classList.contains("is-open");
+    if (isOpen) {
+      closeTooltip();
+    } else {
+      openTooltip();
+    }
+  }
 
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") close();
-  });
+  async function copyEmailToClipboard(email) {
+    if (!email) return false;
 
-  copyBtn.addEventListener("click", async () => {
-    const email = emailEl.textContent.trim();
     try {
-      await navigator.clipboard.writeText(email);
-      copyBtn.textContent = "Copied";
-      setTimeout(() => (copyBtn.textContent = "Copy"), 900);
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(email);
+        return true;
+      }
+
+      const textarea = document.createElement("textarea");
+      textarea.value = email;
+      textarea.setAttribute("readonly", "");
+      textarea.style.position = "absolute";
+      textarea.style.left = "-9999px";
+      document.body.appendChild(textarea);
+      textarea.select();
+
+      const success = document.execCommand("copy");
+      textarea.remove();
+
+      return success;
     } catch {
-      const ta = document.createElement("textarea");
-      ta.value = email;
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand("copy");
-      ta.remove();
-      copyBtn.textContent = "Copied";
-      setTimeout(() => (copyBtn.textContent = "Copy"), 900);
+      return false;
+    }
+  }
+
+  function showToast(message) {
+    if (!toast) return;
+
+    toast.textContent = message;
+    toast.style.display = "block";
+
+    clearTimeout(window.__contactToastTimer);
+    window.__contactToastTimer = setTimeout(() => {
+      toast.style.display = "none";
+    }, 1200);
+  }
+
+  btn.onclick = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    toggleTooltip();
+  };
+
+  copyBtn.onclick = async (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    const email = copyBtn.getAttribute("data-email") || emailBtn.getAttribute("data-email") || "";
+
+    const copied = await copyEmailToClipboard(email);
+
+    if (copied) {
+      showToast("Copied ✓");
+    } else {
+      showToast("Copy failed");
+    }
+  };
+
+  emailBtn.onclick = (event) => {
+    event.preventDefault();
+    const email = emailBtn.getAttribute("data-email") || "";
+    if (!email) return;
+    window.location.href = `mailto:${email}`;
+  };
+
+  document.addEventListener("click", (event) => {
+    if (!root.contains(event.target)) {
+      closeTooltip();
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeTooltip();
     }
   });
 }
 
-// DOM ready
-if (typeof document !== "undefined") {
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initContactTooltip, { once: true });
-  } else {
+/* =========================================================
+   SAFE INIT
+========================================================= */
+
+if (!window.__contactTooltipInitialized__) {
+  const init = () => {
     initContactTooltip();
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init, { once: true });
+  } else {
+    init();
   }
+
+  document.addEventListener("astro:page-load", init);
+  document.addEventListener("astro:after-swap", () => {
+    requestAnimationFrame(init);
+  });
+
+  window.__contactTooltipInitialized__ = true;
 }

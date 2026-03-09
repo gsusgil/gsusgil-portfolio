@@ -4,7 +4,7 @@ export default {
   title: "Paid Media Funnel Design",
   kicker: "Selected project",
   lede: "Three-stage Instagram carousel funnel: awareness → consideration → conversion.",
-  preview: "/thumbs/project-1.jpg",
+  preview: "/thumbs/preview-project-1.png",
 
 modules: [
   {

@@ -1,17 +1,17 @@
 /* =========================================================
    PROJECT PREVIEW — Floating preview following cursor (desktop)
-   - Only runs on fine pointer devices (desktop)
+   - Fine pointer only
    - Smooth follow (lerp) + clamp
-   - Fix: reset position when hiding to avoid "ghost" flashes
+   - Preloads images to avoid delayed first hover
+   - Safe init for Astro navigation
 ========================================================= */
 
 function initProjectPreviewFollow() {
-  if (typeof window === "undefined") return;
-  if (typeof document === "undefined") return;
+  if (typeof window === "undefined" || typeof document === "undefined") return;
 
   const isFinePointer =
     window.matchMedia &&
-    window.matchMedia("(hover:hover) and (pointer:fine)").matches;
+    window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
   if (!isFinePointer) return;
 
@@ -27,6 +27,7 @@ function initProjectPreviewFollow() {
   const safeMargin = 12;
 
   let isPreviewActive = false;
+  let animationFrameId = null;
 
   let targetMouseX = 0;
   let targetMouseY = 0;
@@ -37,8 +38,25 @@ function initProjectPreviewFollow() {
   let previewWidth = 700;
   let previewHeight = 400;
 
+  const imageCache = new Map();
+
   function clamp(value, min, max) {
     return Math.max(min, Math.min(max, value));
+  }
+
+  function preloadImage(src) {
+    if (!src || imageCache.has(src)) return;
+
+    const img = new Image();
+    img.src = src;
+    imageCache.set(src, img);
+  }
+
+  function preloadAllProjectImages() {
+    projectsList.querySelectorAll("[data-preview]").forEach((rowElement) => {
+      const src = rowElement.getAttribute("data-preview");
+      preloadImage(src);
+    });
   }
 
   function resetPreviewPosition() {
@@ -47,21 +65,27 @@ function initProjectPreviewFollow() {
     previewContainer.style.transform = "translate3d(-9999px, -9999px, 0)";
   }
 
+  function measurePreview() {
+    previewWidth = previewContainer.offsetWidth || previewWidth;
+    previewHeight = previewContainer.offsetHeight || previewHeight;
+  }
+
   function showPreview(imageSrc, titleText) {
     if (!imageSrc) return;
 
-    previewImage.src = imageSrc;
     previewTitle.textContent = titleText || "Project";
+    previewImage.src = imageSrc;
 
-    previewWidth = previewContainer.offsetWidth || previewWidth;
-    previewHeight = previewContainer.offsetHeight || previewHeight;
+    measurePreview();
 
-    previewContainer.style.opacity = "1";
+    previewContainer.classList.add("is-visible");
+    previewContainer.setAttribute("aria-hidden", "false");
     isPreviewActive = true;
   }
 
   function hidePreview() {
-    previewContainer.style.opacity = "0";
+    previewContainer.classList.remove("is-visible");
+    previewContainer.setAttribute("aria-hidden", "true");
     isPreviewActive = false;
     resetPreviewPosition();
   }
@@ -103,32 +127,37 @@ function initProjectPreviewFollow() {
 
   function animationLoop() {
     updatePreviewPosition();
-    requestAnimationFrame(animationLoop);
+    animationFrameId = window.requestAnimationFrame(animationLoop);
   }
 
-  previewContainer.style.opacity = "0";
+  function handlePointerMove(event) {
+    targetMouseX = event.clientX;
+    targetMouseY = event.clientY;
+  }
+
+  function bindProjectRows() {
+    projectsList.querySelectorAll("[data-preview]").forEach((rowElement) => {
+      rowElement.addEventListener("pointerenter", () => {
+        const imageSrc = rowElement.getAttribute("data-preview");
+        const titleText = rowElement.getAttribute("data-title");
+        showPreview(imageSrc, titleText);
+      });
+
+      rowElement.addEventListener("pointerleave", () => {
+        hidePreview();
+      });
+    });
+  }
+
+  previewContainer.classList.remove("is-visible");
+  previewContainer.setAttribute("aria-hidden", "true");
   resetPreviewPosition();
-  animationLoop();
+  measurePreview();
+  preloadAllProjectImages();
+  bindProjectRows();
 
-  projectsList.addEventListener(
-    "pointermove",
-    (event) => {
-      targetMouseX = event.clientX;
-      targetMouseY = event.clientY;
-    },
-    { passive: true }
-  );
-
-  projectsList.querySelectorAll("[data-preview]").forEach((rowElement) => {
-    rowElement.addEventListener("pointerenter", () => {
-      const imageSrc = rowElement.getAttribute("data-preview");
-      const titleText = rowElement.getAttribute("data-title");
-      showPreview(imageSrc, titleText);
-    });
-
-    rowElement.addEventListener("pointerleave", () => {
-      hidePreview();
-    });
+  projectsList.addEventListener("pointermove", handlePointerMove, {
+    passive: true,
   });
 
   window.addEventListener(
@@ -140,17 +169,36 @@ function initProjectPreviewFollow() {
   );
 
   window.addEventListener("resize", () => {
+    measurePreview();
     if (isPreviewActive) hidePreview();
   });
+
+  if (animationFrameId) {
+    cancelAnimationFrame(animationFrameId);
+  }
+
+  animationLoop();
 }
 
-// Ejecutar cuando el DOM esté listo
-if (typeof document !== "undefined") {
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initProjectPreviewFollow, {
-      once: true,
-    });
-  } else {
+/* =========================================================
+   Safe init
+========================================================= */
+
+if (!window.__projectPreviewInitialized__) {
+  const init = () => {
     initProjectPreviewFollow();
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init, { once: true });
+  } else {
+    init();
   }
+
+  document.addEventListener("astro:page-load", init);
+  document.addEventListener("astro:after-swap", () => {
+    requestAnimationFrame(init);
+  });
+
+  window.__projectPreviewInitialized__ = true;
 }

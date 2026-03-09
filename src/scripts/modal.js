@@ -1,62 +1,65 @@
-function initResumeModal() {
-  if (typeof window === "undefined" || typeof document === "undefined") return;
+/* =========================================================
+   RESUME MODAL CONTROLLER
+   Archivo: src/scripts/modal.js
+========================================================= */
 
-  const modalRoot = document.getElementById("resumeModal");
-  const openButton = document.getElementById("openResumeButton");
-  const closeButton = document.getElementById("closeResumeButton");
-  const overlay = document.getElementById("resumeOverlay");
+function getResumeModalElements() {
+  return {
+    modal: document.getElementById("resumeModal"),
+    closeButton: document.getElementById("closeResumeButton"),
+  };
+}
 
-  if (!modalRoot || !openButton || !closeButton || !overlay) return;
+function openResumeModal() {
+  const { modal, closeButton } = getResumeModalElements();
+  if (!modal) return;
 
-  let lastFocusedElement = null;
+  modal.classList.add("is-open");
+  modal.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
 
-  function lockBodyScroll(shouldLock) {
-    document.body.style.overflow = shouldLock ? "hidden" : "";
-  }
-
-  function openModal() {
-    lastFocusedElement = document.activeElement;
-    modalRoot.classList.add("is-open");
-    modalRoot.setAttribute("aria-hidden", "false");
-    lockBodyScroll(true);
+  if (closeButton) {
     closeButton.focus();
   }
-
-  function closeModal() {
-    modalRoot.classList.remove("is-open");
-    modalRoot.setAttribute("aria-hidden", "true");
-    lockBodyScroll(false);
-    if (lastFocusedElement?.focus) lastFocusedElement.focus();
-  }
-
-  // Evitar duplicados (clicks)
-  openButton.removeEventListener("click", openModal);
-  closeButton.removeEventListener("click", closeModal);
-  overlay.removeEventListener("click", closeModal);
-
-  openButton.addEventListener("click", openModal);
-  closeButton.addEventListener("click", closeModal);
-  overlay.addEventListener("click", closeModal);
-
-  // Evitar duplicados (keydown)
-  if (window.__resumeEscHandler) {
-    window.removeEventListener("keydown", window.__resumeEscHandler);
-  }
-  window.__resumeEscHandler = (event) => {
-    if (event.key === "Escape" && modalRoot.classList.contains("is-open")) {
-      closeModal();
-    }
-  };
-  window.addEventListener("keydown", window.__resumeEscHandler);
 }
 
-// Primera carga
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", initResumeModal, { once: true });
-} else {
-  initResumeModal();
+function closeResumeModal() {
+  const { modal } = getResumeModalElements();
+  if (!modal) return;
+
+  modal.classList.remove("is-open");
+  modal.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
 }
 
-// Astro nav
-document.addEventListener("astro:page-load", initResumeModal);
-document.addEventListener("astro:after-swap", initResumeModal);
+function handleDocumentClick(event) {
+  const openTrigger = event.target.closest("#openResumeButton");
+  const closeTrigger = event.target.closest("#closeResumeButton");
+  const overlayTrigger = event.target.closest("#resumeOverlay");
+
+  if (openTrigger) {
+    event.preventDefault();
+    openResumeModal();
+    return;
+  }
+
+  if (closeTrigger || overlayTrigger) {
+    event.preventDefault();
+    closeResumeModal();
+  }
+}
+
+function handleDocumentKeydown(event) {
+  if (event.key === "Escape") {
+    closeResumeModal();
+  }
+}
+
+/* =========================================================
+   Evitar registrar listeners duplicados
+========================================================= */
+if (!window.__resumeModalDelegated__) {
+  document.addEventListener("click", handleDocumentClick);
+  document.addEventListener("keydown", handleDocumentKeydown);
+  window.__resumeModalDelegated__ = true;
+}

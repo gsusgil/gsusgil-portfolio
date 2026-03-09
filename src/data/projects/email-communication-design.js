@@ -3,7 +3,7 @@ export default {
   title: "Email Communication Design",
   kicker: "Selected project",
   lede: "Newsletter & Post-Event Nurturing",
-  preview: "/thumbs/project-2.jpg",
+  preview: "/thumbs/email-thumbnail.png",
   modules: [
     {
       type: "intro",
