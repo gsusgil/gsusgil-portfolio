@@ -14,25 +14,25 @@ const { title = "Portfolio", description = "Lorem ipsum portfolio." } = Astro.pr
     <meta name="description" content={description} />
     <title>{title}</title>
 
-    <!-- Setear tema ANTES de pintar para evitar flash -->
     <script>
-  (function () {
-    try {
-      const key = "theme";
-      const saved = localStorage.getItem(key);
-      const systemDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-      const theme = saved ? saved : (systemDark ? "dark" : "light");
-      document.documentElement.setAttribute("data-theme", theme);
-    } catch (_) {}
-  })();
-</script>
+      (function () {
+        try {
+          const key = "theme";
+          const saved = localStorage.getItem(key);
+          const systemDark =
+            window.matchMedia &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches;
+          const theme = saved ? saved : (systemDark ? "dark" : "light");
+          document.documentElement.setAttribute("data-theme", theme);
+        } catch (_) {}
+      })();
+    </script>
   </head>
 
   <body>
     <slot />
     <ResumeModal />
 
-    <!-- ✅ Astro/Vite bundlea estos imports (NO intentan cargar /scripts/...) -->
     <script>
       import "../scripts/theme.js";
       import "../scripts/modal.js";
