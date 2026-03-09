@@ -577,3 +577,365 @@ html[data-reveal="on"] [data-reveal]{
     grid-template-columns: 54px 1fr;
   }
 }
+
+/* =========================================================
+   EMAIL STAGE
+========================================================= */
+
+.emailStage{
+  display: grid;
+  grid-template-columns: minmax(320px, 420px) minmax(420px, 560px);
+  gap: 56px;
+  align-items: start;
+  width: 100%;
+}
+
+.emailStage--flip{
+  grid-template-columns: minmax(420px, 560px) minmax(320px, 420px);
+}
+
+.emailStage__info{
+  min-width: 0;
+  max-width: 420px;
+}
+
+.emailStage__label{
+  margin: 0 0 14px;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.emailStage__title{
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--accent);
+}
+
+.emailStage__text{
+  margin: 18px 0 0;
+  color: var(--text);
+  line-height: 1.75;
+}
+
+.emailStage__meta{
+  margin-top: 18px;
+  display: grid;
+  gap: 0;
+}
+
+.emailStage__metaItem{
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
+  margin-top: 16px;
+}
+
+.emailStage__metaLabel{
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--title);
+}
+
+.emailStage__metaValue{
+  margin: 0;
+  color: var(--text);
+  line-height: 1.75;
+}
+
+.emailStage__stats{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: 28px;
+  row-gap: 0;
+  align-items: start;
+}
+
+.emailStage__stat{
+  display: grid;
+  grid-template-rows: 32px auto;
+  align-content: start;
+  min-width: 0;
+}
+
+.emailStage__statLabel{
+  margin: 0;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1.15;
+  color: var(--muted);
+  display: flex;
+  align-items: flex-start;
+}
+
+.emailStage__statValue{
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.emailStage__highlights{
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  display: grid;
+  gap: 8px;
+}
+
+.emailStage__highlight{
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.4;
+  color: var(--text);
+}
+
+.emailStage__viewer{
+  width: 100%;
+  max-width: 560px;
+  justify-self: start;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-16);
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.emailStage--flip .emailStage__viewer{
+  justify-self: end;
+}
+
+.emailStage__viewerBar{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in srgb, var(--bg) 92%, var(--title) 2%);
+}
+
+.emailStage__viewerDot{
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--border);
+  flex: 0 0 auto;
+}
+
+.emailStage__viewerLabel{
+  margin: 0 0 0 4px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.emailStage__scroll{
+  height: 760px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  background: var(--bg);
+}
+
+.emailStage__img{
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 980px){
+  .emailStage,
+  .emailStage--flip{
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .emailStage__info{
+    max-width: 100%;
+  }
+
+  .emailStage__viewer,
+  .emailStage--flip .emailStage__viewer{
+    justify-self: start;
+    max-width: 100%;
+  }
+
+  .emailStage__stats{
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .emailStage__scroll{
+    height: 680px;
+  }
+}
+
+@media (max-width: 640px){
+  .emailStage__scroll{
+    height: 560px;
+  }
+}
+
+/* =========================================================
+   EVENT VISUAL IDENTITY — CUSTOM MEDIA BLOCKS
+========================================================= */
+:root{
+  --event-media-h: 311px;
+}
+
+/* Block 01 — two square images contained in the same visual height */
+.mediaPairGrid{
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  align-items: start;
+}
+
+.mediaPairGrid__item{
+  margin: 0;
+}
+
+.mediaPairGrid__media{
+  height: var(--event-media-h);
+  border-radius: var(--radius-16);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  display: grid;
+  place-items: center;
+}
+
+.mediaPairGrid__media img{
+  height: 100%;
+  width: auto;
+  max-width: 100%;
+  
+  object-fit: contain;
+  display: block;
+}
+
+.mediaPairGrid__caption{
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+
+/* Block 02 — video defines height, image obeys */
+.mediaFeature{
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.mediaFeature__imageItem,
+.mediaFeature__videoItem{
+  margin: 0;
+}
+
+.mediaFeature__imageMedia,
+.mediaFeature__videoMedia{
+  height: var(--event-media-h);
+  border-radius: var(--radius-16);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--bg);
+}
+
+/* image stays 1:1, complete, no crop */
+.mediaFeature__imageMedia{
+  height: var(--event-media-h);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mediaFeature__imageMedia img{
+  width: auto;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+ 
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+
+/* video fills the same height without weird crop */
+.mediaFeature__videoMedia video{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  background: #000;
+}
+
+.mediaFeature__caption{
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+
+/* Block 03 — stacked banners full width */
+.mediaStack{
+  margin-top: 32px;
+  display: grid;
+  gap: 18px;
+}
+
+.mediaStack__item{
+  margin: 0;
+}
+
+.mediaStack__media{
+  width: 100%;
+  border-radius: var(--radius-16);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--bg);
+}
+
+.mediaStack__media img{
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.mediaStack__caption{
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+
+/* Responsive */
+@media (max-width: 980px){
+  :root{
+    --event-media-h: 280px;
+  }
+
+  .mediaPairGrid,
+  .mediaFeature{
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px){
+  :root{
+    --event-media-h: 220px;
+  }
+
+  .mediaPairGrid,
+  .mediaFeature,
+  .mediaStack{
+    gap: 14px;
+  }
+}

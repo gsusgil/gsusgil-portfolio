@@ -82,7 +82,7 @@ const more = projects.filter((p) => p.slug !== slug).slice(0, 3);
           </section>
         )}
 
-        {/* TEXT (FIX: sin </div> sobrante) */}
+        {/* TEXT */}
         {m.type === "text" && (
           <section class="project__block" data-reveal>
             <div class="project__introLabel">{m.h2}</div>
@@ -102,6 +102,134 @@ const more = projects.filter((p) => p.slug !== slug).slice(0, 3);
             </div>
 
             <img class="project__img" src={m.src} alt={m.alt ?? ""} loading="lazy" />
+          </section>
+        )}
+
+        {/* EMAIL */}
+                {/* EMAIL */}
+        {m.type === "email" && (
+          <section class="project__block project__level" data-reveal>
+            <div class="project__levelTop">
+              {m.num && <div class="project__levelNum">{m.num}</div>}
+
+              <div class={`emailStage ${m.flip ? "emailStage--flip" : ""}`}>
+                {!m.flip && (
+                  <div class="emailStage__info">
+                    {m.label && <p class="emailStage__label">{m.label}</p>}
+                    <h2 class="emailStage__title">{m.h2}</h2>
+                    {m.p && <p class="emailStage__text">{m.p}</p>}
+
+                    {(m.metrics?.length > 0 || m.highlights?.length > 0) && (
+                      <div class="emailStage__metaItem">
+                        <div class="emailStage__metaLabel">Performance</div>
+
+                        {m.metrics?.length > 0 && (
+                          <div class="emailStage__stats">
+                            {m.metrics.map((item) => (
+                              <div class="emailStage__stat">
+                                <div class="emailStage__statLabel">{item.label}</div>
+                                <div class="emailStage__statValue">{item.value}</div>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+
+                        {m.highlights?.length > 0 && (
+                          <div class="emailStage__highlights">
+                            {m.highlights.map((item) => (
+                              <p class="emailStage__highlight">{item}</p>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    )}
+
+                    <div class="emailStage__meta">
+                      {m.role && (
+                        <div class="emailStage__metaItem">
+                          <div class="emailStage__metaLabel">My Role</div>
+                          <p class="emailStage__metaValue">{m.role}</p>
+                        </div>
+                      )}
+
+                      {m.insight && (
+                        <div class="emailStage__metaItem">
+                          <div class="emailStage__metaLabel">Insight</div>
+                          <p class="emailStage__metaValue">{m.insight}</p>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
+
+                <figure class="emailStage__viewer">
+                  <div class="emailStage__viewerBar">
+                    <span class="emailStage__viewerDot"></span>
+                    <span class="emailStage__viewerDot"></span>
+                    <span class="emailStage__viewerDot"></span>
+                    <p class="emailStage__viewerLabel">{m.viewerLabel ?? "Email preview"}</p>
+                  </div>
+
+                  <div class="emailStage__scroll">
+                    <img
+                      class="emailStage__img"
+                      src={m.src}
+                      alt={m.alt ?? ""}
+                      loading="lazy"
+                    />
+                  </div>
+                </figure>
+
+                {m.flip && (
+                  <div class="emailStage__info">
+                    {m.label && <p class="emailStage__label">{m.label}</p>}
+                    <h2 class="emailStage__title">{m.h2}</h2>
+                    {m.p && <p class="emailStage__text">{m.p}</p>}
+
+                    {(m.metrics?.length > 0 || m.highlights?.length > 0) && (
+                      <div class="emailStage__metaItem">
+                        <div class="emailStage__metaLabel">Performance</div>
+
+                        {m.metrics?.length > 0 && (
+                          <div class="emailStage__stats">
+                            {m.metrics.map((item) => (
+                              <div class="emailStage__stat">
+                                <div class="emailStage__statLabel">{item.label}</div>
+                                <div class="emailStage__statValue">{item.value}</div>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+
+                        {m.highlights?.length > 0 && (
+                          <div class="emailStage__highlights">
+                            {m.highlights.map((item) => (
+                              <p class="emailStage__highlight">{item}</p>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    )}
+
+                    <div class="emailStage__meta">
+                      {m.role && (
+                        <div class="emailStage__metaItem">
+                          <div class="emailStage__metaLabel">My Role</div>
+                          <p class="emailStage__metaValue">{m.role}</p>
+                        </div>
+                      )}
+
+                      {m.insight && (
+                        <div class="emailStage__metaItem">
+                          <div class="emailStage__metaLabel">Insight</div>
+                          <p class="emailStage__metaValue">{m.insight}</p>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
           </section>
         )}
 
@@ -130,10 +258,7 @@ const more = projects.filter((p) => p.slug !== slug).slice(0, 3);
                     <div class="project__statLabel">Clicks</div>
                     <div class="project__statValue">{m.metrics?.clicks}</div>
                   </div>
-                  <div class="project__stat">
-                    <div class="project__statLabel">CTR</div>
-                    <div class="project__statValue">{m.metrics?.ctr}</div>
-                  </div>
+                 
                 </div>
 
                 <div class="project__stageDid">
@@ -182,6 +307,110 @@ const more = projects.filter((p) => p.slug !== slug).slice(0, 3);
             )}
           </section>
         )}
+
+                {/* MEDIA PAIR */}
+        {m.type === "mediaPair" && (
+          <section class="project__block project__level" data-reveal>
+            <div class="project__levelTop">
+              {m.num && <div class="project__levelNum">{m.num}</div>}
+              <div>
+                <h2 class="project__h2">{m.h2}</h2>
+                {m.p && <p class="project__p">{m.p}</p>}
+              </div>
+            </div>
+
+            <div class="mediaPairGrid">
+              {m.items?.map((item) => (
+                <figure class="mediaPairGrid__item">
+                  <div class="mediaPairGrid__media">
+                    <img
+                      src={item.src}
+                      alt={item.alt ?? ""}
+                      loading="lazy"
+                    />
+                  </div>
+                  {item.caption && (
+                    <figcaption class="mediaPairGrid__caption">{item.caption}</figcaption>
+                  )}
+                </figure>
+              ))}
+            </div>
+          </section>
+        )}
+
+                {/* MEDIA FEATURE */}
+        {m.type === "mediaFeature" && (
+          <section class="project__block project__level" data-reveal>
+            <div class="project__levelTop">
+              {m.num && <div class="project__levelNum">{m.num}</div>}
+              <div>
+                <h2 class="project__h2">{m.h2}</h2>
+                {m.p && <p class="project__p">{m.p}</p>}
+              </div>
+            </div>
+
+            <div class="mediaFeature">
+              <figure class="mediaFeature__imageItem">
+                <div class="mediaFeature__imageMedia">
+                  <img
+                    src={m.image.src}
+                    alt={m.image.alt ?? ""}
+                    loading="lazy"
+                  />
+                </div>
+                {m.image?.caption && (
+                  <figcaption class="mediaFeature__caption">{m.image.caption}</figcaption>
+                )}
+              </figure>
+
+              <figure class="mediaFeature__videoItem">
+                <div class="mediaFeature__videoMedia">
+                  <video
+                    controls
+                    playsinline
+                    preload="metadata"
+                    poster={m.video.poster}
+                    src={m.video.src}
+                  />
+                </div>
+                {m.video?.caption && (
+                  <figcaption class="mediaFeature__caption">{m.video.caption}</figcaption>
+                )}
+              </figure>
+            </div>
+          </section>
+        )}
+
+                {/* MEDIA STACK */}
+        {m.type === "mediaStack" && (
+          <section class="project__block project__level" data-reveal>
+            <div class="project__levelTop">
+              {m.num && <div class="project__levelNum">{m.num}</div>}
+              <div>
+                <h2 class="project__h2">{m.h2}</h2>
+                {m.p && <p class="project__p">{m.p}</p>}
+              </div>
+            </div>
+
+            <div class="mediaStack">
+              {m.items?.map((item) => (
+                <figure class="mediaStack__item">
+                  <div class="mediaStack__media">
+                    <img
+                      src={item.src}
+                      alt={item.alt ?? ""}
+                      loading="lazy"
+                    />
+                  </div>
+                  {item.caption && (
+                    <figcaption class="mediaStack__caption">{item.caption}</figcaption>
+                  )}
+                </figure>
+              ))}
+            </div>
+          </section>
+        )}
+        
 
         {/* VIDEO */}
         {m.type === "video" && (
