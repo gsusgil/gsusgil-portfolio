@@ -1,7 +1,25 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
 import ThemeToggle from "../components/ThemeToggle.astro";
+
+/*
+  CSS viejo principal.
+  Lo mantenemos por ahora para no romper proyectos existentes.
+*/
 import "../styles/projects.css";
+
+/*
+  Nueva estructura modular.
+  Estos archivos van después para poder sobrescribir projects.css
+  mientras migramos módulo por módulo.
+*/
+import "../styles/projects/project-base.css";
+import "../styles/projects/visual-hero.css";
+import "../styles/projects/case-overview.css";
+import "../styles/projects/project-carousel.css";
+import "../styles/projects/project-email.css";
+import "../styles/projects/project-media.css";
+import "../styles/projects/more-projects.css";
 
 const { title = "Project", description = "" } = Astro.props;
 ---
@@ -10,8 +28,16 @@ const { title = "Project", description = "" } = Astro.props;
   <header class="siteNav">
     <div class="container siteNav__inner">
       <a class="siteNav__brand" href="/" aria-label="Home">
-        <img class="siteNav__logo siteNav__logo--light" src="/logo-gsusgil-red.svg" alt="gsusgil" />
-        <img class="siteNav__logo siteNav__logo--dark"  src="/logo-gsusgil.svg" alt="gsusgil" />
+        <img
+          class="siteNav__logo siteNav__logo--light"
+          src="/logo-gsusgil-red.svg"
+          alt="gsusgil"
+        />
+        <img
+          class="siteNav__logo siteNav__logo--dark"
+          src="/logo-gsusgil.svg"
+          alt="gsusgil"
+        />
       </a>
 
       <nav class="siteNav__actions" aria-label="Primary">
@@ -25,7 +51,6 @@ const { title = "Project", description = "" } = Astro.props;
     <slot />
   </main>
 
-  <!-- ✅ Bundleado real -->
   <script>
     import "../scripts/ig-carousel.js";
     import "../scripts/project-reveal.js";

@@ -4,72 +4,72 @@ export default {
   slug: "brand-identity-refresh",
   title: "Brand Identity Refresh",
   kicker: "Selected project",
-  lede: "Refreshing a photography brand identity through typographic refinement and a distinctive monogram system.",
+  lede:
+    "Refreshing a photography brand identity through typographic refinement and a distinctive monogram system.",
   preview: "/thumbs/paula-belil-thumbnail.png",
 
   modules: [
-
     {
-      type: "text",
-      h2: "Overview",
-      p: "A brand identity refresh developed for photographer and filmmaker Paula Belil. The project focused on elevating the brand’s visual presence while preserving the warmth and sensitivity that define her work across product, gastronomy and portrait photography."
+      type: "visualHero",
+      images: [
+        {
+          label: "PB monogram",
+          src: "/projects/paula-belil/monograma-pb.png",
+          alt: "Paula Belil PB monogram preview",
+        },
+      ],
     },
 
     {
-      type: "intro",
-      title: "Brand Identity Refresh",
-      sections: [
+      type: "caseOverview",
+      eyebrow: "Identity system overview",
+      text:
+        "A refined brand identity refresh developed for photographer and filmmaker Paula Belil, balancing typographic elegance, visual sensitivity and a distinctive PB monogram system.",
+      facts: [
         {
-          label: "Objective",
-          text: "Refresh Paula Belil’s visual identity to reflect her professional maturity and multidisciplinary expertise in photography and filmmaking. The goal was to elevate her brand presence while preserving approachability and creative sensitivity."
+          label: "Role",
+          value: "Concept direction · Monogram design · Visual system",
         },
         {
-          label: "Concept Direction",
-          text: "The core challenge was to create a monogram combining the initials P and B without falling into a generic or overly rigid construction. The solution explores a refined interaction between form and counterform where both letters subtly merge, avoiding symmetrical or corporate-style monograms."
-        }
+          label: "System",
+          value: "PB monogram · Serif wordmark · Natural color palette",
+        },
+        {
+          label: "Output",
+          value: "Logo refresh · Brand system · Digital visual direction",
+        },
       ],
-      scope: "The result balances elegance, fluidity and structure — aligning with her work across product, gastronomy and portrait photography while establishing a refined and contemporary visual presence."
+      metrics: [
+        {
+          value: "PB",
+          label: "Custom monogram",
+        },
+        {
+          value: "3",
+          label: "Core visual pillars",
+        },
+        {
+          value: "1",
+          label: "Scalable identity system",
+        },
+      ],
     },
-
-    {
-      type: "text",
-      h2: "Visual System",
-      p: "The identity system is built around a custom PB monogram paired with a refined serif wordmark that conveys authority and timelessness. A muted natural color palette balances depth and warmth, while soft graphic curves reinforce the brand’s visual fluidity. Together these elements create a flexible system adaptable across print, digital and social environments while maintaining a premium tone."
-    },
-
-    {
-      type: "text",
-      h2: "My Role",
-      p: "Led the full brand refresh process from conceptual direction to typographic refinement and color system definition. The focus was constructing a distinctive monogram capable of communicating experience and professionalism without appearing ornamental or generic, ensuring scalability across logo usage, editorial layouts and digital presence."
-    },
-
-    /* MONOGRAM BANNER */
 
     {
       type: "image",
       num: "01",
-      h2: "PB Monogram",
-      p: "Custom monogram exploring the interaction between the P and B letterforms through refined counterform and subtle structural balance.",
-      src: "/projects/paula-belil/monograma-pb.png",
-      alt: "PB monogram banner"
-    },
-
-    /* BRAND SYSTEM FULL WIDTH */
-
-    {
-      type: "image",
-      num: "02",
       h2: "Brand identity system",
-      p: "Application of the refreshed identity across typography, color palette and visual composition.",
+      p:
+        "Application of the refreshed identity across typography, color palette and visual composition, creating a flexible system for editorial, digital and social environments.",
       src: "/projects/paula-belil/brand-system.png",
-      alt: "Paula Belil brand identity system"
+      alt: "Paula Belil brand identity system",
     },
 
     {
       type: "text",
-      h2: "Conclusion",
-      p: "The refreshed identity positions Paula Belil as an experienced visual professional with a refined yet contemporary presence. By balancing typographic elegance with a distinctive monogram, the system establishes recognition, versatility and long-term brand consistency."
-    }
-
-  ]
+      h2: "Outcome",
+      p:
+        "The refreshed identity positions Paula Belil as an experienced visual professional with a refined yet contemporary presence. By balancing typographic elegance with a distinctive monogram, the system establishes recognition, versatility and long-term brand consistency.",
+    },
+  ],
 };

@@ -1,0 +1,176 @@
+/* =========================================================
+   PROJECT MEDIA
+   - Event Visual Identity custom media blocks
+   - mediaPairGrid / mediaFeature / mediaStack
+========================================================= */
+
+:root{
+  --event-media-h: 311px;
+}
+
+
+/* =========================================================
+   MEDIA PAIR
+   - Two square images contained in the same visual height
+========================================================= */
+
+.mediaPairGrid{
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  align-items: start;
+}
+
+.mediaPairGrid__item{
+  margin: 0;
+}
+
+.mediaPairGrid__media{
+  height: var(--event-media-h);
+  border-radius: var(--radius-16);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  display: grid;
+  place-items: center;
+}
+
+.mediaPairGrid__media img{
+  height: 100%;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.mediaPairGrid__caption{
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+
+/* =========================================================
+   MEDIA FEATURE
+   - Image + video
+========================================================= */
+
+.mediaFeature{
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.mediaFeature__imageItem,
+.mediaFeature__videoItem{
+  margin: 0;
+}
+
+.mediaFeature__imageMedia,
+.mediaFeature__videoMedia{
+  height: var(--event-media-h);
+  border-radius: var(--radius-16);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--bg);
+}
+
+.mediaFeature__imageMedia{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mediaFeature__imageMedia img{
+  width: auto;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+
+.mediaFeature__videoMedia video{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  background: #000;
+}
+
+.mediaFeature__caption{
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+
+/* =========================================================
+   MEDIA STACK
+   - Full-width stacked banners
+========================================================= */
+
+.mediaStack{
+  margin-top: 32px;
+  display: grid;
+  gap: 18px;
+}
+
+.mediaStack__item{
+  margin: 0;
+}
+
+.mediaStack__media{
+  width: 100%;
+  border-radius: var(--radius-16);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--bg);
+}
+
+.mediaStack__media img{
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.mediaStack__caption{
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 980px){
+  :root{
+    --event-media-h: 280px;
+  }
+
+  .mediaPairGrid,
+  .mediaFeature{
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px){
+  :root{
+    --event-media-h: 220px;
+  }
+
+  .mediaPairGrid,
+  .mediaFeature,
+  .mediaStack{
+    gap: 14px;
+  }
+}

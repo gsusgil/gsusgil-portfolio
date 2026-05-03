@@ -22,6 +22,7 @@ function initIntroMaskScroll() {
 
   if (prefersReducedMotion) {
     introSection.style.display = "none";
+    document.documentElement.classList.remove("intro-ready");
     return;
   }
 
@@ -41,6 +42,12 @@ function initIntroMaskScroll() {
   }
 
   resetIntroToStart();
+
+  /*
+    Shows the intro only after GSAP has reset the initial state.
+    This prevents the red intro background from flashing on reload.
+  */
+  document.documentElement.classList.add("intro-ready");
 
   ScrollTrigger.getAll().forEach((t) => {
     if (t?.vars?.id === "introMaskPin") t.kill(true);
@@ -64,6 +71,7 @@ function initIntroMaskScroll() {
       },
 
       onEnterBack: () => {
+        document.documentElement.classList.add("intro-ready");
         introSection.style.pointerEvents = "";
         introSection.style.opacity = "1";
         introSection.style.display = "";
@@ -71,6 +79,7 @@ function initIntroMaskScroll() {
 
       onLeaveBack: () => {
         resetIntroToStart();
+        document.documentElement.classList.add("intro-ready");
       },
     },
   });

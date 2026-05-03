@@ -1,0 +1,127 @@
+/* =========================================================
+   CASE OVERVIEW
+   - Strategic summary
+   - Facts + metrics
+   - Aligned with project carousel width
+========================================================= */
+
+.caseOverview{
+  text-align: center;
+}
+
+.caseOverview__content{
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.caseOverview__eyebrow{
+  margin-bottom: 12px;
+  font-size: 12px;
+  line-height: 1;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.caseOverview__text{
+  margin: 0 auto;
+  max-width: 760px;
+  font-size: 20px;
+  line-height: 1.5;
+  color: var(--text);
+  opacity: .9;
+}
+
+.caseOverview__facts{
+  width: 100%;
+  margin: 30px auto 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.caseOverview__fact{
+  padding: 18px 22px;
+}
+
+.caseOverview__fact + .caseOverview__fact{
+  border-left: 1px solid var(--border);
+}
+
+.caseOverview__factLabel{
+  margin-bottom: 8px;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.caseOverview__factValue{
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--title);
+}
+
+.caseOverview__metrics{
+  width: 100%;
+  margin: 24px auto 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.caseOverview__metric{
+  padding: 20px 20px;
+  text-align: center;
+}
+
+.caseOverview__metric + .caseOverview__metric{
+  border-left: 1px solid var(--border);
+}
+
+.caseOverview__metricValue{
+  font-size: clamp(30px, 3vw, 44px);
+  line-height: 1;
+  font-weight: 750;
+  letter-spacing: -0.035em;
+  color: var(--title);
+}
+
+.caseOverview__metricLabel{
+  margin-top: 8px;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 640px){
+  .caseOverview{
+    text-align: left;
+  }
+
+  .caseOverview__text{
+    font-size: 17px;
+    line-height: 1.55;
+    text-align: left;
+  }
+
+  .caseOverview__facts,
+  .caseOverview__metrics{
+    grid-template-columns: 1fr;
+  }
+
+  .caseOverview__fact + .caseOverview__fact,
+  .caseOverview__metric + .caseOverview__metric{
+    border-left: 0;
+    border-top: 1px solid var(--border);
+  }
+}

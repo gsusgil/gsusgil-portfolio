@@ -1,0 +1,275 @@
+/* =========================================================
+   PROJECT CAROUSEL
+   - 3 visible slides on desktop
+   - Native horizontal scroll
+   - Auto-preview handled by JS
+   - Pauses on hover
+   - Manual arrows on every carousel
+========================================================= */
+
+
+/* =========================================================
+   SHARED SETTINGS
+========================================================= */
+
+.ig-grid,
+.ig-scroll{
+  --carousel-visible: 3;
+}
+
+
+/* =========================================================
+   LEGACY GRID SUPPORT
+   - Kept in case another project still uses layout: "grid"
+========================================================= */
+
+.ig-grid{
+  width: 100%;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc(100% / var(--carousel-visible));
+  gap: 0;
+
+  margin-top: 44px;
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+
+  border-radius: var(--radius-16);
+  border: 1px solid var(--border);
+  background: var(--bg);
+}
+
+.ig-grid::-webkit-scrollbar{
+  display: none;
+}
+
+.ig-gridSlide{
+  margin: 0;
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  scroll-snap-align: start;
+}
+
+.ig-gridSlide + .ig-gridSlide{
+  margin-left: -1px;
+}
+
+.ig-gridSlide img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+
+  backface-visibility: hidden;
+  transform: translateZ(0);
+
+  transition: filter .35s ease;
+  filter: brightness(.96);
+}
+
+@media (hover:hover) and (pointer:fine){
+  .ig-grid{
+    cursor: grab;
+  }
+
+  .ig-grid:hover{
+    cursor: grab;
+  }
+
+  .ig-grid:hover img{
+    filter: brightness(1);
+  }
+}
+
+
+/* =========================================================
+   SCROLL CAROUSEL
+   - Used by TOFU / MOFU / BOFU
+========================================================= */
+
+.ig-scrollWrap{
+  position: relative;
+  display: block;
+  margin-top: 44px;
+}
+
+.ig-scroll{
+  width: 100%;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc(100% / var(--carousel-visible));
+  gap: 0;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+
+  border-radius: var(--radius-16);
+  border: 1px solid var(--border);
+  background: var(--bg);
+}
+
+.ig-scroll::-webkit-scrollbar{
+  display: none;
+}
+
+.ig-scrollSlide{
+  scroll-snap-align: start;
+  margin: 0;
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+
+.ig-scrollSlide + .ig-scrollSlide{
+  margin-left: -1px;
+}
+
+.ig-scrollSlide img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+
+  backface-visibility: hidden;
+  transform: translateZ(0);
+
+  transition: filter .35s ease;
+  filter: brightness(.96);
+}
+
+@media (hover:hover) and (pointer:fine){
+  .ig-scroll{
+    cursor: grab;
+  }
+
+  .ig-scroll:hover img{
+    filter: brightness(1);
+  }
+}
+
+
+/* Disable snap while JS animation is running */
+.ig-grid.is-auto-previewing,
+.ig-scroll.is-auto-previewing{
+  scroll-snap-type: none;
+}
+
+
+/* =========================================================
+   NAV BUTTONS
+========================================================= */
+
+.ig-navBtn{
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  border-radius: 999px;
+
+  color: var(--text);
+  cursor: pointer;
+  opacity: .86;
+
+  display: grid;
+  place-items: center;
+
+  transition:
+    opacity 200ms ease,
+    transform 150ms ease,
+    background 200ms ease;
+}
+
+.ig-scrollWrap .ig-navBtn{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+}
+
+.ig-scrollWrap .ig-navBtn[data-ig-prev]{
+  left: -22px;
+}
+
+.ig-scrollWrap .ig-navBtn[data-ig-next]{
+  right: -22px;
+}
+
+.ig-navBtn:disabled{
+  opacity: .28;
+  cursor: default;
+  pointer-events: none;
+}
+
+@media (hover:hover) and (pointer:fine){
+  .ig-scrollWrap:hover .ig-navBtn:not(:disabled){
+    opacity: 1;
+  }
+
+  .ig-scrollWrap .ig-navBtn:not(:disabled):hover{
+    background: var(--bg);
+    transform: translateY(-50%) scale(1.06);
+  }
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1100px){
+  .ig-grid,
+  .ig-scroll{
+    --carousel-visible: 2.5;
+  }
+}
+
+@media (max-width: 700px){
+  .ig-grid,
+  .ig-scroll{
+    --carousel-visible: 1.35;
+  }
+}
+
+@media (max-width: 640px){
+  .ig-scrollWrap{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .ig-scrollWrap .ig-navBtn{
+    position: static;
+    transform: none;
+    width: 100%;
+    height: 40px;
+    border-radius: var(--radius-12);
+    background: transparent;
+  }
+
+  .ig-scrollWrap .ig-navBtn[data-ig-prev]{
+    order: 2;
+  }
+
+  .ig-scrollWrap .ig-scroll{
+    order: 1;
+  }
+
+  .ig-scrollWrap .ig-navBtn[data-ig-next]{
+    order: 3;
+  }
+
+  @media (hover:hover) and (pointer:fine){
+    .ig-scrollWrap .ig-navBtn:not(:disabled):hover{
+      transform: none;
+    }
+  }
+}

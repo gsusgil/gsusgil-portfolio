@@ -1,13 +1,22 @@
 /* =========================================================
    COMPONENTS
-   - Buttons (no shadows)
+   - Buttons
    - Pills
    - Intro
-   - Projects list + hover border draw
+   - Hero
+   - Projects list
+   - Floating preview
    - Modal
+   - Contact tooltip
+   - Site nav
+   - Site footer
 ========================================================= */
 
-/* ---------- Buttons ---------- */
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
 .btn{
   position: relative;
   display: inline-flex;
@@ -22,12 +31,13 @@
   color: var(--text);
 
   cursor: pointer;
-  transition: color var(--dur-250) var(--ease-out),
-              border-color var(--dur-250) var(--ease-out),
-              transform var(--dur-150) var(--ease-out);
+  transition:
+    color var(--dur-250) var(--ease-out),
+    border-color var(--dur-250) var(--ease-out),
+    transform var(--dur-150) var(--ease-out);
 }
 
-/* “Trimpath” sin SVG: 4 líneas como backgrounds */
+/* Border draw hover */
 .btn::after{
   content:"";
   position:absolute;
@@ -35,63 +45,217 @@
   border-radius: calc(var(--radius-8) + 1px);
   pointer-events:none;
 
-  /* 4 lados (top, right, bottom, left) */
   background:
     linear-gradient(var(--accent), var(--accent)) top left / 0% 1px no-repeat,
     linear-gradient(var(--accent), var(--accent)) top right / 1px 0% no-repeat,
     linear-gradient(var(--accent), var(--accent)) bottom right / 0% 1px no-repeat,
     linear-gradient(var(--accent), var(--accent)) bottom left / 1px 0% no-repeat;
 
-  transition:
-    background-size var(--dur-400) var(--ease-out);
+  transition: background-size var(--dur-400) var(--ease-out);
 }
 
 .btn:hover{
-  border-color: transparent; /* opcional: deja solo el “draw” */
+  border-color: transparent;
 }
 
-/* Secuencia simple: primero horizontales, luego verticales */
 .btn:hover::after{
   background-size:
-    100% 1px,  /* top */
-    1px 100%,  /* right */
-    100% 1px,  /* bottom */
-    1px 100%;  /* left */
+    100% 1px,
+    1px 100%,
+    100% 1px,
+    1px 100%;
 }
 
-/* ---------- Pills ---------- */
+
+/* =========================================================
+   PILLS
+========================================================= */
+
 .pill{
   display: inline-flex;
   align-items: center;
   gap: 10px;
+
   padding: 10px 12px;
   border-radius: 999px;
   border: 1px solid var(--border);
+
   background: transparent;
   color: var(--text);
 }
 
-/* ---------- Intro ---------- */
+
+/* =========================================================
+   INTRO — Mask reveal
+========================================================= */
+
 .intro{
   min-height: 100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  display: grid;
+  place-items: center;
   position: relative;
+  z-index: 9999;
+  overflow: hidden;
+  background: var(--intro-bg);
+}
+
+
+.intro__hint{
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 22px;
+  text-align: center;
+  opacity: 0.7;
+}
+
+.intro__logoWrap{
+  width: min(520px, 80vw);
+  display: grid;
+  place-items: center;
+  position: relative;
+  z-index: 2;
 }
 
 .intro__logo{
-  width: min(520px, 80vw);
+  width: 100%;
   height: auto;
+  display: block;
 }
 
+.intro__maskLayer{
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+
+  background: var(--intro-reveal);
+
+  --mask-size: 22vh;
+
+  -webkit-mask-image: var(--intro-mask-url);
+  mask-image: var(--intro-mask-url);
+
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+
+  -webkit-mask-position: center;
+  mask-position: center;
+
+  -webkit-mask-size: var(--mask-size);
+  mask-size: var(--mask-size);
+
+  will-change: -webkit-mask-size, mask-size;
+  transform: translateZ(0);
+}
+
+:root{
+  --intro-bg: #ff4d4d;
+  --intro-reveal: #ffffff;
+  --intro-mask-url: url("/logo-gsusgil.svg");
+}
+
+html[data-theme="dark"]{
+  --intro-bg: #ffffff;
+  --intro-reveal: #121217;
+  --intro-mask-url: url("/logo-gsusgil-dark.svg");
+}
+
+
 /* =========================================================
-   PROJECTS LIST — Lista textual
-   - Sin tags / sin fecha
-   - Hover: líneas separadoras pasan a rojo (accent)
+   HERO
 ========================================================= */
 
-/* Kicker ("Selected projects") */
+.hero{
+  padding: 84px 0 64px;
+}
+
+.hero__top{
+  position: relative;
+  display: grid;
+  place-items: center;
+  margin-bottom: 34px;
+}
+
+.hero__brand{
+  display:flex;
+  justify-content:center;
+  width:100%;
+}
+
+.hero__logo{
+  height: 34px;
+  width: auto;
+  display:block;
+}
+
+.hero__logo--dark{
+  display:none;
+}
+
+html[data-theme="dark"] .hero__logo--light{
+  display:none;
+}
+
+html[data-theme="dark"] .hero__logo--dark{
+  display:block;
+}
+
+.hero__toggle{
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.hero__content{
+  text-align: center;
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.hero__content h1{
+  font-size: 54px;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.hero__content h2{
+  margin-top: 18px;
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: .8;
+  font-weight: 400;
+}
+
+.hero__ctaRow{
+  margin-top: 28px;
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 640px){
+  .hero{
+    padding: 64px 0 52px;
+  }
+
+  .hero__content h1{
+    font-size: 36px;
+    line-height: 1.1;
+  }
+
+  .hero__content h2{
+    font-size: 18px;
+    line-height: 1.55;
+  }
+}
+
+
+/* =========================================================
+   PROJECTS LIST
+========================================================= */
+
 .projects__kicker{
   font-size: 18px;
   font-weight: 300;
@@ -99,18 +263,16 @@
   margin-bottom: 24px;
 }
 
-/* ---------- Row ---------- */
 .project-row{
   font-size: 28px;
   display: grid;
-  grid-template-columns: 64px 1fr; /* ✅ ya no hay columna derecha */
+  grid-template-columns: 64px 1fr;
   gap: 18px;
   padding: 22px 0;
 
   border-top: 1px solid var(--border);
   align-items: start;
 
-  /* ✅ Transiciones claras (más “premium”) */
   transition:
     transform var(--dur-250) var(--ease-out),
     border-color var(--dur-250) var(--ease-out);
@@ -121,35 +283,32 @@
   transition: border-color var(--dur-250) var(--ease-out);
 }
 
-/* ✅ Hover con línea roja visible */
 .project-row:hover{
   transform: translateY(-3px);
   border-top-color: var(--accent);
 }
 
-/* Hover coherente con el título */
+.project-row:hover:last-child{
+  border-bottom-color: var(--accent);
+}
+
+.project-row__num{
+  color: var(--muted);
+  font-weight: 600;
+  transition:
+    color var(--dur-250) var(--ease-out),
+    transform var(--dur-250) var(--ease-out);
+}
+
 .project-row:hover .project-row__num{
   color: var(--accent);
   transform: translateY(-2px);
 }
 
-/* ✅ Si es el último, también pinta la línea inferior */
-.project-row:hover:last-child{
-  border-bottom-color: var(--accent);
-}
-
-/* Número */
-.project-row__num{
-  color: var(--muted);
-  font-weight: 600;
-}
-
-/* Contenido */
 .project-row__body{
-  min-width: 0; /* evita overflow raro */
+  min-width: 0;
 }
 
-/* Título */
 .project-row__title{
   font-size: 26px;
   line-height: 1.15;
@@ -160,57 +319,56 @@
   transition: color var(--dur-250) var(--ease-out);
 }
 
-/* (Opcional pero queda mejor): refuerza interacción */
 .project-row:hover .project-row__title{
   color: var(--accent);
 }
 
-/* Descripción */
 .project-row__excerpt{
   color: var(--muted);
   margin: 0;
 }
 
 
-
 /* =========================================================
-   FLOATING PREVIEW (desktop only)
-   - Lo mueve preview-follow.js
+   FLOATING PREVIEW
 ========================================================= */
 
-/* =========================================================
-   PROJECT PREVIEW FLOAT
-========================================================= */
-
-.preview-float {
+.preview-float{
   position: fixed;
   top: 0;
   left: 0;
+
   width: 700px;
   aspect-ratio: 16 / 9;
   overflow: hidden;
+
   border-radius: 20px;
   background: #111;
   border: 1px solid rgba(255, 255, 255, 0.12);
   box-shadow:
     0 18px 50px rgba(0, 0, 0, 0.35),
     0 2px 10px rgba(0, 0, 0, 0.18);
+
   pointer-events: none;
   opacity: 0;
   visibility: hidden;
   transform: translate3d(-9999px, -9999px, 0);
+
   transition:
-    opacity 160ms ease,
-    visibility 160ms ease;
-  z-index: 60;
+    opacity 120ms ease,
+    visibility 120ms ease;
+
+  z-index: 2147483647;
+  isolation: isolate;
+  will-change: transform, opacity;
 }
 
-.preview-float.is-visible {
+.preview-float.is-visible{
   opacity: 1;
   visibility: visible;
 }
 
-.preview-float__img {
+.preview-float__img{
   display: block;
   width: 100%;
   height: 100%;
@@ -218,26 +376,37 @@
   background: #1a1a1a;
 }
 
-.preview-float__label {
+.preview-float__label{
   position: absolute;
   left: 16px;
   right: 16px;
   bottom: 16px;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
+
   padding: 14px 18px;
   border-radius: 14px;
-  background: rgba(10, 10, 10, 0.62);
+
+  background: color-mix(in srgb, var(--accent) 88%, transparent);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  color: #fff;
+
+  border: 1px solid color-mix(in srgb, #ffffff 22%, transparent);
+  color: #ffffff;
   z-index: 2;
 }
+.preview-float__label span:last-child{
+  flex-shrink: 0;
+  font-size: 16px;
+  line-height: 1;
+  font-weight: 700;
+  opacity: 1;
+}
 
-.preview-float__label span:first-child {
+.preview-float__label span:first-child{
   min-width: 0;
   font-size: 18px;
   line-height: 1.2;
@@ -247,7 +416,7 @@
   text-overflow: ellipsis;
 }
 
-.preview-float__label span:last-child {
+.preview-float__label span:last-child{
   flex-shrink: 0;
   font-size: 16px;
   line-height: 1;
@@ -255,18 +424,13 @@
   opacity: 0.92;
 }
 
-/* =========================================================
-   RESPONSIVE
-========================================================= */
-
-/* Desktop medio */
-@media (max-width: 1440px) {
-  .preview-float {
+@media (max-width: 1440px){
+  .preview-float{
     width: 620px;
     border-radius: 18px;
   }
 
-  .preview-float__label {
+  .preview-float__label{
     left: 14px;
     right: 14px;
     bottom: 14px;
@@ -274,23 +438,22 @@
     border-radius: 12px;
   }
 
-  .preview-float__label span:first-child {
+  .preview-float__label span:first-child{
     font-size: 17px;
   }
 
-  .preview-float__label span:last-child {
+  .preview-float__label span:last-child{
     font-size: 15px;
   }
 }
 
-/* Laptop */
-@media (max-width: 1200px) {
-  .preview-float {
+@media (max-width: 1200px){
+  .preview-float{
     width: 540px;
     border-radius: 16px;
   }
 
-  .preview-float__label {
+  .preview-float__label{
     left: 12px;
     right: 12px;
     bottom: 12px;
@@ -299,23 +462,22 @@
     border-radius: 12px;
   }
 
-  .preview-float__label span:first-child {
+  .preview-float__label span:first-child{
     font-size: 16px;
   }
 
-  .preview-float__label span:last-child {
+  .preview-float__label span:last-child{
     font-size: 14px;
   }
 }
 
-/* Tablet grande / pantallas donde aún puede haber puntero */
-@media (max-width: 1024px) {
-  .preview-float {
+@media (max-width: 1024px){
+  .preview-float{
     width: 460px;
     border-radius: 14px;
   }
 
-  .preview-float__label {
+  .preview-float__label{
     left: 10px;
     right: 10px;
     bottom: 10px;
@@ -324,23 +486,25 @@
     border-radius: 10px;
   }
 
-  .preview-float__label span:first-child {
+  .preview-float__label span:first-child{
     font-size: 15px;
   }
 
-  .preview-float__label span:last-child {
+  .preview-float__label span:last-child{
     font-size: 13px;
   }
 }
 
-/* En móvil no debería aparecer nunca */
-@media (max-width: 768px), (hover: none), (pointer: coarse) {
-  .preview-float {
+@media (max-width: 768px), (hover: none), (pointer: coarse){
+  .preview-float{
     display: none !important;
   }
 }
 
-/* ---------- Modal ---------- */
+/* =========================================================
+   MODAL
+========================================================= */
+
 .modal{
   position: fixed;
   inset: 0;
@@ -363,9 +527,11 @@
   position: absolute;
   inset: 24px;
   z-index: 2;
+
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: var(--radius-16);
+
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -395,191 +561,9 @@
   border:0;
 }
 
-/* =========================================================
-   INTRO — Mask reveal (estable, sin “rosa”)
-========================================================= */
-
-.intro{
-  min-height: 100vh;
-  display: grid;
-  place-items: center;
-  position: relative;
-  z-index: 9999;
-  overflow: hidden;
-  background: var(--intro-bg);
-}
-
-/* Hint */
-.intro__hint{
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 22px;
-  text-align: center;
-  opacity: 0.7;
-}
-
-/* Logo solo “decorativo” (no se anima) */
-.intro__logoWrap{
-  width: min(520px, 80vw);
-  display: grid;
-  place-items: center;
-  position: relative;
-  z-index: 2;
-}
-
-.intro__logo{
-  width: 100%;
-  height: auto;
-  display: block;
-}
 
 /* =========================================================
-   MASK LAYER (esto es lo que “crece”)
-   - Fondo: color real de la página
-   - Máscara: tu SVG
-   - Tamaño: controlado por variable --mask-size
-========================================================= */
-
-.intro__maskLayer{
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-
-  background: var(--intro-reveal);
-
-  /* La magia: máscara con SVG */
-  --mask-size: 22vh; /* valor inicial (GSAP lo sobreescribe) */
-
-  -webkit-mask-image: var(--intro-mask-url);
-  mask-image: var(--intro-mask-url);
-
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-
-  -webkit-mask-position: center;
-  mask-position: center;
-
-  -webkit-mask-size: var(--mask-size);
-  mask-size: var(--mask-size);
-
-  /* Evita “shimmer” raro en algunos setups */
-  will-change: -webkit-mask-size, mask-size;
-  transform: translateZ(0);
-}
-
-/* =========================================================
-   THEME BINDINGS
-   - Light: fondo rojo, “página” blanca, máscara = logo light
-   - Dark: fondo blanco, “página” dark suave, máscara = logo dark
-========================================================= */
-
-:root{
-  --intro-bg: #ff4d4d;
-  --intro-reveal: #ffffff;
-  --intro-mask-url: url("/logo-gsusgil.svg");
-}
-
-/* Dark “relajado” (no negro puro) */
-html[data-theme="dark"]{
-  --intro-bg: #ffffff;
-  --intro-reveal: #121217; /* <- dark suave que combina con el rojo */
-  --intro-mask-url: url("/logo-gsusgil-dark.svg");
-}
-
-
-/* =========================================================
-   HERO LAYOUT (alineación + espaciado)
-   - Centra logo arriba
-   - Títulos centrados
-   - CTA row (Contact / Resume) centrado
-========================================================= */
-
-.hero{
-  padding: 84px 0 64px;
-}
-
-.hero__top{
-  position: relative;
-  display: grid;
-  place-items: center;
-  margin-bottom: 34px;
-}
-
-/* Logo arriba centrado */
-.hero__brand{
-  display:flex;
-  justify-content:center;
-  width:100%;
-}
-
-.hero__logo{
-  height: 34px;
-  width: auto;
-  display:block;
-}
-
-.hero__logo--dark{ display:none; }
-html[data-theme="dark"] .hero__logo--light{ display:none; }
-html[data-theme="dark"] .hero__logo--dark{ display:block; }
-
-/* Toggle arriba a la derecha */
-.hero__toggle{
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-
-/* Textos */
-.hero__content{
-  text-align: center;
-  max-width: 920px;
-  margin: 0 auto;
-}
-
-.hero__content h1{
-  font-size: 54px;
-  line-height: 1.05;
-  letter-spacing: -0.02em;
-}
-
-.hero__content h2{
-  margin-top: 18px;
-  max-width: 760px;
-  margin-left: auto;
-  margin-right: auto;
-  opacity: .8;
-  font-weight: 400; /* “light” */
-}
-
-/* CTAs centrados */
-.hero__ctaRow{
-  margin-top: 28px;
-  display: flex;
-  justify-content: center;
-  gap: 14px;
-  flex-wrap: wrap;
-}
-
-/* Mobile */
-@media (max-width: 640px){
-  .hero{ padding: 64px 0 52px; }
-
-  .hero__content h1{
-    font-size: 36px;
-    line-height: 1.1;
-  }
-
-  .hero__content h2{
-    font-size: 18px;
-    line-height: 1.55;
-  }
-}
-
-/* =========================================================
-   CONTACT TOOLTIP (no “salto” de layout)
-   - Botón Contact abre tooltip
-   - Tooltip contiene Email + Copy (y opcional mailto)
+   CONTACT TOOLTIP
 ========================================================= */
 
 .contactTip{
@@ -588,14 +572,14 @@ html[data-theme="dark"] .hero__logo--dark{ display:block; }
   align-items: center;
 }
 
-/* Panel tooltip */
 .contactTip__panel{
   position: absolute;
   top: calc(100% + 10px);
   left: 50%;
   transform: translateX(-50%) translateY(6px);
+
   width: min(340px, 86vw);
-  padding: 12px 12px;
+  padding: 12px;
 
   border-radius: var(--radius-12);
   border: 1px solid var(--border);
@@ -604,25 +588,27 @@ html[data-theme="dark"] .hero__logo--dark{ display:block; }
 
   opacity: 0;
   pointer-events: none;
-  transition: opacity var(--dur-150) var(--ease-out),
-              transform var(--dur-150) var(--ease-out);
+
+  transition:
+    opacity var(--dur-150) var(--ease-out),
+    transform var(--dur-150) var(--ease-out);
 }
 
-/* Flechita */
 .contactTip__panel::before{
   content:"";
   position: absolute;
   top: -6px;
   left: 50%;
   transform: translateX(-50%) rotate(45deg);
+
   width: 10px;
   height: 10px;
+
   background: var(--bg);
   border-left: 1px solid var(--border);
   border-top: 1px solid var(--border);
 }
 
-/* Abierto */
 .contactTip.is-open .contactTip__panel{
   opacity: 1;
   pointer-events: auto;
@@ -646,20 +632,103 @@ html[data-theme="dark"] .hero__logo--dark{ display:block; }
   font-family: var(--font-sans);
   font-size: 14px;
   color: var(--text);
+
   padding: 8px 10px;
   border-radius: var(--radius-8);
   border: 1px solid var(--border);
   background: transparent;
+
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 
+/* Legacy contact tooltip */
+.contact-tooltip{
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip-bubble{
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+
+  min-width: 280px;
+  padding: 14px;
+  border-radius: 16px;
+
+  background: rgba(18, 18, 18, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+
+  transition:
+    opacity 180ms ease,
+    visibility 180ms ease,
+    transform 180ms ease;
+
+  z-index: 80;
+}
+
+.contact-tooltip.is-open .tooltip-bubble{
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.tooltip-row{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.tooltip-email{
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  text-align: left;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  word-break: break-word;
+}
+
+.tooltip-copy{
+  white-space: nowrap;
+}
+
+.tooltip-toast{
+  margin-top: 10px;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 160ms ease,
+    visibility 160ms ease;
+}
+
+.tooltip-toast.is-visible{
+  opacity: 1;
+  visibility: visible;
+}
+
+
+/* =========================================================
+   SITE NAV
+========================================================= */
+
 .siteNav{
   position: sticky;
   top: 0;
   z-index: 50;
+
   background: color-mix(in srgb, var(--bg) 86%, transparent);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--border);
@@ -683,9 +752,17 @@ html[data-theme="dark"] .hero__logo--dark{ display:block; }
   display: block;
 }
 
-.siteNav__logo--dark{ display:none; }
-html[data-theme="dark"] .siteNav__logo--light{ display:none; }
-html[data-theme="dark"] .siteNav__logo--dark{ display:block; }
+.siteNav__logo--dark{
+  display:none;
+}
+
+html[data-theme="dark"] .siteNav__logo--light{
+  display:none;
+}
+
+html[data-theme="dark"] .siteNav__logo--dark{
+  display:block;
+}
 
 .siteNav__actions{
   display: inline-flex;
@@ -693,66 +770,133 @@ html[data-theme="dark"] .siteNav__logo--dark{ display:block; }
   gap: 12px;
 }
 
-.contact-tooltip {
+
+/* =========================================================
+   SITE FOOTER
+========================================================= */
+
+.siteFooter{
   position: relative;
-  display: inline-block;
+  z-index: 1;
+  padding: 0 0 42px;
 }
 
-.tooltip-bubble {
-  position: absolute;
-  top: calc(100% + 12px);
-  right: 0;
-  min-width: 280px;
-  padding: 14px;
-  border-radius: 16px;
-  background: rgba(18, 18, 18, 0.96);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(8px);
-  transition: opacity 180ms ease, visibility 180ms ease, transform 180ms ease;
-  z-index: 80;
+.siteFooter__inner{
+  display: grid;
+  gap: 42px;
+  border-top: 1px solid var(--border);
+  padding-top: 42px;
 }
 
-.contact-tooltip.is-open .tooltip-bubble {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
+.siteFooter__main{
+  max-width: 760px;
 }
 
-.tooltip-row {
+.siteFooter__eyebrow{
+  margin: 0 0 12px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.siteFooter__title{
+  margin: 0;
+  max-width: 760px;
+  font-size: clamp(28px, 4vw, 48px);
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+  color: var(--accent);
+
+  transition:
+    color var(--dur-400) var(--ease-out),
+    letter-spacing var(--dur-400) var(--ease-out);
+}
+
+.siteFooter__main:hover .siteFooter__title{
+  color: #121217;
+  letter-spacing: -0.045em;
+}
+
+html[data-theme="dark"] .siteFooter__main:hover .siteFooter__title{
+  color: #ffffff;
+}
+
+.siteFooter__meta{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+}
+
+.siteFooter__credit{
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.siteFooter__credit span{
+  color: var(--title);
+  font-weight: 700;
+}
+
+.siteFooter__links{
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 10px;
+  gap: 16px;
+  flex-wrap: wrap;
 }
 
-.tooltip-email {
-  width: 100%;
+.siteFooter__links a,
+.siteFooter__linkButton{
+  appearance: none;
   border: 0;
-  background: transparent;
-  color: #fff;
-  text-align: left;
   padding: 0;
+  background: transparent;
+
   font: inherit;
+  font-size: 14px;
+  line-height: 1;
+
+  color: var(--title);
+  text-decoration: none;
   cursor: pointer;
-  word-break: break-word;
+  opacity: .82;
+
+  transition:
+    opacity var(--dur-250) var(--ease-out),
+    color var(--dur-250) var(--ease-out);
 }
 
-.tooltip-copy {
-  white-space: nowrap;
-}
-
-.tooltip-toast {
-  margin-top: 10px;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 160ms ease, visibility 160ms ease;
-}
-
-.tooltip-toast.is-visible {
+.siteFooter__links a:hover,
+.siteFooter__linkButton:hover{
   opacity: 1;
-  visibility: visible;
+  color: var(--accent);
+}
+
+
+/* =========================================================
+   FOOTER RESPONSIVE
+========================================================= */
+
+@media (max-width: 700px){
+  .siteFooter{
+    padding: 48px 0 34px;
+  }
+
+  .siteFooter__inner{
+    gap: 32px;
+    padding-top: 34px;
+  }
+
+  .siteFooter__meta{
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .siteFooter__links{
+    gap: 14px;
+  }
 }

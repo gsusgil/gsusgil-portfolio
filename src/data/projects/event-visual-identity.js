@@ -1,33 +1,66 @@
 // src/data/projects/event-visual-identity.js
+
 export default {
   slug: "event-visual-identity",
   title: "Event Visual Identity",
   kicker: "Selected project",
-  lede: "ZIGURAT Student Week — evolving architectural identity across editions",
+  lede:
+    "ZIGURAT Student Week — evolving an architectural identity system across editions.",
   preview: "/thumbs/event-thumbnail.png",
+
   modules: [
     {
-      type: "intro",
-      title: "Overview",
-      sections: [
+      type: "visualHero",
+      images: [
         {
-          label: "Objective",
-          text: "Evolve the annual visual identity of Student Week while maintaining a coherent system across editions. Each year the event requires a renewed concept connected to Barcelona’s architectural culture, without losing recognisability or structural continuity.",
-        },
-        {
-          label: "Concept Direction",
-          text: "The identity evolved through architectural representations of the city. Earlier editions established the visual language through singular landmarks — beginning with Sagrada Família in 2023 — followed by Park Güell and later Casa Batlló combined with the Passeig de Gràcia panot pattern. In 2026, the concept expands into five architectural icons representing Barcelona’s broader architectural landscape, aligned with the Year of Architecture. While previous editions focused on a single landmark, the 2026 direction expands the narrative to reflect Barcelona’s architectural diversity and scale. The Passeig de Gràcia panot pattern remains the structural anchor — reused as a compositional and graphic system element across editions.",
+          label: "2026 system",
+          src: "/projects/event-identity/hotel-w.png",
+          alt: "Student Week 2026 visual identity based on Sagrada Família",
         },
       ],
-      scope:
-        "From 2024 onwards, I led the evolution of the visual identity system, shifting from single-icon representation toward a broader architectural narrative while preserving structural continuity. I defined conceptual direction, architectural representation style, composition rules, pattern integration strategy, and color hierarchy across digital and physical touchpoints.",
+    },
+
+    {
+      type: "caseOverview",
+      eyebrow: "Identity system overview",
+      text:
+        "A recurring event identity evolved through Barcelona’s architectural language, expanding from single-landmark references into a broader visual system while preserving recognisable structural continuity across editions.",
+      facts: [
+        {
+          label: "Role",
+          value: "Visual direction · Concept evolution · Event identity system",
+        },
+        {
+          label: "System",
+          value: "Architectural references · Panot pattern · Edition continuity",
+        },
+        {
+          label: "Output",
+          value: "Digital assets · Event visuals · Multi-edition identity",
+        },
+      ],
+      metrics: [
+        {
+          value: "4",
+          label: "Editions",
+        },
+        {
+          value: "5",
+          label: "2026 landmarks",
+        },
+        {
+          value: "1",
+          label: "Reusable visual DNA",
+        },
+      ],
     },
 
     {
       type: "mediaPair",
       num: "01",
       h2: "Foundational references",
-      p: "Earlier editions established the visual language through singular landmarks strongly tied to Barcelona’s architectural identity.",
+      p:
+        "Earlier editions established the visual language through singular landmarks strongly tied to Barcelona’s architectural identity.",
       items: [
         {
           src: "/projects/event-identity/sagrada-familia.png",
@@ -46,7 +79,8 @@ export default {
       type: "mediaFeature",
       num: "02",
       h2: "Concept applied to event experience",
-      p: "In 2025, the identity became more expressive through Casa Batlló and was translated into the live event environment.",
+      p:
+        "In 2025, the identity became more expressive through Casa Batlló and was translated into the live event environment.",
       image: {
         src: "/projects/event-identity/casa-batllo.png",
         alt: "Casa Batlló concept development for Student Week 2025",
@@ -63,7 +97,8 @@ export default {
       type: "mediaStack",
       num: "03",
       h2: "2026 architectural expansion",
-      p: "The 2026 direction expands the system into multiple architectural references, broadening the narrative while preserving recognisable structural anchors.",
+      p:
+        "The 2026 direction expands the identity into multiple architectural references, broadening the narrative while preserving the event’s recognisable structural anchors.",
       items: [
         {
           src: "/projects/event-identity/sagrada-familia-v2.png",
@@ -85,8 +120,9 @@ export default {
 
     {
       type: "text",
-      h2: "Conclusion",
-      p: "The evolution of Student Week shows how a recurring event identity can grow without losing its core structure. What started with Barcelona’s iconic square panots evolved into a more organic language inspired by the Passeig de Gràcia tiles, reflecting a shift from rigid geometry to fluid architectural forms. Each edition inherits the underlying visual system while introducing new landmarks and narratives, with AI used to explore stylised interpretations of the city’s architecture. The result is a flexible identity that evolves each year while preserving a recognisable visual DNA.",
+      h2: "Outcome",
+      p:
+        "The evolution of Student Week shows how a recurring event identity can grow without losing its core structure. Each edition inherits the underlying visual system while introducing new landmarks and narratives, resulting in a flexible identity that evolves year after year while preserving a recognisable visual DNA.",
     },
   ],
 };

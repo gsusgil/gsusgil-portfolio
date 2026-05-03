@@ -4,8 +4,6 @@ import "../styles/components.css";
 import ResumeModal from "../components/ResumeModal.astro";
 
 const { title = "Portfolio", description = "Jesus gil's portfolio" } = Astro.props;
-
-
 ---
 
 <!doctype html>
@@ -16,7 +14,7 @@ const { title = "Portfolio", description = "Jesus gil's portfolio" } = Astro.pro
     <meta name="description" content={description} />
     <title>{title}</title>
 
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml"></link>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 
     <script>
       (function () {
@@ -26,7 +24,7 @@ const { title = "Portfolio", description = "Jesus gil's portfolio" } = Astro.pro
           const systemDark =
             window.matchMedia &&
             window.matchMedia("(prefers-color-scheme: dark)").matches;
-          const theme = saved ? saved : (systemDark ? "dark" : "light");
+          const theme = saved ? saved : systemDark ? "dark" : "light";
           document.documentElement.setAttribute("data-theme", theme);
         } catch (_) {}
       })();
@@ -35,6 +33,31 @@ const { title = "Portfolio", description = "Jesus gil's portfolio" } = Astro.pro
 
   <body>
     <slot />
+
+    <footer class="siteFooter" aria-label="Site footer">
+      <div class="container siteFooter__inner">
+        <div class="siteFooter__main">
+          <p class="siteFooter__eyebrow">Interested in working together?</p>
+
+          <p class="siteFooter__title">
+            Senior graphic design, visual systems and frontend-friendly creative execution.
+          </p>
+        </div>
+
+        <div class="siteFooter__meta">
+          <p class="siteFooter__credit">
+            Design, strategy & frontend by <span>gsusgil</span>
+          </p>
+
+          <nav class="siteFooter__links" aria-label="Footer links">
+            <a href="mailto:gsusgildesigner@gmail.com">Email</a>
+            <a href="https://www.linkedin.com/in/gsus-gil/?locale=es" target="_blank" rel="noreferrer">LinkedIn</a>
+            
+          </nav>
+        </div>
+      </div>
+    </footer>
+
     <ResumeModal />
 
     <script>

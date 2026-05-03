@@ -13,17 +13,72 @@ if (!project) throw new Error("Project not found");
 
 const pad2 = (n) => String(n).padStart(2, "0");
 const more = projects.filter((p) => p.slug !== slug).slice(0, 3);
+
+const visualHero = project.modules?.find((m) => m.type === "visualHero");
+const caseOverview = project.modules?.find((m) => m.type === "caseOverview");
+
+const contentModules =
+  project.modules?.filter(
+    (m) => m.type !== "visualHero" && m.type !== "caseOverview"
+  ) ?? [];
 ---
 
 <ProjectLayout title={project.title} description={project.lede}>
-  <article class="project">
+  <article class={`project project--${project.slug}`}>
+    {visualHero && (
+      <section class="visualHero" data-reveal>
+        <div class="visualHero__inner">
+          {visualHero.images?.map((item) => (
+            <figure class="visualHero__card">
+              <img src={item.src} alt={item.alt ?? ""} loading="eager" />
+              <figcaption>{item.label}</figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
+    )}
+
     <header class="project__header" data-reveal>
       <div class="small projects__kicker">{project.kicker ?? "Selected project"}</div>
       <h1 class="project__h1">{project.title}</h1>
       <p class="project__lede">{project.lede}</p>
     </header>
 
-    {project.modules?.map((m) => (
+    {caseOverview && (
+      <section class="project__block caseOverview" data-reveal>
+        <div class="caseOverview__content">
+          {caseOverview.eyebrow && (
+            <div class="caseOverview__eyebrow">{caseOverview.eyebrow}</div>
+          )}
+
+          <p class="caseOverview__text">{caseOverview.text}</p>
+
+          {caseOverview.facts?.length > 0 && (
+            <div class="caseOverview__facts">
+              {caseOverview.facts.map((item) => (
+                <div class="caseOverview__fact">
+                  <div class="caseOverview__factLabel">{item.label}</div>
+                  <div class="caseOverview__factValue">{item.value}</div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {caseOverview.metrics?.length > 0 && (
+            <div class="caseOverview__metrics">
+              {caseOverview.metrics.map((item) => (
+                <div class="caseOverview__metric">
+                  <div class="caseOverview__metricValue">{item.value}</div>
+                  <div class="caseOverview__metricLabel">{item.label}</div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+    )}
+
+    {contentModules.map((m) => (
       <>
         {/* INTRO */}
         {m.type === "intro" && (
@@ -48,40 +103,6 @@ const more = projects.filter((p) => p.slug !== slug).slice(0, 3);
           </section>
         )}
 
-        {/* STAGE */}
-        {m.type === "stage" && (
-          <section class="project__block project__stage" data-reveal>
-            <div class="project__stageHeader">
-              <div class="project__stageNum">{m.stage}</div>
-
-              <div class="project__stageKPI">
-                <div class="project__stageKPIValue">{m.metrics?.ctr}</div>
-                <div class="project__stageKPILabel">CTR</div>
-              </div>
-            </div>
-
-            <div class="project__stageStats">
-              <div class="project__stat">
-                <div class="project__statLabel">Impressions</div>
-                <div class="project__statValue">{m.metrics?.impressions}</div>
-              </div>
-              <div class="project__stat">
-                <div class="project__statLabel">Clicks</div>
-                <div class="project__statValue">{m.metrics?.clicks}</div>
-              </div>
-              <div class="project__stat">
-                <div class="project__statLabel">CTR</div>
-                <div class="project__statValue">{m.metrics?.ctr}</div>
-              </div>
-            </div>
-
-            <div class="project__stageDid">
-              <div class="project__stageDidLabel">What I did</div>
-              <p class="project__stageDidText">{m.did}</p>
-            </div>
-          </section>
-        )}
-
         {/* TEXT */}
         {m.type === "text" && (
           <section class="project__block" data-reveal>
@@ -95,6 +116,7 @@ const more = projects.filter((p) => p.slug !== slug).slice(0, 3);
           <section class="project__block project__level" data-reveal>
             <div class="project__levelTop">
               {m.num && <div class="project__levelNum">{m.num}</div>}
+
               <div>
                 <h2 class="project__h2">{m.h2}</h2>
                 <p class="project__p">{m.p}</p>
@@ -106,7 +128,6 @@ const more = projects.filter((p) => p.slug !== slug).slice(0, 3);
         )}
 
         {/* EMAIL */}
-                {/* EMAIL */}
         {m.type === "email" && (
           <section class="project__block project__level" data-reveal>
             <div class="project__levelTop">
@@ -254,15 +275,15 @@ const more = projects.filter((p) => p.slug !== slug).slice(0, 3);
                     <div class="project__statLabel">Impressions</div>
                     <div class="project__statValue">{m.metrics?.impressions}</div>
                   </div>
+
                   <div class="project__stat">
                     <div class="project__statLabel">Clicks</div>
                     <div class="project__statValue">{m.metrics?.clicks}</div>
                   </div>
-                 
                 </div>
 
                 <div class="project__stageDid">
-                  <div class="project__stageDidLabel">What I did</div>
+                  <div class="project__stageDidLabel">Design decision</div>
                   <p class="project__stageDidText">{m.did}</p>
                 </div>
               </div>
@@ -308,11 +329,12 @@ const more = projects.filter((p) => p.slug !== slug).slice(0, 3);
           </section>
         )}
 
-                {/* MEDIA PAIR */}
+        {/* MEDIA PAIR */}
         {m.type === "mediaPair" && (
           <section class="project__block project__level" data-reveal>
             <div class="project__levelTop">
               {m.num && <div class="project__levelNum">{m.num}</div>}
+
               <div>
                 <h2 class="project__h2">{m.h2}</h2>
                 {m.p && <p class="project__p">{m.p}</p>}
@@ -323,12 +345,9 @@ const more = projects.filter((p) => p.slug !== slug).slice(0, 3);
               {m.items?.map((item) => (
                 <figure class="mediaPairGrid__item">
                   <div class="mediaPairGrid__media">
-                    <img
-                      src={item.src}
-                      alt={item.alt ?? ""}
-                      loading="lazy"
-                    />
+                    <img src={item.src} alt={item.alt ?? ""} loading="lazy" />
                   </div>
+
                   {item.caption && (
                     <figcaption class="mediaPairGrid__caption">{item.caption}</figcaption>
                   )}
@@ -338,11 +357,12 @@ const more = projects.filter((p) => p.slug !== slug).slice(0, 3);
           </section>
         )}
 
-                {/* MEDIA FEATURE */}
+        {/* MEDIA FEATURE */}
         {m.type === "mediaFeature" && (
           <section class="project__block project__level" data-reveal>
             <div class="project__levelTop">
               {m.num && <div class="project__levelNum">{m.num}</div>}
+
               <div>
                 <h2 class="project__h2">{m.h2}</h2>
                 {m.p && <p class="project__p">{m.p}</p>}
@@ -352,12 +372,9 @@ const more = projects.filter((p) => p.slug !== slug).slice(0, 3);
             <div class="mediaFeature">
               <figure class="mediaFeature__imageItem">
                 <div class="mediaFeature__imageMedia">
-                  <img
-                    src={m.image.src}
-                    alt={m.image.alt ?? ""}
-                    loading="lazy"
-                  />
+                  <img src={m.image.src} alt={m.image.alt ?? ""} loading="lazy" />
                 </div>
+
                 {m.image?.caption && (
                   <figcaption class="mediaFeature__caption">{m.image.caption}</figcaption>
                 )}
@@ -373,6 +390,7 @@ const more = projects.filter((p) => p.slug !== slug).slice(0, 3);
                     src={m.video.src}
                   />
                 </div>
+
                 {m.video?.caption && (
                   <figcaption class="mediaFeature__caption">{m.video.caption}</figcaption>
                 )}
@@ -381,11 +399,12 @@ const more = projects.filter((p) => p.slug !== slug).slice(0, 3);
           </section>
         )}
 
-                {/* MEDIA STACK */}
+        {/* MEDIA STACK */}
         {m.type === "mediaStack" && (
           <section class="project__block project__level" data-reveal>
             <div class="project__levelTop">
               {m.num && <div class="project__levelNum">{m.num}</div>}
+
               <div>
                 <h2 class="project__h2">{m.h2}</h2>
                 {m.p && <p class="project__p">{m.p}</p>}
@@ -396,12 +415,9 @@ const more = projects.filter((p) => p.slug !== slug).slice(0, 3);
               {m.items?.map((item) => (
                 <figure class="mediaStack__item">
                   <div class="mediaStack__media">
-                    <img
-                      src={item.src}
-                      alt={item.alt ?? ""}
-                      loading="lazy"
-                    />
+                    <img src={item.src} alt={item.alt ?? ""} loading="lazy" />
                   </div>
+
                   {item.caption && (
                     <figcaption class="mediaStack__caption">{item.caption}</figcaption>
                   )}
@@ -410,7 +426,6 @@ const more = projects.filter((p) => p.slug !== slug).slice(0, 3);
             </div>
           </section>
         )}
-        
 
         {/* VIDEO */}
         {m.type === "video" && (
@@ -436,6 +451,7 @@ const more = projects.filter((p) => p.slug !== slug).slice(0, 3);
             <div class="moreCard__thumb">
               <img src={p.preview} alt="" loading="lazy" />
             </div>
+
             <div class="moreCard__meta">
               <div class="moreCard__title">{p.title}</div>
               <div class="moreCard__lede">{p.lede}</div>

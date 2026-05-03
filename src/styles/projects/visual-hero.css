@@ -1,0 +1,133 @@
+/* =========================================================
+   VISUAL HERO
+   - First visual hook after nav
+   - Supports:
+     1) three-image hero / sequence
+     2) single-image cover hero
+   - No hover zoom
+========================================================= */
+
+.visualHero{
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 24px 66px;
+}
+
+.visualHero__inner{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-radius: var(--radius-16);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--bg);
+}
+
+.visualHero__card{
+  position: relative;
+  margin: 0;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+
+.visualHero__card + .visualHero__card{
+  margin-left: -1px;
+}
+
+.visualHero__card img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+
+  transform: translateZ(0);
+  filter: brightness(.98);
+}
+
+.visualHero__card figcaption{
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  z-index: 2;
+
+  padding: 7px 10px;
+  border-radius: 999px;
+
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+
+  color: var(--bg);
+  background: color-mix(in srgb, var(--title) 78%, transparent);
+}
+
+
+/* =========================================================
+   SINGLE IMAGE VISUAL HERO
+========================================================= */
+
+.visualHero__inner:has(.visualHero__card:only-child){
+  grid-template-columns: 1fr;
+}
+
+.visualHero__inner:has(.visualHero__card:only-child) .visualHero__card{
+  aspect-ratio: 16 / 6.5;
+}
+
+.visualHero__inner:has(.visualHero__card:only-child) .visualHero__card img{
+  object-fit: cover;
+  object-position: center;
+}
+
+
+/* =========================================================
+   EVENT VISUAL IDENTITY
+   - Uses full artwork, no crop
+========================================================= */
+
+.project--event-visual-identity .visualHero{
+  max-width: 920px;
+}
+
+.project--event-visual-identity .visualHero__card{
+  aspect-ratio: 16 / 5;
+  background: #ffffff;
+}
+
+.project--event-visual-identity .visualHero__card img{
+  object-fit: contain;
+  object-position: center;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 640px){
+  .visualHero{
+    padding: 0 24px 58px;
+  }
+
+  .visualHero__inner{
+    grid-template-columns: 1fr;
+  }
+
+  .visualHero__card{
+    aspect-ratio: 1 / 1;
+  }
+
+  .visualHero__card + .visualHero__card{
+    margin-left: 0;
+    margin-top: -1px;
+  }
+
+  .visualHero__inner:has(.visualHero__card:only-child) .visualHero__card{
+    aspect-ratio: 16 / 10;
+  }
+
+  .project--event-visual-identity .visualHero__card{
+    aspect-ratio: 16 / 9;
+  }
+}
