@@ -16,6 +16,8 @@ function openResumeModal() {
 
   modal.classList.add("is-open");
   modal.setAttribute("aria-hidden", "false");
+
+  document.body.classList.add("resume-modal-open");
   document.body.style.overflow = "hidden";
 
   if (closeButton) {
@@ -29,13 +31,19 @@ function closeResumeModal() {
 
   modal.classList.remove("is-open");
   modal.setAttribute("aria-hidden", "true");
+
+  document.body.classList.remove("resume-modal-open");
   document.body.style.overflow = "";
 }
 
 function handleDocumentClick(event) {
-  const openTrigger = event.target.closest("#openResumeButton");
-  const closeTrigger = event.target.closest("#closeResumeButton");
-  const overlayTrigger = event.target.closest("#resumeOverlay");
+  const openTrigger = event.target.closest(
+    "#openResumeButton, [data-open-resume]"
+  );
+
+  const closeTrigger = event.target.closest(
+    "#closeResumeButton, [data-close-resume]"
+  );
 
   if (openTrigger) {
     event.preventDefault();
@@ -43,7 +51,7 @@ function handleDocumentClick(event) {
     return;
   }
 
-  if (closeTrigger || overlayTrigger) {
+  if (closeTrigger) {
     event.preventDefault();
     closeResumeModal();
   }
@@ -58,6 +66,7 @@ function handleDocumentKeydown(event) {
 /* =========================================================
    Evitar registrar listeners duplicados
 ========================================================= */
+
 if (!window.__resumeModalDelegated__) {
   document.addEventListener("click", handleDocumentClick);
   document.addEventListener("keydown", handleDocumentKeydown);
