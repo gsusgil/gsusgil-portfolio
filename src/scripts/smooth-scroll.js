@@ -1,7 +1,3 @@
-/* =========================================================
-   SMOOTH SCROLL — Lenis helper (opcional)
-========================================================= */
-
 import Lenis from "lenis";
 
 export function createLenis() {

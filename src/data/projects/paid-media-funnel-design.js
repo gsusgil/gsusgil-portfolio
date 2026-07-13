@@ -51,11 +51,11 @@ export default {
       ],
       metrics: [
         {
-          value: "235K+",
+          value: "230K+",
           label: "Impressions",
         },
         {
-          value: "1,519",
+          value: "1.5K+",
           label: "Clicks",
         },
         {
@@ -63,6 +63,7 @@ export default {
           label: "Enrollments first week",
         },
       ],
+      metricsNote: "Figures rounded for client confidentiality.",
     },
 
     {
@@ -71,8 +72,8 @@ export default {
       num: "01",
       stage: "TOFU — Awareness",
       metrics: {
-        impressions: "78,951",
-        clicks: "827",
+        impressions: "79K+",
+        clicks: "800+",
         ctr: "1.05%",
       },
       did:
@@ -87,8 +88,8 @@ export default {
       num: "02",
       stage: "MOFU — Consideration",
       metrics: {
-        impressions: "110,709",
-        clicks: "405",
+        impressions: "110K+",
+        clicks: "400+",
         ctr: "0.74%",
       },
       did:
@@ -103,8 +104,8 @@ export default {
       num: "03",
       stage: "BOFU — Conversion",
       metrics: {
-        impressions: "45,915",
-        clicks: "287",
+        impressions: "46K+",
+        clicks: "290+",
         ctr: "0.63%",
       },
       did:
@@ -117,7 +118,7 @@ export default {
       type: "text",
       h2: "Outcome",
       p:
-        "The final system aligned visual design with funnel psychology, maintaining consistency from awareness to conversion while adapting each stage to user intent. The campaign generated qualified leads and secured three enrollments within the first week of launch.",
+        "The final system aligned visual design with funnel psychology, maintaining consistency from awareness to conversion while adapting each stage to user intent. The campaign generated qualified leads and secured multiple enrollments within the first week of launch.",
     },
   ],
 };

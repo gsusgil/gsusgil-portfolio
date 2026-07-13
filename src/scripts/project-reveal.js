@@ -15,7 +15,9 @@ function initProjectReveal() {
 
   document.documentElement.dataset.reveal = "on";
 
-  ScrollTrigger.getAll().forEach((t) => t.kill());
+  ScrollTrigger.getAll().forEach((t) => {
+    if (t?.vars?.id?.startsWith("reveal-")) t.kill();
+  });
   gsap.killTweensOf("[data-reveal]");
 
   const els = gsap.utils.toArray("[data-reveal]");
@@ -23,13 +25,14 @@ function initProjectReveal() {
 
   gsap.set(els, { y: 24, autoAlpha: 0 });
 
-  els.forEach((el) => {
+  els.forEach((el, i) => {
     gsap.to(el, {
       y: 0,
       autoAlpha: 1,
       duration: 0.8,
       ease: "power2.out",
       scrollTrigger: {
+        id: `reveal-${i}`,
         trigger: el,
         start: "top 85%",
         toggleActions: "play none none none",
@@ -40,27 +43,17 @@ function initProjectReveal() {
   ScrollTrigger.refresh();
 
   const imgs = Array.from(document.images || []);
-
   Promise.all(
-    imgs.map((img) =>
-      img.decode ? img.decode().catch(() => {}) : Promise.resolve()
-    )
+    imgs.map((img) => (img.decode ? img.decode().catch(() => {}) : Promise.resolve()))
   ).finally(() => {
     ScrollTrigger.refresh();
   });
 }
 
-// Primera carga
 if (typeof document !== "undefined") {
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initProjectReveal, {
-      once: true,
-    });
+    document.addEventListener("DOMContentLoaded", initProjectReveal, { once: true });
   } else {
     initProjectReveal();
   }
-
-  // Navegación Astro
-  document.addEventListener("astro:page-load", initProjectReveal);
-  document.addEventListener("astro:after-swap", initProjectReveal);
 }

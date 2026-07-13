@@ -1,0 +1,186 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ThemeToggle from "../components/ThemeToggle.astro";
+import "../styles/resume.css";
+
+const experience = [
+  {
+    role: "Senior Graphic Designer",
+    company: "ZIGURAT Institute of Technology",
+    dates: "2024 – Present",
+    bullets: [
+      "I own each assigned project from start to finish: I define and defend visual and strategic decisions with stakeholders.",
+      "I design the visual system for campaigns and landing pages in HubSpot, deciding which assets fit each funnel (acquisition, nurturing, alumni · 80k+ contacts).",
+      "I design modular templates that reduced the team's production time without losing brand consistency.",
+    ],
+  },
+  {
+    role: "Operations Associate (Extended Responsibilities)",
+    company: "Amazon",
+    dates: "2019 – 2023",
+    bullets: [
+      "As Process Guide, I supported leaders by leading teams of up to 25 people per shift in Amnesty Floor Maintenance (AFM).",
+      "I managed inventory tracking for inbound and outbound processes, and completed training in UX/UI (2020) and Front-End Development (2023) in parallel.",
+    ],
+  },
+  {
+    role: "Graphic Designer (Freelance)",
+    company: "Mashup Agency Interactive",
+    dates: "2017 – 2018",
+    bullets: [
+      "I created social-first content for well-known brands, working with larger teams and higher budgets in a fast-paced agency.",
+    ],
+  },
+  {
+    role: "Graphic Designer",
+    company: "Vértice Publicidad (Agency)",
+    dates: "2015 – 2018",
+    bullets: [
+      "I designed digital and print campaign assets, including motion graphics and outdoor advertising, working directly with copywriters, content creators, and social media managers on branding and rebranding projects.",
+      "Team Leader for a team of 3 designers for 6 months, coordinating the team's production and quality.",
+    ],
+  },
+  {
+    role: "Junior Graphic Designer",
+    company: "Ministerio de Ciencia, Tecnología e Innovación",
+    dates: "2011 – 2014",
+    bullets: [
+      "I designed institutional communication materials for public campaigns and events — print and digital — following strict brand guidelines.",
+    ],
+  },
+];
+
+const competencies = [
+  { label: "Brand Systems", items: "Branding · Visual Identity · Design Systems" },
+  { label: "Design for Conversion", items: "Paid Social · Funnel Design · Landing Pages · Digital Campaigns" },
+  { label: "UX & Prototyping", items: "Figma · Wireframing & Prototyping · Atomic Design · Responsive Design" },
+  { label: "Marketing & Technical Knowledge", items: "HubSpot (Email & Landing Pages) · HTML & CSS · JavaScript · Design-to-Development Handoff · Data Analysis · SQL" },
+];
+
+const tools = "Adobe Photoshop · Illustrator · InDesign · After Effects · Premiere Pro · Figma · HubSpot · Generative AI (Image & Video) · Leonardo AI · Nano Banana · Neo 3 · Claude (Code, Design)";
+
+const education = [
+  { title: "Data Analytics Bootcamp", school: "Ironhack", dates: "2024" },
+  { title: "Front-End Web Development Bootcamp", school: "Ironhack", dates: "2023" },
+  { title: "UX/UI Design: User Experience Fundamentals", school: "Udemy", dates: "2020" },
+  { title: "Technical Degree in Graphic Design", school: "Colegio Universitario Monseñor Talavera, Caracas, Venezuela", dates: "2008 – 2012" },
+];
+---
+
+<BaseLayout title="Resume — Jesus Gil" description="Senior Visual Designer — Resume">
+  <header class="siteNav">
+    <div class="container siteNav__inner">
+      <a class="siteNav__brand" href="/" aria-label="Home">
+        <img class="siteNav__logo siteNav__logo--light" src="/logo-gsusgil-red.svg" alt="gsusgil" />
+        <img class="siteNav__logo siteNav__logo--dark" src="/logo-gsusgil.svg" alt="gsusgil" />
+      </a>
+
+      <nav class="siteNav__actions" aria-label="Primary">
+        <a class="btn" href="/">Home</a>
+        <ThemeToggle />
+      </nav>
+    </div>
+  </header>
+
+  <main class="resume">
+    <div class="container">
+
+      <!-- ===================== HEADER ===================== -->
+      <section class="resumeHead" data-reveal>
+        <img
+          class="resumeHead__photo"
+          src="/resume/profile.jpg"
+          alt="Jesus David Gil Duran"
+          width="120"
+          height="120"
+        />
+
+        <div class="resumeHead__info">
+          <h1 class="resumeHead__name">Jesus David Gil Duran</h1>
+          <p class="resumeHead__title">Senior Visual Designer</p>
+
+          <div class="resumeHead__contact">
+            <span>Barcelona, Spain</span>
+            <a href="mailto:gsusgildesigner@gmail.com">gsusgildesigner@gmail.com</a>
+            <a href="tel:+34685656681">+34 685 656 681</a>
+            <a href="https://www.linkedin.com/in/gsus-gil/?locale=es" target="_blank" rel="noreferrer">LinkedIn</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== PROFILE ===================== -->
+      <section class="resumeBlock" data-reveal>
+        <div class="resumeBlock__label">Professional Profile</div>
+        <p class="resumeBlock__text">
+          I design visual identities that convert and last over time: clear visual identity, scalable systems,
+          and communication that stays consistent as the brand grows. This craft skill and business focus —
+          not just the tools I use — is what I bring to a senior creative team.
+        </p>
+      </section>
+
+      <!-- ===================== EXPERIENCE ===================== -->
+      <section class="resumeBlock">
+        <div class="resumeBlock__label">Experience</div>
+
+        <div class="resumeExp">
+          {experience.map((job) => (
+            <div class="resumeExp__item" data-reveal>
+              <div class="resumeExp__top">
+                <div>
+                  <div class="resumeExp__role">{job.role}</div>
+                  <div class="resumeExp__company">{job.company}</div>
+                </div>
+                <div class="resumeExp__dates">{job.dates}</div>
+              </div>
+
+              <ul class="resumeExp__bullets">
+                {job.bullets.map((b) => (
+                  <li>{b}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- ===================== COMPETENCIES ===================== -->
+      <section class="resumeBlock">
+        <div class="resumeBlock__label">Core Competencies</div>
+
+        <div class="resumeSkills">
+          {competencies.map((c) => (
+            <div class="resumeSkills__row" data-reveal>
+              <div class="resumeSkills__cat">{c.label}</div>
+              <div class="resumeSkills__items">{c.items}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- ===================== TOOLS ===================== -->
+      <section class="resumeBlock" data-reveal>
+        <div class="resumeBlock__label">Tools</div>
+        <p class="resumeBlock__text resumeBlock__text--tools">{tools}</p>
+      </section>
+
+      <!-- ===================== EDUCATION ===================== -->
+      <section class="resumeBlock">
+        <div class="resumeBlock__label">Education & Certifications</div>
+
+        <div class="resumeEdu">
+          {education.map((e) => (
+            <div class="resumeEdu__item" data-reveal>
+              <div class="resumeEdu__title">{e.title}</div>
+              <div class="resumeEdu__meta">{e.school} · {e.dates}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <script>
+    import "../scripts/project-reveal.js";
+  </script>
+</BaseLayout>

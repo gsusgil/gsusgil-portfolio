@@ -28,7 +28,7 @@ function initIntroMaskScroll() {
 
   const maskStart = "22vh";
   const maskEnd = "9000vh";
-  const scrollLength = 520;
+  const scrollLength = 50;
   const cutAt = 0.94;
 
   function resetIntroToStart() {

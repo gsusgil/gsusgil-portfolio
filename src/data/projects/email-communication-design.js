@@ -52,6 +52,7 @@ export default {
           label: "Best clickthrough rate",
         },
       ],
+      metricsNote: "Figures rounded for client confidentiality.",
     },
 
     {
@@ -93,8 +94,8 @@ export default {
         { label: "Clickthrough Rate", value: "39.29%" },
       ],
       highlights: [
-        "+19.6pp vs. average open rate",
-        "+26.6pp vs. average clickthrough rate",
+        "Notably above average open rate",
+        "Notably above average clickthrough rate",
       ],
       role:
         "Shifted from editorial depth to focused conversion clarity. Structured messaging to quickly re-establish event context and elevate CTA visibility, translating live engagement into sustained interest.",
@@ -106,7 +107,7 @@ export default {
       type: "text",
       h2: "Outcome",
       p:
-        "A scalable modular system enabled consistent communication across a 65K+ database while adapting to distinct engagement contexts. From long-term editorial nurturing to high-intent event follow-up, structured email design sustained engagement at scale and reinforced lead progression within the broader marketing ecosystem.",
+        "A scalable modular system enabled consistent communication across a large contact database while adapting to distinct engagement contexts. From long-term editorial nurturing to high-intent event follow-up, structured email design sustained engagement at scale and reinforced lead progression within the broader marketing ecosystem.",
     },
   ],
 };

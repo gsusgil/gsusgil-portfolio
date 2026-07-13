@@ -145,3 +145,10 @@ body > *{
 html:not([data-theme]) {
   visibility: hidden;
 }
+
+.accent-script{
+  font-family: var(--font-script);
+  font-weight: 700;
+  color: var(--accent);
+  font-style: normal;
+}
