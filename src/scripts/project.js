@@ -38,6 +38,14 @@ function initProjectPage() {
   const gen = ++currentGen;
   const alive = () => gen === currentGen;
 
+  /* ---------- Video pieces: no autoplay under reduced motion, poster only ---------- */
+  if (reduce) {
+    $$(".vidpiece video[autoplay]").forEach((v) => {
+      v.removeAttribute("autoplay");
+      v.pause();
+    });
+  }
+
   /* ---------- Stats count up from 0 once, on load ---------- */
   function count(el) {
     const m = el.textContent.match(/^([^\d]*)([\d.]+)(.*)$/);

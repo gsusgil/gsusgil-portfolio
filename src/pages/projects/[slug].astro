@@ -5,6 +5,7 @@
 // .vt-close/.vt-switch and src/scripts/view-transitions.js), not the prototype's overlay.
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import ContactPill from "../../components/ContactPill.astro";
+import VideoPiece from "../../components/VideoPiece.astro";
 import { projects, getProjectBySlug } from "../../data/projects/index.js";
 
 export async function getStaticPaths() {
@@ -69,7 +70,11 @@ const isLong = Boolean(project.long);
       </div>
     </div>
 
-    {!isChapters && (
+    {!isChapters && project.videoPiece && (
+      <VideoPiece piece={project.videoPiece} images={project.videoPiece.images} />
+    )}
+
+    {!isChapters && !project.videoPiece && (
       <div class="shots">
         {project.shots.map((shot, n) => {
           const cls = `${isLong ? "b" : "s"}${n}`;
@@ -119,20 +124,24 @@ const isLong = Boolean(project.long);
               </div>
             </div>
           </div>
-          <div class="shots">
-            {ch.shots.map((shot, n) => (
-              <figure class={`shot ${c % 2 ? "m" : "k"}${n}`}>
-                <div class="sf">
-                  {shot.placeholder ? (
-                    <div class="pending">Pending</div>
-                  ) : (
-                    <img src={shot.src} alt={shot.caption} loading="lazy" />
-                  )}
-                </div>
-                <figcaption><span>{shot.caption}</span></figcaption>
-              </figure>
-            ))}
-          </div>
+          {ch.videoPiece ? (
+            <VideoPiece piece={ch.videoPiece} images={ch.videoPiece.images} />
+          ) : (
+            <div class="shots">
+              {ch.shots.map((shot, n) => (
+                <figure class={`shot ${c % 2 ? "m" : "k"}${n}`}>
+                  <div class="sf">
+                    {shot.placeholder ? (
+                      <div class="pending">Pending</div>
+                    ) : (
+                      <img src={shot.src} alt={shot.caption} loading="lazy" />
+                    )}
+                  </div>
+                  <figcaption><span>{shot.caption}</span></figcaption>
+                </figure>
+              ))}
+            </div>
+          )}
         </>
       ))}
 

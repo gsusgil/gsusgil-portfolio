@@ -41,11 +41,17 @@ export default {
       d2: "I led concept and design, then built the system for editorial, digital and social use.",
       out: "One system for her editorial, digital and social work.",
       key: "Let a monogram do the work where the full name cannot.",
-      shots: [
-        { src: "/projects/paula-belil/monograma-pb.png", caption: "PB monogram" },
-        { placeholder: true, caption: "Serif wordmark and palette" },
-        { src: "/projects/paula-belil/brand-system.png", caption: "Brand system in use" },
-      ],
+      // Brandboard video not produced yet (handoff §4) — conventional path, falls back to
+      // the .pending plate if it 404s; poster is the real monogram so it isn't blank either way.
+      videoPiece: {
+        video: "/projects/paula-belil/brandboard.mp4",
+        poster: "/projects/paula-belil/monograma-pb.png",
+        caption: "Brandboard",
+        images: [
+          { placeholder: true, caption: "Serif wordmark and palette" },
+          { src: "/projects/paula-belil/brand-system.png", caption: "Brand system in use" },
+        ],
+      },
     },
     {
       name: "Arita",
@@ -56,11 +62,14 @@ export default {
       d2: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
       out: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       key: "Lorem ipsum dolor sit amet, consectetur.",
-      shots: [
-        { placeholder: true, caption: "Lorem ipsum" },
-        { placeholder: true, caption: "Dolor sit amet" },
-        { placeholder: true, caption: "Consectetur adipiscing" },
-      ],
+      // No real assets at all yet for Arita (handoff §5) — video and poster both pending.
+      videoPiece: {
+        caption: "Lorem ipsum",
+        images: [
+          { placeholder: true, caption: "Dolor sit amet" },
+          { placeholder: true, caption: "Consectetur adipiscing" },
+        ],
+      },
     },
   ],
 };

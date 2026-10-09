@@ -1,0 +1,43 @@
+---
+// 16:9 autoplaying video (Student Week recap, Paula/Arita brandboards) with two 4:3
+// companion images below, half-and-half. Replaces the standard .shots gallery for a
+// project/chapter that has one. reduced-motion handling (autoplay off, poster only) is
+// in project.js, since static HTML can't know the viewer's motion preference.
+interface Piece {
+  video?: string;
+  poster?: string;
+  caption: string;
+}
+interface Companion {
+  src?: string;
+  caption: string;
+}
+interface Props {
+  piece: Piece;
+  images: Companion[];
+}
+const { piece, images } = Astro.props;
+---
+
+<div class="vidpiece">
+  <figure>
+    <div class="vidcell">
+      {piece.video ? (
+        <video src={piece.video} poster={piece.poster} autoplay muted loop playsinline preload="metadata" />
+      ) : (
+        <div class="pending">Pending</div>
+      )}
+    </div>
+    <figcaption><span>{piece.caption}</span></figcaption>
+  </figure>
+  <div class="vidpair">
+    {images.map((img) => (
+      <figure class="shot">
+        <div class="sf">
+          {img.src ? <img src={img.src} alt={img.caption} loading="lazy" /> : <div class="pending">Pending</div>}
+        </div>
+        <figcaption><span>{img.caption}</span></figcaption>
+      </figure>
+    ))}
+  </div>
+</div>

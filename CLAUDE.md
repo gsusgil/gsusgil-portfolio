@@ -13,7 +13,8 @@ Mapa del proyecto — gsusgil Portfolio. Diseño cerrado, fuente de verdad: `han
 - Intro (texto con parallax + etiqueta 9+/4/65K+): markup `.intro` en `src/pages/index.astro`; parallax y `count()` en `src/scripts/portfolio-home.js`
 - Lista/retícula de proyectos (switch Grid/List, bento): markup `#grid`/`#list` en `src/pages/index.astro`; lógica en `src/scripts/portfolio-home.js`
 - Datos de los proyectos: `src/data/projects/*.js` (uno por proyecto) + `src/data/projects/index.js` (orden fijo, `burstImages`)
-- Páginas de proyecto: `src/pages/projects/[slug].astro`; lógica en `src/scripts/project.js`. Rutas reales, no overlay; sin transición animada home↔proyecto todavía
+- Páginas de proyecto: `src/pages/projects/[slug].astro`; lógica en `src/scripts/project.js`. Rutas reales (no overlay); transición home↔proyecto vía View Transitions, ver `src/scripts/view-transitions.js` y `.vt-open`/`.vt-close`/`.vt-switch` en `components.css`
+- Piezas de vídeo de proyecto (Student Week, Paula, Arita): `src/components/VideoPiece.astro`, estilos `.vidpiece` en `components.css`, campo `videoPiece` en los datos del proyecto/capítulo
 - Perfil: sección `#profile` en `src/pages/index.astro`
 - Footer + animación gsusgil↔designer: `<footer>` en `src/pages/index.astro`; bloque GSAP `footer .name` en `src/scripts/portfolio-home.js`
 - Tema claro/oscuro (sigue al sistema, no persiste): variables en `src/styles/tokens.css`; botón `src/components/ThemeToggle.astro`; lógica en `src/scripts/portfolio-home.js`

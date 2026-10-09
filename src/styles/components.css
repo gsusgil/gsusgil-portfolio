@@ -166,6 +166,15 @@ footer{border-top:1px solid var(--line);padding-block:12px 0}
 .pending{display:flex;align-items:center;justify-content:center;height:100%;color:var(--mute);font-size:12px;text-align:center;padding:12px}
 .sf img,.sf video{display:block;width:100%;height:100%;max-height:80svh;object-fit:cover}
 .sf.long img,.sf.long video{position:absolute;left:0;top:0;width:100%;height:auto;max-height:none;will-change:transform}
+/* Video pieces (Student Week recap, Paula/Arita brandboards): full-bento-width 16:9, no
+   grid-row span, no padding frame; two 4:3 companion images below, half each. Stands on
+   its own rather than nesting in .shots, whose shared grid-auto-rows can't fit this height. */
+.vidpiece{display:grid;gap:var(--gap)}
+.vidpiece .vidcell{position:relative;aspect-ratio:16/9;border-radius:6px;overflow:hidden;background:var(--plate)}
+.vidpiece .vidcell video{display:block;width:100%;height:100%;object-fit:cover}
+.vidpiece .vidpair{display:grid;grid-template-columns:1fr 1fr;gap:var(--gap)}
+.vidpiece .vidpair .sf{aspect-ratio:4/3}
+@media (max-width:640px){.vidpiece .vidpair .sf{aspect-ratio:1}}
 .shot figcaption{display:flex;flex-wrap:wrap;justify-content:space-between;gap:2px 12px;padding:0 2px}
 .chap{align-items:end;padding-block:clamp(56px,9vw,128px) 16px;border-top:1px solid var(--line);margin-top:clamp(40px,7vw,96px)}
 .sub{align-items:end;padding-block:8px 24px}
