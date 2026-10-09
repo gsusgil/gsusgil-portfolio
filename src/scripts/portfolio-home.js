@@ -59,6 +59,7 @@ document.addEventListener("astro:after-swap", () => {
     splitName();
     fit();
     showWork();
+    resyncLenis(); // drop Lenis's stale project-page target before the snapshot
   }
 });
 
