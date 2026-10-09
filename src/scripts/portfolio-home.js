@@ -53,8 +53,80 @@ function showWork() {
   if (sw) scrollTo(0, Math.max(0, sw.getBoundingClientRect().top + scrollY - 38));
 }
 document.addEventListener("astro:after-swap", () => {
-  if ($("header .name") && savedScrollY !== null) showWork();
+  if ($("header .name") && savedScrollY !== null) {
+    // Build the name + fit it NOW (not at page-load, after the snapshot), so the layout the
+    // closing curtain reveals is already the final one and the list doesn't jump later.
+    splitName();
+    fit();
+    showWork();
+  }
 });
+
+function splitName() {
+  const NAME = "gsusgil.";
+  $$(".name .fit").forEach((f) => {
+    if (f.querySelector(".ch")) return; // already split (idempotent)
+    (f.dataset.t || NAME).split("").forEach((ch, i) => {
+      const s = document.createElement("span");
+      s.className = "ch";
+      s.innerHTML = `<span class="gl${ch === "." ? " pt" : ""}">${ch}</span>`;
+      s.style.transitionDelay = `${i * 45}ms`;
+      f.appendChild(s);
+    });
+  });
+}
+
+function fit() {
+  const hf = $("header .fit");
+  hf.style.fontSize = "100px";
+  const hw = hf.getBoundingClientRect().width;
+  const hc = hf.parentNode.clientWidth;
+  if (hw > 0 && hc > 0) hf.style.fontSize = `${(100 * hc) / hw}px`;
+
+  // footer: the word and the red full stop share the width; "designer" is fitted to the
+  // same word area and sits on the same baseline, so the stop never moves.
+  const n = $("footer .name");
+  const A = $(".fit:not(.alt)", n);
+  const B = $(".fit.alt", n);
+  const D = $(".dot", n);
+  const cw = n.clientWidth;
+  A.style.fontSize = D.style.fontSize = B.style.fontSize = "100px";
+  const wa = A.getBoundingClientRect().width;
+  const wd = D.getBoundingClientRect().width;
+  const wb = B.getBoundingClientRect().width;
+  if (!(wa > 0 && cw > 0)) return;
+  const fa = (100 * cw) / (wa + wd);
+  const fb = Math.min(fa, (100 * (cw - (wd * fa) / 100)) / wb);
+  A.style.fontSize = D.style.fontSize = `${fa}px`;
+  B.style.fontSize = `${fb}px`;
+
+  // "gsusgil"'s line box (line-height 1 + the .3em padding-bottom every .fit/.dot carries)
+  // is taller than the visible ink — there's built-in leading below the "g" descenders.
+  // Crop A/D's own padding-bottom (real glyph metrics, not the font's nominal line box) so
+  // the footer box — and the document — ends 12px below the lowest ink pixel (scroll-end
+  // fix), then re-derive "designer"'s `bottom` from the same metrics so it still lands on
+  // gsusgil's baseline despite the new padding (replaces the old fixed-.3em `base` formula).
+  try {
+    const cx = document.createElement("canvas").getContext("2d");
+    const metrics = (fs) => {
+      cx.font = `italic 900 ${fs}px "Inter Tight"`;
+      const m = cx.measureText("gsusgil");
+      const halfLeadTop = (fs - (m.fontBoundingBoxAscent + m.fontBoundingBoxDescent)) / 2;
+      return { baseline: halfLeadTop + m.fontBoundingBoxAscent, descent: m.actualBoundingBoxDescent };
+    };
+    const mA = metrics(fa);
+    const padA = 12 + mA.baseline + mA.descent - fa;
+    A.style.paddingBottom = D.style.paddingBottom = `${padA.toFixed(1)}px`;
+    const nameHeight = fa + padA;
+
+    const padB = 0.3 * fb; // "designer" keeps its original .3em padding-bottom
+    const mB = metrics(fb);
+    const heightB = fb + padB;
+    B.style.bottom = `${(nameHeight - heightB + mB.baseline - mA.baseline).toFixed(1)}px`;
+  } catch (e) {
+    B.style.bottom = "0px";
+  }
+}
 
 function initHome() {
   // astro:page-load fires on every navigation in the session, not just ones that land back
@@ -80,69 +152,7 @@ function initHome() {
   const gen = ++currentGen;
   const alive = () => gen === currentGen;
 
-  /* ---------- Full-width name: split into letters, size to fill the container ---------- */
-  const NAME = "gsusgil.";
-  $$(".name .fit").forEach((f) => {
-    (f.dataset.t || NAME).split("").forEach((ch, i) => {
-      const s = document.createElement("span");
-      s.className = "ch";
-      s.innerHTML = `<span class="gl${ch === "." ? " pt" : ""}">${ch}</span>`;
-      s.style.transitionDelay = `${i * 45}ms`;
-      f.appendChild(s);
-    });
-  });
-
-  function fit() {
-    const hf = $("header .fit");
-    hf.style.fontSize = "100px";
-    const hw = hf.getBoundingClientRect().width;
-    const hc = hf.parentNode.clientWidth;
-    if (hw > 0 && hc > 0) hf.style.fontSize = `${(100 * hc) / hw}px`;
-
-    // footer: the word and the red full stop share the width; "designer" is fitted to the
-    // same word area and sits on the same baseline, so the stop never moves.
-    const n = $("footer .name");
-    const A = $(".fit:not(.alt)", n);
-    const B = $(".fit.alt", n);
-    const D = $(".dot", n);
-    const cw = n.clientWidth;
-    A.style.fontSize = D.style.fontSize = B.style.fontSize = "100px";
-    const wa = A.getBoundingClientRect().width;
-    const wd = D.getBoundingClientRect().width;
-    const wb = B.getBoundingClientRect().width;
-    if (!(wa > 0 && cw > 0)) return;
-    const fa = (100 * cw) / (wa + wd);
-    const fb = Math.min(fa, (100 * (cw - (wd * fa) / 100)) / wb);
-    A.style.fontSize = D.style.fontSize = `${fa}px`;
-    B.style.fontSize = `${fb}px`;
-
-    // "gsusgil"'s line box (line-height 1 + the .3em padding-bottom every .fit/.dot carries)
-    // is taller than the visible ink — there's built-in leading below the "g" descenders.
-    // Crop A/D's own padding-bottom (real glyph metrics, not the font's nominal line box) so
-    // the footer box — and the document — ends 12px below the lowest ink pixel (scroll-end
-    // fix), then re-derive "designer"'s `bottom` from the same metrics so it still lands on
-    // gsusgil's baseline despite the new padding (replaces the old fixed-.3em `base` formula).
-    try {
-      const cx = document.createElement("canvas").getContext("2d");
-      const metrics = (fs) => {
-        cx.font = `italic 900 ${fs}px "Inter Tight"`;
-        const m = cx.measureText("gsusgil");
-        const halfLeadTop = (fs - (m.fontBoundingBoxAscent + m.fontBoundingBoxDescent)) / 2;
-        return { baseline: halfLeadTop + m.fontBoundingBoxAscent, descent: m.actualBoundingBoxDescent };
-      };
-      const mA = metrics(fa);
-      const padA = 12 + mA.baseline + mA.descent - fa;
-      A.style.paddingBottom = D.style.paddingBottom = `${padA.toFixed(1)}px`;
-      const nameHeight = fa + padA;
-
-      const padB = 0.3 * fb; // "designer" keeps its original .3em padding-bottom
-      const mB = metrics(fb);
-      const heightB = fb + padB;
-      B.style.bottom = `${(nameHeight - heightB + mB.baseline - mA.baseline).toFixed(1)}px`;
-    } catch (e) {
-      B.style.bottom = "0px";
-    }
-  }
+  splitName();
 
   /* ---------- Footer: gsusgil. / designer. trade places, letters rolling through a mask ---------- */
   if (!reduce) {
