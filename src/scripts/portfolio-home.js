@@ -46,8 +46,14 @@ document.addEventListener("astro:before-swap", () => {
 
 // Put the list back where it was as soon as the home is swapped in, so the closing curtain
 // uncovers the list itself rather than the top of the page.
+// Returning from a project always lands with the work list (switch + bento) in view,
+// whatever the scroll depth was, instead of restoring the old offset.
+function showWork() {
+  const sw = $("#work .switch");
+  if (sw) scrollTo(0, Math.max(0, sw.getBoundingClientRect().top + scrollY - 38));
+}
 document.addEventListener("astro:after-swap", () => {
-  if ($("header .name") && savedScrollY !== null) scrollTo(0, savedScrollY);
+  if ($("header .name") && savedScrollY !== null) showWork();
 });
 
 function initHome() {
@@ -56,7 +62,10 @@ function initHome() {
   if (!$("header .name")) return;
 
   if (savedScrollY !== null) {
-    scrollTo(0, savedScrollY);
+    showWork();
+    // layout (name sizing, fonts) settles after load, so re-place once more
+    requestAnimationFrame(showWork);
+    setTimeout(showWork, 400);
     savedScrollY = null;
   }
   resyncLenis();
