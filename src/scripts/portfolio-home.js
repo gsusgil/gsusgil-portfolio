@@ -569,7 +569,21 @@ function initHome() {
   if (IO) {
     new IntersectionObserver((es) => root.classList.toggle("tabbar-hide", es[0].isIntersecting), {
       rootMargin: "0px 0px -1px 0px",
-    }).observe($("footer"));
+    }).observe($("footer .name") || $("footer"));
+  }
+
+  /* ---------- Desktop: show the bottom tab bar once the header nav has scrolled away,
+     and keep its active pill in step with the section on screen ---------- */
+  if (IO) {
+    const pills = $("header nav.pills");
+    if (pills) new IntersectionObserver((es) => root.classList.toggle("tabbar-show", !es[0].isIntersecting)).observe(pills);
+    const spy = new IntersectionObserver(
+      (es) => es.forEach((e) => {
+        if (e.isIntersecting) $$("[data-go]").forEach((x) => x.classList.toggle("on", x.dataset.go === e.target.id));
+      }),
+      { rootMargin: "-45% 0px -50% 0px" }
+    );
+    ["work", "profile", "contact"].forEach((id) => { const el = document.getElementById(id); if (el) spy.observe(el); });
   }
 
   /* ---------- Reveal on scroll ---------- */

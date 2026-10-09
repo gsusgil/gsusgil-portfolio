@@ -222,6 +222,15 @@ html.vt-switch::view-transition-new(root){animation:vt-fade-in .35s linear both}
 .dock a{width:32px;justify-content:center;padding:0;font-size:18px;line-height:1;transition:background .3s}
 .dock a:hover{background:var(--accent)}
 .tabbar{display:none}
+/* Desktop: the mobile tab bar reappears, compact, once the header nav scrolls away, so
+   Work/Profile/Contact stay one click away. Hidden again over the footer (.tabbar-hide). */
+@media (min-width:641px){
+  .tabbar{display:flex;padding:3px;border-radius:9px;background:var(--glass);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);visibility:hidden;transform:translate(-50%,90px);transition:transform .6s var(--out),visibility 0s .6s}
+  .tabbar a,.tabbar button{height:32px;display:flex;align-items:center;gap:6px;padding:0 12px;border-radius:6px;color:var(--on-art);font-size:13px;transition:background .3s,color .3s}
+  .tabbar .on{background:var(--on-art);color:#20201f}
+  .tabbar-show:not(.tabbar-hide) .tabbar{visibility:visible;transform:translate(-50%,0);transition:transform .6s var(--out),visibility 0s}
+}
+@media (min-width:641px) and (hover:hover){.tabbar a:not(.on):hover{background:rgba(255,255,255,.14)}}
 
 @media (max-width:900px){
   .intro h2,.desc,.cdesc,.profile dl{grid-column:2 / span 2}
