@@ -44,6 +44,12 @@ document.addEventListener("astro:before-swap", () => {
   if ($("header .name")) savedScrollY = scrollY;
 });
 
+// Put the list back where it was as soon as the home is swapped in, so the closing curtain
+// uncovers the list itself rather than the top of the page.
+document.addEventListener("astro:after-swap", () => {
+  if ($("header .name") && savedScrollY !== null) scrollTo(0, savedScrollY);
+});
+
 function initHome() {
   // astro:page-load fires on every navigation in the session, not just ones that land back
   // on "/" — bail out when the current page isn't the home page.

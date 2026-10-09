@@ -210,7 +210,7 @@ footer{border-top:1px solid var(--line);padding-block:12px 0}
 @keyframes vt-fade-out{from{opacity:1}to{opacity:0}}
 html.vt-open::view-transition-old(root){animation:none}
 html.vt-open::view-transition-new(root){animation:vt-curtain-in .9s var(--ease) both;mix-blend-mode:normal}
-html.vt-close::view-transition-old(root){animation:vt-curtain-out .9s var(--ease) both;mix-blend-mode:normal}
+html.vt-close::view-transition-old(root){animation:vt-curtain-out .9s var(--ease) both;mix-blend-mode:normal;z-index:1}
 html.vt-close::view-transition-new(root){animation:none}
 html.vt-switch::view-transition-old(root){animation:vt-fade-out .35s linear both}
 html.vt-switch::view-transition-new(root){animation:vt-fade-in .35s linear both}

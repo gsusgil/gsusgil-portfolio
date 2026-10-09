@@ -1,3 +1,4 @@
+import { navigate } from "astro:transitions/client";
 // Project (case study) page behaviour, ported from the "openCase()"/"closeCase()" section of
 // handoff/gsusgil-portfolio.html. The prototype rendered this inside a fixed overlay (`.case`)
 // with its own scroll container; as a real routed page it's the normal document, so the
@@ -153,8 +154,11 @@ document.addEventListener("click", (e) => {
    history.back() lets the browser/router restore that scroll position; falls back to a
    plain navigation to "/" when there's nowhere of ours to go back to. ---------- */
 function closeProject() {
-  if (document.referrer && new URL(document.referrer).origin === location.origin) history.back();
-  else location.href = "/";
+  // Always go home through the router, so the closing curtain plays and portfolio-home.js
+  // puts the list back where it was. (document.referrer never changes inside the router, so
+  // the old history.back() check fell through to a full reload; and after Previous/Next,
+  // back() would have landed on the previous project, not home.)
+  navigate("/");
 }
 document.addEventListener("click", (e) => {
   const close = e.target.closest && e.target.closest("[data-close]");
