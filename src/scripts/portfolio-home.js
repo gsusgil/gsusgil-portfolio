@@ -14,7 +14,7 @@
 // idempotent (re-queries the live DOM) so a few stacking up across repeat home-visits in one
 // session is harmless, just not maximally tidy.
 import gsap from "gsap";
-import { createLenis, resyncLenis } from "./smooth-scroll.js";
+import { createLenis, resyncLenis, freezeLenis } from "./smooth-scroll.js";
 import { burstImages } from "../data/projects/index.js";
 
 const $ = (s, c) => (c || document).querySelector(s);
@@ -30,6 +30,7 @@ let footerObs = null;
 let savedScrollY = null;
 
 document.addEventListener("astro:before-swap", () => {
+  freezeLenis();
   currentGen++; // invalidates every rAF loop guarded by alive() below
   if (clockTimer) clearInterval(clockTimer);
   if (proofTimer) clearInterval(proofTimer);

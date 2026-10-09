@@ -38,5 +38,15 @@ export function createLenis() {
 // the scroll adjustment) leaves Lenis smoothing toward a stale target and the page visually
 // snaps back there.
 export function resyncLenis() {
-  instance?.resize();
+  if (!instance) return;
+  // Kill any in-flight smoothing (e.g. the project was closed mid-wheel): without this
+  // Lenis keeps easing toward the PREVIOUS page's target and drags the new page with it.
+  instance.scrollTo(window.scrollY, { immediate: true, force: true });
+  instance.resize();
+  instance.start();
+}
+
+// Freeze Lenis the moment we leave a page, so its momentum can't outlive the swap.
+export function freezeLenis() {
+  instance?.stop();
 }

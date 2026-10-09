@@ -11,7 +11,7 @@ import { navigate } from "astro:transitions/client";
 // swaps in a fresh project page without re-executing it. So setup lives in initProjectPage(),
 // re-run on every `astro:page-load`; `astro:before-swap` stops the rAF loop and reveal
 // observer before the page is replaced.
-import { createLenis, resyncLenis } from "./smooth-scroll.js";
+import { createLenis, resyncLenis, freezeLenis } from "./smooth-scroll.js";
 
 const $ = (s, c) => (c || document).querySelector(s);
 const $$ = (s, c) => (c || document).querySelectorAll(s);
@@ -22,6 +22,7 @@ let currentGen = 0;
 let revealObs = null;
 
 document.addEventListener("astro:before-swap", () => {
+  freezeLenis();
   currentGen++; // invalidates the rAF loop guarded by alive() below
   if (revealObs) revealObs.disconnect();
   revealObs = null;
