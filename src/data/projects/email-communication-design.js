@@ -27,13 +27,13 @@ export default {
     ["39.29%", "Post-event clickthrough"],
   ],
 
-  cover: { src: "/projects/email-design/banner-mail-system.png", alt: "Email system overview" },
-  hero: { src: "/projects/email-design/email-1.png", alt: "Newsletter email design" },
+  cover: { src: "/home/grid/email.webp", alt: "Email system overview" },
+  hero: { src: "/projects/email-design/hero.webp", alt: "Newsletter email design" },
   thumbs: [
-    { src: "/projects/email-design/email-1.png", alt: "Newsletter" },
-    { src: "/projects/email-design/email-2.png", alt: "Post-event" },
-    { src: "/projects/email-design/banner-mail-system.png", alt: "Email system" },
-    { src: "/projects/email-design/email-1.png", alt: "Newsletter" },
+    { src: "/home/list/email-1.webp", alt: "Newsletter" },
+    { src: "/home/list/email-2.webp", alt: "Post-event" },
+    { src: "/home/list/email-3.webp", alt: "Email system" },
+    { src: "/home/list/email-4.webp", alt: "Newsletter" },
   ],
 
   // shots[0..1] render as the two long, scroll-driven emails; shots[2..4] as detail crops.

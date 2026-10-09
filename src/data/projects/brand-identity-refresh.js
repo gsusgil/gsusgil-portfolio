@@ -20,13 +20,13 @@ export default {
 
   stats: [],
 
-  cover: { src: "/projects/paula-belil/monograma-pb.png", alt: "Paula Belil PB monogram" },
-  hero: { src: "/projects/paula-belil/brand-system.png", alt: "Paula Belil brand system" },
+  cover: { src: "/home/grid/paula.webp", alt: "Paula Belil PB monogram" },
+  hero: { src: "/projects/paula-belil/hero.webp", alt: "Paula Belil brand system" },
   thumbs: [
-    { src: "/projects/paula-belil/monograma-pb.png", alt: "PB monogram" },
-    { src: "/projects/paula-belil/brand-system.png", alt: "Brand system" },
-    { src: "/projects/paula-belil/monograma-pb.png", alt: "PB monogram" },
-    { src: "/projects/paula-belil/brand-system.png", alt: "Brand system" },
+    { src: "/home/list/paula-1.webp", alt: "PB monogram" },
+    { src: "/home/list/paula-2.webp", alt: "Brand system" },
+    { src: "/home/list/paula-3.webp", alt: "PB monogram" },
+    { src: "/home/list/paula-4.webp", alt: "Brand system" },
   ],
 
   creditsNote: null, // client !== in-house → "Collaborators (To be added)"

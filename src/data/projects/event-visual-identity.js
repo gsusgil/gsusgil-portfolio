@@ -22,13 +22,13 @@ export default {
     ["5", "Landmarks in the 2026 system"],
   ],
 
-  cover: { src: "/projects/event-identity/sagrada-familia.png", alt: "Student Week identity based on Sagrada Família" },
-  hero: { src: "/projects/event-identity/sagrada-familia-v2.png", alt: "Student Week 2026 identity system" },
+  cover: { src: "/home/grid/event.webp", alt: "Student Week identity based on Sagrada Família" },
+  hero: { src: "/projects/event-identity/hero.webp", alt: "Student Week 2026 identity system" },
   thumbs: [
-    { src: "/projects/event-identity/sagrada-familia.png", alt: "2023 — Sagrada Família" },
-    { src: "/projects/event-identity/park-guell.png", alt: "2024 — Park Güell" },
-    { src: "/projects/event-identity/casa-batllo.png", alt: "2025 — Casa Batlló + panot" },
-    { src: "/projects/event-identity/hotel-w.png", alt: "2026 — Hotel W" },
+    { src: "/home/list/event-1.webp", alt: "2023 — Sagrada Família" },
+    { src: "/home/list/event-2.webp", alt: "2024 — Park Güell" },
+    { src: "/home/list/event-3.webp", alt: "2025 — Casa Batlló + panot" },
+    { src: "/home/list/event-4.webp", alt: "2026 — Hotel W" },
   ],
 
   // Note: reordered vs. the prototype's shot order so the 16:9 recap video lands in the

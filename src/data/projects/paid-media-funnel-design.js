@@ -24,13 +24,13 @@ export default {
     ["17", "Slides across 3 stages"],
   ],
 
-  cover: { src: "/projects/ig-funnel/carousel-1/01.jpg", alt: "HVAC Master Launch — awareness stage" },
-  hero: { src: "/projects/ig-funnel/carousel-2/01.jpg", alt: "HVAC Master Launch — consideration stage" },
+  cover: { src: "/home/grid/hvac.webp", alt: "HVAC Master Launch — awareness stage" },
+  hero: { src: "/projects/ig-funnel/hero.webp", alt: "HVAC Master Launch — consideration stage" },
   thumbs: [
-    { src: "/projects/ig-funnel/carousel-1/01.jpg", alt: "Awareness" },
-    { src: "/projects/ig-funnel/carousel-2/01.jpg", alt: "Consideration" },
-    { src: "/projects/ig-funnel/carousel-3/01.jpg", alt: "Conversion" },
-    { src: "/projects/ig-funnel/carousel-3/04.jpg", alt: "Launch week" },
+    { src: "/home/list/hvac-1.webp", alt: "Awareness" },
+    { src: "/home/list/hvac-2.webp", alt: "Consideration" },
+    { src: "/home/list/hvac-3.webp", alt: "Conversion" },
+    { src: "/home/list/hvac-4.webp", alt: "Launch week" },
   ],
 
   shots: [
