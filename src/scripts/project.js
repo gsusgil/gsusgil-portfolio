@@ -40,7 +40,7 @@ function initProjectPage() {
 
   /* ---------- Video pieces: no autoplay under reduced motion, poster only ---------- */
   if (reduce) {
-    $$(".vidpiece video[autoplay]").forEach((v) => {
+    $$(".shots video[autoplay]").forEach((v) => {
       v.removeAttribute("autoplay");
       v.pause();
     });

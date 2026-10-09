@@ -31,16 +31,15 @@ export default {
     { src: "/projects/event-identity/hotel-w.png", alt: "2026 — Hotel W" },
   ],
 
-  // Video piece: the 16:9 recap video full-width, with 2 companion stills below.
-  videoPiece: {
-    video: "/projects/event-identity/resumen-stw-2025-b.mp4",
-    poster: "/projects/event-identity/hotel-w.png",
-    caption: "2025 · Applied to the live event",
-    images: [
-      { src: "/projects/event-identity/sagrada-familia.png", caption: "2023 · Sagrada Família" },
-      { src: "/projects/event-identity/mies-van-rhode.png", caption: "2026 · Multi-landmark system" },
-    ],
-  },
+  // Note: reordered vs. the prototype's shot order so the 16:9 recap video lands in the
+  // panoramic cell (s4) instead of a small 9:7 one — same 5 captions, no text changed.
+  shots: [
+    { src: "/projects/event-identity/sagrada-familia.png", caption: "2023 · Sagrada Família" },
+    { src: "/projects/event-identity/park-guell.png", caption: "2024 · Park Güell" },
+    { src: "/projects/event-identity/casa-batllo.png", caption: "2025 · Casa Batlló + panot" },
+    { src: "/projects/event-identity/mies-van-rhode.png", caption: "2026 · Multi-landmark system" },
+    { video: "/projects/event-identity/resumen-stw-2025-b.mp4", poster: "/projects/event-identity/hotel-w.png", caption: "2025 · Applied to the live event" },
+  ],
 
   creditsNote: "Performance, content and alumni teams",
 };
