@@ -256,7 +256,7 @@ function initHome() {
       say(false);
       nm.appendChild(pile);
       nm.appendChild(cur);
-      nm.appendChild(hl);
+      // Cursor label removed by design: the pulsing ring and the "hi, it’s me" hint carry the cue.
       nm.classList.add("live");
       const dotc = $(".dotc", cur);
       const ring = $(".ring", cur);
@@ -790,15 +790,8 @@ function initHome() {
       });
     }, 700);
   }
-  const pf = [...$$(".proof div")];
-  let pi = 0;
-  count(pf[0].firstChild);
-  if (!reduce)
-    proofTimer = setInterval(() => {
-      pf[pi].classList.remove("on");
-      pi = (pi + 1) % pf.length;
-      pf[pi].classList.add("on");
-    }, 3600);
+  // The three figures sit together and still; each counts up once on load.
+  $$(".proof strong").forEach((el) => count(el));
 }
 
 document.addEventListener("astro:page-load", initHome);
