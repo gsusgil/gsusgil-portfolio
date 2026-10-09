@@ -1,29 +1,10 @@
 ---
-/* =========================================================
-   CONTACT (Tooltip)
-   - Button triggers a tooltip bubble
-   - Tooltip contains: copy email + open mailto
-   - Logic: /src/scripts/contact.js
-========================================================= */
+/* "Copy email" pill, used in the footer and in each project's end CTA
+   (handoff §3). Click handling is delegated in portfolio.js via [data-copy]. */
+interface Props {
+  id?: string;
+}
+const { id } = Astro.props;
 ---
 
-<div class="contact-tooltip" id="contactTooltip">
-  <button class="btn btn--accent" id="contactTooltipButton" type="button" aria-expanded="false">
-    Contact
-  </button>
-
-  <div class="tooltip-bubble" id="contactTooltipBubble" role="tooltip" aria-hidden="true">
-    <div class="tooltip-row">
-      <span class="small">Email</span>
-      <button class="btn tooltip-copy" id="copyEmailButton" type="button" data-email="gsusgildesigner@gmail.com">
-        Copy
-      </button>
-    </div>
-
-    <button class="tooltip-email" id="emailActionButton" type="button" data-email="gsusgildesigner@gmail.com">
-      gsusgildesigner@gmai.com
-    </button>
-
-    <div class="small tooltip-toast" id="copyToast" style="display:none;">Copied ✓</div>
-  </div>
-</div>
+<button class="pill copy" data-copy id={id}>Copy email</button>

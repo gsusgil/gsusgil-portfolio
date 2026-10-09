@@ -1,13 +1,14 @@
 ---
-/* =========================================================
-   THEME TOGGLE (UI)
-   - Botón para alternar Dark/Light
-========================================================= */
+/* Theme toggle pill (handoff §2: follows the system, button overrides for the
+   session only — the choice is never persisted). Logic lives in portfolio.js. */
+interface Props {
+  compact?: boolean; // true = mobile tabbar icon-only variant
+}
+const { compact = false } = Astro.props;
 ---
 
-<div class="theme-toggle">
-  <button class="btn" id="themeToggleButton" type="button" aria-label="Toggle theme">
-    Theme
-    <span class="small" id="themeToggleLabel">Dark</span>
-  </button>
-</div>
+{compact ? (
+  <button class="theme" data-theme-btn aria-label="Switch theme"><i></i></button>
+) : (
+  <button class="pill theme" data-theme-btn><i></i><span>Light</span></button>
+)}

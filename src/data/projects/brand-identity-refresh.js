@@ -1,75 +1,66 @@
 // src/data/projects/brand-identity-refresh.js
+// Content ported verbatim from handoff/gsusgil-portfolio.html (project id: "brand-identity").
+// Arita is still lorem ipsum per handoff §5 — not invented here, carried over as-is until
+// Jesús writes the real copy. Paula Belil is missing one of its three real gallery assets
+// (wordmark/palette shot) — renders as a placeholder plate.
 
 export default {
   slug: "brand-identity-refresh",
-  title: "Brand Identity Refresh",
-  kicker: "Selected project",
-  lede:
-    "Refreshing a photography brand identity through typographic refinement and a distinctive monogram system.",
-  preview: "/thumbs/paula-belil-thumbnail.png",
+  name: "Paula Belil + Arita",
+  disc: "Brand Identity",
+  year: "",
+  client: "Paula Belil · Arita",
+  role: "Concept direction, identity design, visual system",
 
-  modules: [
+  idea: "Two identities, each built from what the client already had.",
+  key: "",
+  d1: "Two identity projects, approached the same way: start from what the client already has and turn it into a system.",
+  d2: "Two clients are presented here, each with its own brief, system and result.",
+  out: "Two identities, each with a system the client can keep using.",
+
+  stats: [],
+
+  cover: { src: "/projects/paula-belil/monograma-pb.png", alt: "Paula Belil PB monogram" },
+  hero: { src: "/projects/paula-belil/brand-system.png", alt: "Paula Belil brand system" },
+  thumbs: [
+    { src: "/projects/paula-belil/monograma-pb.png", alt: "PB monogram" },
+    { src: "/projects/paula-belil/brand-system.png", alt: "Brand system" },
+    { src: "/projects/paula-belil/monograma-pb.png", alt: "PB monogram" },
+    { src: "/projects/paula-belil/brand-system.png", alt: "Brand system" },
+  ],
+
+  creditsNote: null, // client !== in-house → "Collaborators (To be added)"
+
+  chapters: [
     {
-      type: "visualHero",
-      images: [
-        {
-          label: "PB monogram",
-          src: "/projects/paula-belil/monograma-pb.png",
-          alt: "Paula Belil PB monogram preview",
-        },
+      name: "Paula Belil",
+      client: "Paula Belil · Photographer and filmmaker",
+      year: "",
+      role: "Concept direction, monogram design, visual system",
+      d1: "An identity refresh for photographer and filmmaker Paula Belil: a serif wordmark, a natural palette and a custom PB monogram that carries the brand where the full name cannot.",
+      d2: "I led concept and design, then built the system for editorial, digital and social use.",
+      out: "One system for her editorial, digital and social work.",
+      key: "Let a monogram do the work where the full name cannot.",
+      shots: [
+        { src: "/projects/paula-belil/monograma-pb.png", caption: "PB monogram" },
+        { placeholder: true, caption: "Serif wordmark and palette" },
+        { src: "/projects/paula-belil/brand-system.png", caption: "Brand system in use" },
       ],
     },
-
     {
-      type: "caseOverview",
-      eyebrow: "Identity system overview",
-      text:
-        "A refined brand identity refresh developed for photographer and filmmaker Paula Belil, balancing typographic elegance, visual sensitivity and a distinctive PB monogram system.",
-      facts: [
-        {
-          label: "Role",
-          value: "Concept direction · Monogram design · Visual system",
-        },
-        {
-          label: "System",
-          value: "PB monogram · Serif wordmark · Natural color palette",
-        },
-        {
-          label: "Output",
-          value: "Logo refresh · Brand system · Digital visual direction",
-        },
+      name: "Arita",
+      client: "Arita · Lorem ipsum",
+      year: "Lorem",
+      role: "Lorem ipsum, dolor sit amet, consectetur",
+      d1: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua, ut enim ad minim veniam quis nostrud exercitation.",
+      d2: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+      out: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      key: "Lorem ipsum dolor sit amet, consectetur.",
+      shots: [
+        { placeholder: true, caption: "Lorem ipsum" },
+        { placeholder: true, caption: "Dolor sit amet" },
+        { placeholder: true, caption: "Consectetur adipiscing" },
       ],
-      metrics: [
-        {
-          value: "PB",
-          label: "Custom monogram",
-        },
-        {
-          value: "3",
-          label: "Core visual pillars",
-        },
-        {
-          value: "1",
-          label: "Scalable identity system",
-        },
-      ],
-    },
-
-    {
-      type: "image",
-      num: "01",
-      h2: "Brand identity system",
-      p:
-        "Application of the refreshed identity across typography, color palette and visual composition, creating a flexible system for editorial, digital and social environments.",
-      src: "/projects/paula-belil/brand-system.png",
-      alt: "Paula Belil brand identity system",
-    },
-
-    {
-      type: "text",
-      h2: "Outcome",
-      p:
-        "The refreshed identity positions Paula Belil as an experienced visual professional with a refined yet contemporary presence. By balancing typographic elegance with a distinctive monogram, the system establishes recognition, versatility and long-term brand consistency.",
     },
   ],
 };

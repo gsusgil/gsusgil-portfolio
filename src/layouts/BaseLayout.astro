@@ -1,68 +1,33 @@
 ---
+import { ClientRouter } from "astro:transitions";
 import "../styles/global.css";
 import "../styles/components.css";
-import ResumeModal from "../components/ResumeModal.astro";
 
-const { title = "Portfolio", description = "Jesus gil's portfolio" } = Astro.props;
+const { title = "gsusgil Portfolio", description = "Jesús Gil — senior visual designer, Barcelona" } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
     <meta name="description" content={description} />
     <title>{title}</title>
 
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@1,900&family=Hanken+Grotesk:wght@500&display=swap"
+    />
+    <ClientRouter />
     <script>
-      (function () {
-        try {
-          const key = "theme";
-          const saved = localStorage.getItem(key);
-          const systemDark =
-            window.matchMedia &&
-            window.matchMedia("(prefers-color-scheme: dark)").matches;
-          const theme = saved ? saved : systemDark ? "dark" : "light";
-          document.documentElement.setAttribute("data-theme", theme);
-        } catch (_) {}
-      })();
+      import "../scripts/view-transitions.js";
     </script>
-    </head>
+  </head>
 
   <body>
     <slot />
-
-    <footer class="siteFooter" aria-label="Site footer">
-      <div class="container siteFooter__inner">
-        <div class="siteFooter__main">
-          <p class="siteFooter__eyebrow">Interested in working together?</p>
-
-          <p class="siteFooter__title">
-            I design systems that convert — let's talk about your next project.
-          </p>
-        </div>
-
-        <div class="siteFooter__meta">
-          <p class="siteFooter__credit">
-            Design, strategy & frontend by <span>gsusgil</span>
-          </p>
-
-          <nav class="siteFooter__links" aria-label="Footer links">
-            <a href="mailto:gsusgildesigner@gmail.com">Email</a>
-            <a href="https://www.linkedin.com/in/gsus-gil/?locale=es" target="_blank" rel="noreferrer">LinkedIn</a>
-            
-          </nav>
-        </div>
-      </div>
-    </footer>
-
-    <ResumeModal />
-
-    <script>
-      import "../scripts/theme.js";
-      import "../scripts/modal.js";
-    </script>
   </body>
 </html>

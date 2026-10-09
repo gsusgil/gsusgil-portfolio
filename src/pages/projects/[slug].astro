@@ -1,5 +1,10 @@
 ---
-import ProjectLayout from "../../layouts/ProjectLayout.astro";
+// Case study page, ported from the openCase() section of handoff/gsusgil-portfolio.html.
+// Real per-project route (handoff §6.5) instead of the prototype's overlay-over-home.
+// The open/close/switch transitions are View Transitions (see components.css .vt-open/
+// .vt-close/.vt-switch and src/scripts/view-transitions.js), not the prototype's overlay.
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ContactPill from "../../components/ContactPill.astro";
 import { projects, getProjectBySlug } from "../../data/projects/index.js";
 
 export async function getStaticPaths() {
@@ -7,462 +12,166 @@ export async function getStaticPaths() {
 }
 
 const { slug } = Astro.params;
-const project = getProjectBySlug(slug);
-
+// Project data files are plain, differently-shaped JS objects (flat vs. chapters, long vs.
+// not) — cast once here rather than modelling every shape as a TS union.
+const project: any = getProjectBySlug(slug);
 if (!project) throw new Error("Project not found");
 
-const pad2 = (n) => String(n).padStart(2, "0");
-const more = projects.filter((p) => p.slug !== slug).slice(0, 3);
+const i = projects.findIndex((p) => p.slug === slug);
+const prev: any = projects[(i + projects.length - 1) % projects.length];
+const next: any = projects[(i + 1) % projects.length];
 
-const visualHero = project.modules?.find((m) => m.type === "visualHero");
-const caseOverview = project.modules?.find((m) => m.type === "caseOverview");
-
-const contentModules =
-  project.modules?.filter(
-    (m) => m.type !== "visualHero" && m.type !== "caseOverview"
-  ) ?? [];
+const isChapters = Boolean(project.chapters);
+const isLong = Boolean(project.long);
 ---
 
-<ProjectLayout title={project.title} description={project.lede}>
-  <article class={`project project--${project.slug}`}>
-    {visualHero && (
-      <section class="visualHero" data-reveal>
-        <div class="visualHero__inner">
-          {visualHero.images?.map((item) => (
-            <figure class="visualHero__card">
-              <img src={item.src} alt={item.alt ?? ""} loading="eager" />
-              <figcaption>{item.label}</figcaption>
-            </figure>
-          ))}
-        </div>
-      </section>
-    )}
-
-    <header class="project__header" data-reveal>
-      <div class="small projects__kicker">{project.kicker ?? "Selected project"}</div>
-      <h1 class="project__h1">{project.title}</h1>
-      <p class="project__lede">{project.lede}</p>
-    </header>
-
-    {caseOverview && (
-      <section class="project__block caseOverview" data-reveal>
-        <div class="caseOverview__content">
-          {caseOverview.eyebrow && (
-            <div class="caseOverview__eyebrow">{caseOverview.eyebrow}</div>
-          )}
-
-          <p class="caseOverview__text">{caseOverview.text}</p>
-
-          {caseOverview.facts?.length > 0 && (
-            <div class="caseOverview__facts">
-              {caseOverview.facts.map((item) => (
-                <div class="caseOverview__fact">
-                  <div class="caseOverview__factLabel">{item.label}</div>
-                  <div class="caseOverview__factValue">{item.value}</div>
-                </div>
-              ))}
-            </div>
-          )}
-
-          {caseOverview.metrics?.length > 0 && (
-            <div class="caseOverview__metrics">
-              {caseOverview.metrics.map((item) => (
-                <div class="caseOverview__metric">
-                  <div class="caseOverview__metricValue" data-counter>{item.value}</div>
-                  <div class="caseOverview__metricLabel">{item.label}</div>
-                </div>
-              ))}
-            </div>
-          )}
-
-          {caseOverview.metricsNote && (
-            <p class="caseOverview__metricsNote">{caseOverview.metricsNote}</p>
-          )}
-        </div>
-      </section>
-    )}
-
-    {contentModules.map((m) => (
-      <>
-        {/* INTRO */}
-        {m.type === "intro" && (
-          <section class="project__block project__intro" data-reveal>
-            <h2 class="project__introTitle">{m.title}</h2>
-
-            <div class="project__introGrid">
-              {m.sections?.map((s) => (
-                <div class="project__introItem">
-                  <div class="project__introLabel">{s.label}</div>
-                  <p class="project__introText">{s.text}</p>
-                </div>
-              ))}
-            </div>
-
-            <hr class="project__divider" />
-
-            <div class="project__introRole">
-              <div class="project__introLabel">Scope</div>
-              <p class="project__introText">{m.scope}</p>
-            </div>
-          </section>
-        )}
-
-        {/* TEXT */}
-        {m.type === "text" && (
-          <section class="project__block" data-reveal>
-            <div class="project__introLabel">{m.h2}</div>
-            <p class="project__introText">{m.p}</p>
-          </section>
-        )}
-
-        {/* IMAGE */}
-        {m.type === "image" && (
-          <section class="project__block project__level" data-reveal>
-            <div class="project__levelTop">
-              {m.num && <div class="project__levelNum">{m.num}</div>}
-
-              <div>
-                <h2 class="project__h2">{m.h2}</h2>
-                <p class="project__p">{m.p}</p>
-              </div>
-            </div>
-
-            <img class="project__img" src={m.src} alt={m.alt ?? ""} loading="lazy" />
-          </section>
-        )}
-
-        {/* EMAIL */}
-        {m.type === "email" && (
-          <section class="project__block project__level" data-reveal>
-            <div class="project__levelTop">
-              {m.num && <div class="project__levelNum">{m.num}</div>}
-
-              <div class={`emailStage ${m.flip ? "emailStage--flip" : ""}`}>
-                {!m.flip && (
-                  <div class="emailStage__info">
-                    {m.label && <p class="emailStage__label">{m.label}</p>}
-                    <h2 class="emailStage__title">{m.h2}</h2>
-                    {m.p && <p class="emailStage__text">{m.p}</p>}
-
-                    {(m.metrics?.length > 0 || m.highlights?.length > 0) && (
-                      <div class="emailStage__metaItem">
-                        <div class="emailStage__metaLabel">Performance</div>
-
-                        {m.metrics?.length > 0 && (
-                          <div class="emailStage__stats">
-                            {m.metrics.map((item) => (
-                              <div class="emailStage__stat">
-                                <div class="emailStage__statLabel">{item.label}</div>
-                                <div class="emailStage__statValue" data-counter>{item.value}</div>
-                              </div>
-                            ))}
-                          </div>
-                        )}
-
-                        {m.highlights?.length > 0 && (
-                          <div class="emailStage__highlights">
-                            {m.highlights.map((item) => (
-                              <p class="emailStage__highlight">{item}</p>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    )}
-
-                    <div class="emailStage__meta">
-                      {m.role && (
-                        <div class="emailStage__metaItem">
-                          <div class="emailStage__metaLabel">My Role</div>
-                          <p class="emailStage__metaValue">{m.role}</p>
-                        </div>
-                      )}
-
-                      {m.insight && (
-                        <div class="emailStage__metaItem">
-                          <div class="emailStage__metaLabel">Insight</div>
-                          <p class="emailStage__metaValue">{m.insight}</p>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                )}
-
-                <figure class="emailStage__viewer">
-                  <div class="emailStage__viewerBar">
-                    <span class="emailStage__viewerDot"></span>
-                    <span class="emailStage__viewerDot"></span>
-                    <span class="emailStage__viewerDot"></span>
-                    <p class="emailStage__viewerLabel">{m.viewerLabel ?? "Email preview"}</p>
-                  </div>
-
-                  <div class="emailStage__scroll">
-                    <img
-                      class="emailStage__img"
-                      src={m.src}
-                      alt={m.alt ?? ""}
-                      loading="lazy"
-                    />
-                  </div>
-                </figure>
-
-                {m.flip && (
-                  <div class="emailStage__info">
-                    {m.label && <p class="emailStage__label">{m.label}</p>}
-                    <h2 class="emailStage__title">{m.h2}</h2>
-                    {m.p && <p class="emailStage__text">{m.p}</p>}
-
-                    {(m.metrics?.length > 0 || m.highlights?.length > 0) && (
-                      <div class="emailStage__metaItem">
-                        <div class="emailStage__metaLabel">Performance</div>
-
-                        {m.metrics?.length > 0 && (
-                          <div class="emailStage__stats">
-                            {m.metrics.map((item) => (
-                              <div class="emailStage__stat">
-                                <div class="emailStage__statLabel">{item.label}</div>
-                                <div class="emailStage__statValue" data-counter>{item.value}</div>
-                              </div>
-                            ))}
-                          </div>
-                        )}
-
-                        {m.highlights?.length > 0 && (
-                          <div class="emailStage__highlights">
-                            {m.highlights.map((item) => (
-                              <p class="emailStage__highlight">{item}</p>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    )}
-
-                    <div class="emailStage__meta">
-                      {m.role && (
-                        <div class="emailStage__metaItem">
-                          <div class="emailStage__metaLabel">My Role</div>
-                          <p class="emailStage__metaValue">{m.role}</p>
-                        </div>
-                      )}
-
-                      {m.insight && (
-                        <div class="emailStage__metaItem">
-                          <div class="emailStage__metaLabel">Insight</div>
-                          <p class="emailStage__metaValue">{m.insight}</p>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
-          </section>
-        )}
-
-        {/* CAROUSEL */}
-        {m.type === "carousel" && (
-          <section class="project__block project__level" data-reveal>
-            <div class="project__levelTop">
-              {m.num && <div class="project__levelNum">{m.num}</div>}
-
-              <div class="project__stageWrap">
-                <div class="project__stageHeader">
-                  <h2 class="project__stageTitle">{m.stage}</h2>
-
-                  <div class="project__stageKPI">
-                    <div class="project__stageKPIValue" data-counter>{m.metrics?.ctr}</div>
-                    <div class="project__stageKPILabel">CTR</div>
-                  </div>
-                </div>
-
-                <div class="project__stageStats" aria-label="Stage metrics">
-                  <div class="project__stat">
-                    <div class="project__statLabel">Impressions</div>
-                    <div class="project__statValue" data-counter>{m.metrics?.impressions}</div>
-                  </div>
-
-                  <div class="project__stat">
-                    <div class="project__statLabel">Clicks</div>
-                    <div class="project__statValue" data-counter>{m.metrics?.clicks}</div>
-                  </div>
-                </div>
-
-                <div class="project__stageDid">
-                  <div class="project__stageDidLabel">Design decision</div>
-                  <p class="project__stageDidText">{m.did}</p>
-                </div>
-              </div>
-            </div>
-
-            {m.layout === "grid" && (
-              <div class="ig-grid" aria-label={m.stage}>
-                {Array.from({ length: m.count }).map((_, i) => (
-                  <figure class="ig-gridSlide">
-                    <img
-                      src={`${m.dir}/${pad2(i + 1)}.jpg`}
-                      alt={`${m.stage} — slide ${i + 1}`}
-                      loading="lazy"
-                    />
-                  </figure>
-                ))}
-              </div>
-            )}
-
-            {m.layout !== "grid" && (
-              <div class="ig-scrollWrap" aria-label={m.stage}>
-                <button class="ig-navBtn" type="button" aria-label="Previous" data-ig-prev>
-                  ←
-                </button>
-
-                <div class="ig-scroll" data-ig-carousel>
-                  {Array.from({ length: m.count }).map((_, i) => (
-                    <figure class="ig-scrollSlide">
-                      <img
-                        src={`${m.dir}/${pad2(i + 1)}.jpg`}
-                        alt={`${m.stage} — slide ${i + 1}`}
-                        loading="lazy"
-                      />
-                    </figure>
-                  ))}
-                </div>
-
-                <button class="ig-navBtn" type="button" aria-label="Next" data-ig-next>
-                  →
-                </button>
-              </div>
-            )}
-          </section>
-        )}
-
-        {/* MEDIA PAIR */}
-        {m.type === "mediaPair" && (
-          <section class="project__block project__level" data-reveal>
-            <div class="project__levelTop">
-              {m.num && <div class="project__levelNum">{m.num}</div>}
-
-              <div>
-                <h2 class="project__h2">{m.h2}</h2>
-                {m.p && <p class="project__p">{m.p}</p>}
-              </div>
-            </div>
-
-            <div class="mediaPairGrid">
-              {m.items?.map((item) => (
-                <figure class="mediaPairGrid__item">
-                  <div class="mediaPairGrid__media">
-                    <img src={item.src} alt={item.alt ?? ""} loading="lazy" />
-                  </div>
-
-                  {item.caption && (
-                    <figcaption class="mediaPairGrid__caption">{item.caption}</figcaption>
-                  )}
-                </figure>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* MEDIA FEATURE */}
-        {m.type === "mediaFeature" && (
-          <section class="project__block project__level" data-reveal>
-            <div class="project__levelTop">
-              {m.num && <div class="project__levelNum">{m.num}</div>}
-
-              <div>
-                <h2 class="project__h2">{m.h2}</h2>
-                {m.p && <p class="project__p">{m.p}</p>}
-              </div>
-            </div>
-
-            <div class="mediaFeature">
-              <figure class="mediaFeature__imageItem">
-                <div class="mediaFeature__imageMedia">
-                  <img src={m.image.src} alt={m.image.alt ?? ""} loading="lazy" />
-                </div>
-
-                {m.image?.caption && (
-                  <figcaption class="mediaFeature__caption">{m.image.caption}</figcaption>
-                )}
-              </figure>
-
-              <figure class="mediaFeature__videoItem">
-                <div class="mediaFeature__videoMedia">
-                  <video
-                    controls
-                    playsinline
-                    preload="metadata"
-                    poster={m.video.poster}
-                    src={m.video.src}
-                  />
-                </div>
-
-                {m.video?.caption && (
-                  <figcaption class="mediaFeature__caption">{m.video.caption}</figcaption>
-                )}
-              </figure>
-            </div>
-          </section>
-        )}
-
-        {/* MEDIA STACK */}
-        {m.type === "mediaStack" && (
-          <section class="project__block project__level" data-reveal>
-            <div class="project__levelTop">
-              {m.num && <div class="project__levelNum">{m.num}</div>}
-
-              <div>
-                <h2 class="project__h2">{m.h2}</h2>
-                {m.p && <p class="project__p">{m.p}</p>}
-              </div>
-            </div>
-
-            <div class="mediaStack">
-              {m.items?.map((item) => (
-                <figure class="mediaStack__item">
-                  <div class="mediaStack__media">
-                    <img src={item.src} alt={item.alt ?? ""} loading="lazy" />
-                  </div>
-
-                  {item.caption && (
-                    <figcaption class="mediaStack__caption">{item.caption}</figcaption>
-                  )}
-                </figure>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* VIDEO */}
-        {m.type === "video" && (
-          <section class="project__block project__level" data-reveal>
-            <h2 class="project__h2">{m.h2}</h2>
-            <p class="project__p">{m.p}</p>
-
-            <div class="videoPlaceholder">
-              <img class="project__img" src={m.poster} alt={m.alt ?? ""} loading="lazy" />
-              <div class="videoPlaceholder__badge">Video (placeholder)</div>
-            </div>
-          </section>
-        )}
-      </>
-    ))}
-
-    <section class="project__block moreProjects" data-reveal>
-      <h2 class="project__h2">More projects</h2>
-
-      <div class="moreProjects__grid">
-        {more.map((p) => (
-          <a class="moreCard" href={`/projects/${p.slug}`}>
-            <div class="moreCard__thumb">
-              <img src={p.preview} alt="" loading="lazy" />
-            </div>
-
-            <div class="moreCard__meta">
-              <div class="moreCard__title">{p.title}</div>
-              <div class="moreCard__lede">{p.lede}</div>
-            </div>
-          </a>
-        ))}
+<BaseLayout title={`${project.name} — gsusgil`} description={project.idea}>
+  <main class="in-wrap">
+    <div class="stag">
+      <div class="hero">
+        <img src={project.hero.src} alt={project.hero.alt} />
       </div>
-    </section>
-  </article>
-</ProjectLayout>
+      <div class="thirds ctext">
+        <p class="idea">{project.idea}</p>
+        <div class="desc">
+          <p>{project.d1}</p>
+          <p>{project.d2}</p>
+        </div>
+        <div class="info">
+          {project.stats.length > 0 && (
+            <div class="stats">
+              {project.stats.map(([v, l]: [string, string]) => (
+                <div>
+                  <strong>{v}</strong>
+                  <span class="mute">{l}</span>
+                </div>
+              ))}
+            </div>
+          )}
+          <div class="meta">
+            <span class="mute">Client</span><span>{project.client}</span>
+            <span class="mute">Year</span><span>{project.year || "To be added"}</span>
+            <span class="mute">Role</span><span>{project.role}</span>
+            {project.key && (
+              <>
+                <span class="mute">Decision</span><span>{project.key}</span>
+              </>
+            )}
+            <span class="mute">Result</span><span>{project.out}</span>
+            {project.bench && (
+              <>
+                <span class="mute">Benchmark</span><span class="mute">Account average to be added</span>
+                <span class="mute">Note</span><span class="mute">Figures rounded for client confidentiality.</span>
+              </>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {!isChapters && (
+      <div class="shots">
+        {project.shots.map((shot, n) => {
+          const cls = `${isLong ? "b" : "s"}${n}`;
+          const sfLong = isLong && n < 2;
+          return (
+            <figure class={`shot ${cls}`}>
+              <div class={`sf${sfLong ? " long" : ""}`}>
+                {shot.video ? (
+                  <video src={shot.video} controls muted loop playsinline preload="metadata" />
+                ) : shot.placeholder ? (
+                  <div class="pending">Pending</div>
+                ) : (
+                  <img src={shot.src} alt={shot.caption} loading="lazy" />
+                )}
+              </div>
+              <figcaption>
+                <span>{shot.caption}</span>
+                {sfLong && <span class="mute">Full length · scrolls with the page</span>}
+              </figcaption>
+            </figure>
+          );
+        })}
+      </div>
+    )}
+
+    {isChapters &&
+      project.chapters.map((ch, c) => (
+        <>
+          <div class="thirds chap">
+            <h3>{ch.name}</h3>
+            <span class="mute">
+              Client 0{c + 1} of 0{project.chapters.length}
+            </span>
+          </div>
+          <div class="thirds sub">
+            <div class="cdesc">
+              <p>{ch.d1}</p>
+              <p>{ch.d2}</p>
+            </div>
+            <div class="info">
+              <div class="meta">
+                <span class="mute">Client</span><span>{ch.client}</span>
+                <span class="mute">Year</span><span>{ch.year || "To be added"}</span>
+                <span class="mute">Role</span><span>{ch.role}</span>
+                <span class="mute">Decision</span><span>{ch.key}</span>
+                <span class="mute">Result</span><span>{ch.out}</span>
+              </div>
+            </div>
+          </div>
+          <div class="shots">
+            {ch.shots.map((shot, n) => (
+              <figure class={`shot ${c % 2 ? "m" : "k"}${n}`}>
+                <div class="sf">
+                  {shot.placeholder ? (
+                    <div class="pending">Pending</div>
+                  ) : (
+                    <img src={shot.src} alt={shot.caption} loading="lazy" />
+                  )}
+                </div>
+                <figcaption><span>{shot.caption}</span></figcaption>
+              </figure>
+            ))}
+          </div>
+        </>
+      ))}
+
+    <div class="thirds credits">
+      <span class="mute">Credits</span>
+      <div class="meta">
+        <span>Jesús Gil</span><span class="mute">({project.role.split(",")[0]})</span>
+        {project.creditsNote ? (
+          <>
+            <span>{project.creditsNote}</span><span class="mute">(Stakeholders)</span>
+          </>
+        ) : (
+          <>
+            <span>Collaborators</span><span class="mute">(To be added)</span>
+          </>
+        )}
+      </div>
+    </div>
+
+    <div class="thirds endcta">
+      <span class="mute">Want the story behind this project?</span>
+      <div>
+        <span class="mail">gsusgildesigner@gmail.com</span>
+        <ContactPill />
+      </div>
+    </div>
+
+    <div class="pn">
+      <a href={`/projects/${prev.slug}`}><span class="mute">Previous</span><strong>{prev.name}</strong></a>
+      <a href={`/projects/${next.slug}`}><span class="mute">Next</span><strong>{next.name}</strong></a>
+    </div>
+  </main>
+
+  <div class="dock">
+    <span>{project.name}</span>
+    <a href="/" data-close aria-label="Close project">×</a>
+  </div>
+
+  <script>
+    import "../../scripts/project.js";
+  </script>
+</BaseLayout>

@@ -1,124 +1,45 @@
 // src/data/projects/paid-media-funnel-design.js
+// Content ported verbatim from handoff/gsusgil-portfolio.html (project id: "hvac-master-launch").
+
+const CL = "In‑house · Higher education (AEC)";
 
 export default {
   slug: "paid-media-funnel-design",
-  title: "Paid Media Funnel Design",
-  kicker: "Selected project",
-  lede:
-    "A three-stage Instagram carousel funnel designed to move architects and engineers from awareness to qualified conversion.",
-  preview: "/thumbs/preview-project-1.png",
+  name: "HVAC Master Launch",
+  disc: "Campaign Direction",
+  year: "", // To be added — handoff §5
+  client: CL,
+  role: "Visual direction, funnel structure, campaign design",
+  bench: true, // shows "Benchmark: Account average to be added" + confidentiality note
 
-  modules: [
-    {
-      type: "visualHero",
-      images: [
-        {
-          label: "TOFU",
-          src: "/projects/ig-funnel/carousel-1/01.jpg",
-          alt: "TOFU carousel preview",
-        },
-        {
-          label: "MOFU",
-          src: "/projects/ig-funnel/carousel-2/01.jpg",
-          alt: "MOFU carousel preview",
-        },
-        {
-          label: "BOFU",
-          src: "/projects/ig-funnel/carousel-3/01.jpg",
-          alt: "BOFU carousel preview",
-        },
-      ],
-    },
+  idea: "Design that follows intent, from the first scroll to enrolment.",
+  key: "One visual language across all three stages. Only hierarchy and depth change with intent.",
+  d1: "A paid media system on Instagram that moves architects and engineers from awareness to enrolment: three carousel stages, 17 slides, one campaign language.",
+  d2: "I directed the visual system and shaped each stage around intent: high-impact hierarchy to stop the scroll, academic depth for consideration, then outcomes and a clear call to action for conversion.",
+  out: "Qualified leads and the first enrolments within a week of launch.",
 
-    {
-      type: "caseOverview",
-      eyebrow: "Funnel overview",
-      text:
-        "HVAC Master Launch — a paid media visual system built to guide prospects through awareness, consideration and conversion with a coherent campaign language.",
-      facts: [
-        {
-          label: "Role",
-          value: "Visual direction · Funnel structure · Campaign design",
-        },
-        {
-          label: "Audience",
-          value: "Architects & Engineers",
-        },
-        {
-          label: "Output",
-          value: "3 Instagram carousel stages · 17 total slides",
-        },
-      ],
-      metrics: [
-        {
-          value: "230K+",
-          label: "Impressions",
-        },
-        {
-          value: "1.5K+",
-          label: "Clicks",
-        },
-        {
-          value: "3",
-          label: "Enrollments first week",
-        },
-      ],
-      metricsNote: "Figures rounded for client confidentiality.",
-    },
-
-    {
-      type: "carousel",
-      layout: "scroll",
-      num: "01",
-      stage: "TOFU — Awareness",
-      metrics: {
-        impressions: "79K+",
-        clicks: "800+",
-        ctr: "1.05%",
-      },
-      did:
-        "Built the entry point of the funnel with high-impact hierarchy, technical context and clear value framing to stop scroll and establish industry relevance.",
-      dir: "/projects/ig-funnel/carousel-1",
-      count: 5,
-    },
-
-    {
-      type: "carousel",
-      layout: "scroll",
-      num: "02",
-      stage: "MOFU — Consideration",
-      metrics: {
-        impressions: "110K+",
-        clicks: "400+",
-        ctr: "0.74%",
-      },
-      did:
-        "Expanded content depth and academic credibility, moving users from industry awareness into program positioning without breaking the visual system.",
-      dir: "/projects/ig-funnel/carousel-2",
-      count: 5,
-    },
-
-    {
-      type: "carousel",
-      layout: "scroll",
-      num: "03",
-      stage: "BOFU — Conversion",
-      metrics: {
-        impressions: "46K+",
-        clicks: "290+",
-        ctr: "0.63%",
-      },
-      did:
-        "Shifted the narrative toward outcomes, institutional trust and decision-making, strengthening CTA visibility for high-intent prospects.",
-      dir: "/projects/ig-funnel/carousel-3",
-      count: 7,
-    },
-
-    {
-      type: "text",
-      h2: "Outcome",
-      p:
-        "The final system aligned visual design with funnel psychology, maintaining consistency from awareness to conversion while adapting each stage to user intent. The campaign generated qualified leads and secured multiple enrollments within the first week of launch.",
-    },
+  stats: [
+    ["230K+", "Impressions"],
+    ["1.5K+", "Clicks"],
+    ["17", "Slides across 3 stages"],
   ],
+
+  cover: { src: "/projects/ig-funnel/carousel-1/01.jpg", alt: "HVAC Master Launch — awareness stage" },
+  hero: { src: "/projects/ig-funnel/carousel-2/01.jpg", alt: "HVAC Master Launch — consideration stage" },
+  thumbs: [
+    { src: "/projects/ig-funnel/carousel-1/01.jpg", alt: "Awareness" },
+    { src: "/projects/ig-funnel/carousel-2/01.jpg", alt: "Consideration" },
+    { src: "/projects/ig-funnel/carousel-3/01.jpg", alt: "Conversion" },
+    { src: "/projects/ig-funnel/carousel-3/04.jpg", alt: "Launch week" },
+  ],
+
+  shots: [
+    { src: "/projects/ig-funnel/carousel-1/01.jpg", caption: "Awareness · stop the scroll, establish relevance" },
+    { src: "/projects/ig-funnel/carousel-2/01.jpg", caption: "Consideration · depth and academic credibility" },
+    { src: "/projects/ig-funnel/carousel-3/01.jpg", caption: "Conversion · outcomes, trust, a visible call to action" },
+    { src: "/projects/ig-funnel/carousel-1/02.jpg", caption: "One system across 17 slides" },
+    { src: "/projects/ig-funnel/carousel-3/04.jpg", caption: "Launch week" },
+  ],
+
+  creditsNote: "Performance, content and alumni teams",
 };

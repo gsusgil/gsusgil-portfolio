@@ -1,17 +1,146 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import Intro from "../components/Intro.astro";
-import Hero from "../components/Hero.astro";
-import ProjectsList from "../components/ProjectsList.astro";
+import ThemeToggle from "../components/ThemeToggle.astro";
+import ContactPill from "../components/ContactPill.astro";
+import { projects } from "../data/projects/index.js";
 ---
 
-<BaseLayout title="Portfolio" description="portfolio jesus gil ">
-  <Intro />
-  <Hero />
-  <ProjectsList />
+<BaseLayout
+  title="gsusgil Portfolio"
+  description="Jesús Gil — senior visual designer in Barcelona, working across brand, web and campaigns, and moving into art direction."
+>
+  <div class="wrap" id="top">
+    <header>
+      <h1 class="name" aria-label="gsusgil"><span class="fit" aria-hidden="true"></span></h1>
+      <div class="nav">
+        <nav class="pills" aria-label="Sections">
+          <a class="pill on" href="#work" data-go="work">Work</a>
+          <a class="pill" href="#profile" data-go="profile">Profile</a>
+          <a class="pill" href="#contact" data-go="contact">Contact</a>
+        </nav>
+        <div class="right">
+          <div class="clock"><i></i><span>Barcelona</span><span>•</span><span id="clock">--:--</span></div>
+          <ThemeToggle />
+        </div>
+      </div>
+    </header>
 
-  <!-- ✅ Entry point bundleado (GSAP/Lenis OK) -->
+    <section class="thirds intro">
+      <h2>
+        <span class="pin"
+          >Senior visual designer based in Barcelona, working across brand, web and campaigns, and moving into art
+          direction. Four projects where the creative decisions were mine, made alongside performance, content and
+          alumni teams.</span
+        >
+      </h2>
+      <div class="proof">
+        <div class="on"><strong>9+</strong><span>Years across agencies and in‑house teams</span></div>
+        <div><strong>4</strong><span>Editions of one event identity, directed end to end</span></div>
+        <div><strong>65K+</strong><span>Contacts reached by an email system I designed</span></div>
+      </div>
+    </section>
+
+    <section id="work">
+      <div class="switch" role="group" aria-label="Project view">
+        <button id="bGrid" aria-pressed="true"
+          ><span class="ico g"><b></b><b></b><b></b><b></b></span><span>Grid</span></button
+        >
+        <button id="bList" aria-pressed="false"><span>List</span><span class="ico l"><b></b><b></b><b></b></span></button>
+      </div>
+      <div class="range"><span>Selected work</span><span>(0{projects.length})</span><span>2023-Present</span></div>
+
+      <div class="bento" id="grid">
+        {
+          projects.map((p, i) => (
+            <a class={`cell c${i}`} href={`/projects/${p.slug}`} style={{ transitionDelay: `${i * 80}ms` }}>
+              <span class="cap">
+                <em>{p.name}</em>
+                <em>{p.disc}</em>
+                {p.year && <em>{p.year}</em>}
+              </span>
+              <span class="frame">
+                <img src={p.cover.src} alt={p.cover.alt} loading="lazy" width="900" height="760" />
+              </span>
+              <span class="tag">View project ↗︎</span>
+            </a>
+          ))
+        }
+      </div>
+
+      <div class="list" id="list" hidden>
+        {
+          projects.map((p, i) => (
+            <a class="row" href={`/projects/${p.slug}`} style={{ animationDelay: `${i * 70}ms` }}>
+              <span>{p.name}</span>
+              <span class="thumbs">
+                {p.thumbs.map((t, k) => (
+                  <img
+                    src={t.src}
+                    alt={t.alt}
+                    loading="lazy"
+                    width="240"
+                    height="240"
+                    style={{ animationDelay: `${i * 70 + k * 60 + 150}ms` }}
+                  />
+                ))}
+                <b>View project</b>
+              </span>
+              <span>{p.disc}</span>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="thirds profile" id="profile">
+      <p class="big rv">
+        I build and look after brands: identities, templates and workflow improvements that help a team produce
+        faster without the brand drifting.
+      </p>
+      <dl class="rv">
+        <dt>Experience</dt>
+        <dd>9+ years across agencies and in‑house teams</dd>
+        <dt>Now</dt>
+        <dd>Senior designer in‑house, Barcelona</dd>
+        <dt>Impact</dt>
+        <dd>Built the social component system that took a team from about two creatives a day to a full batch in one morning</dd>
+        <dt>Practice</dt>
+        <dd>Brand identity, art direction, digital design, motion</dd>
+        <dt>Languages</dt>
+        <dd>Spanish, English</dd>
+      </dl>
+    </section>
+
+    <footer id="contact">
+      <div class="thirds foot">
+        <span class="mute">©2026 · Designed and directed by gsusgil</span>
+        <div>
+          <span class="mute">Interested in working together?</span>
+          <span class="mail" id="mail">gsusgildesigner@gmail.com</span>
+          <ContactPill id="copy" />
+        </div>
+        <div class="soc"><a href="https://www.linkedin.com/in/gsus-gil" target="_blank" rel="noopener">LinkedIn ↗︎</a></div>
+      </div>
+      <div class="name" aria-hidden="true">
+        <span class="fit" data-t="gsusgil"></span><span class="dot">.</span><span class="fit alt" data-t="designer"
+        ></span>
+      </div>
+    </footer>
+  </div>
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <filter id="mblur" x="-5%" y="-60%" width="110%" height="220%" color-interpolation-filters="sRGB">
+      <feGaussianBlur id="mbg" stdDeviation="0 0" />
+    </filter>
+  </svg>
+  <nav class="tabbar" aria-label="Sections">
+    <a class="on" href="#work" data-go="work">Work</a>
+    <a href="#profile" data-go="profile">Profile</a>
+    <a href="#contact" data-go="contact">Contact</a>
+    <ThemeToggle compact />
+  </nav>
+
   <script>
-    import "../scripts/home.client.js";
+    import "../scripts/portfolio-home.js";
   </script>
 </BaseLayout>
