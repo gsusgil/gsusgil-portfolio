@@ -176,6 +176,63 @@ function initHome() {
      elsewhere on the site, sourced from burstImages (single source of truth, handoff §11).
      The portrait slot (card 5) has no real photo yet (handoff §0 step 4) — still a placeholder. */
 
+  /* ---------- Rest cue (desktop + touch): a ring pulses out of the red full stop until the
+     photos are opened once, so it reads as clickable before anyone touches it. On desktop the
+     "hi, it's me" hint also shows at rest (touch already has its own, interactive one) and
+     steps aside while the cursor is inside the name, where the cursor label takes over. ---------- */
+  (function () {
+    const hd = $("header"), pt = $("header .pt");
+    if (!hd || !pt) return;
+    const ring = document.createElement("span");
+    ring.className = "ptring";
+    ring.setAttribute("aria-hidden", "true");
+    hd.appendChild(ring);
+    let tip = null;
+    if (fine) {
+      tip = document.createElement("span");
+      tip.className = "meet ptip";
+      tip.setAttribute("aria-hidden", "true");
+      tip.innerHTML =
+        '<span class="mt">hi, it’s me</span><svg class="arw" viewBox="0 0 120 90"><path d="M3 74 C 22 76 40 66 42 52 C 44 38 26 34 22 46 C 18 60 44 64 64 52 C 84 40 98 26 106 10 M106 10 L 93 13 M106 10 L 108 23"/></svg>';
+      hd.appendChild(tip);
+    }
+    function place() {
+      const H = hd.getBoundingClientRect();
+      const C = pt.parentNode.getBoundingClientRect();
+      const fs = parseFloat($("header .fit").style.fontSize || 100);
+      // Measured on the rendered glyph (Inter Tight Black Italic): the full stop's centre sits
+      // 0.155em right of and 0.77em below its letter box's top-left; its diameter is ~0.24em.
+      const d = fs * 0.24;
+      const x = C.left - H.left + fs * 0.155;
+      const y = C.top - H.top + fs * 0.77;
+      ring.style.width = ring.style.height = `${d}px`;
+      ring.style.left = `${x}px`;
+      ring.style.top = `${y}px`;
+      if (tip) {
+        tip.style.left = tip.style.top = "0px";
+        const L = tip.getBoundingClientRect();
+        const R = tip.querySelector(".arw").getBoundingClientRect();
+        tip.style.left = `${x - d * 0.55 - (R.left - L.left + R.width * 0.883)}px`;
+        tip.style.top = `${y + d * 0.55 - (R.top - L.top + R.height * 0.111)}px`;
+      }
+    }
+    place();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(place);
+    // The name's letters are still rising into place for a moment after load, so re-measure
+    // once they've settled, and before every pulse in case layout moved since.
+    setTimeout(place, 1700);
+    ring.addEventListener("animationiteration", place);
+    addEventListener("resize", place);
+    if (tip) setTimeout(() => tip.classList.add("on"), 1800);
+    function done(e) {
+      if (!(e.target.closest && e.target.closest("header .name, header .meet"))) return;
+      ring.remove();
+      if (tip) tip.remove();
+      document.removeEventListener("click", done, true);
+    }
+    document.addEventListener("click", done, true);
+  })();
+
   /* ---------- Desktop hero: inside the name only, the red full stop becomes the cursor ---------- */
   if (fine) {
     (function () {

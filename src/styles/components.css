@@ -35,6 +35,12 @@ header .name.live{cursor:none}
 /* Photo burst out of the red full stop in the header, on demand */
 header{position:relative}
 header .pt{cursor:pointer}
+/* Rest cue: ring pulsing out of the red full stop (see portfolio-home.js) */
+.ptring{position:absolute;left:0;top:0;z-index:4;pointer-events:none;border-radius:50%;border:2px solid var(--accent);opacity:0;transform:translate(-50%,-50%);animation:ptring 2.4s cubic-bezier(.16,1,.3,1) 1.8s infinite}
+@keyframes ptring{0%{opacity:.8;transform:translate(-50%,-50%) scale(1)}60%,100%{opacity:0;transform:translate(-50%,-50%) scale(2)}}
+.ptip{pointer-events:none}
+header:has(.name:hover) .ptring,header:has(.name:hover) .ptip{opacity:0!important;animation-play-state:paused}
+@media (prefers-reduced-motion:reduce){.ptring{animation:none}}
 .burst{position:absolute;left:0;top:0;width:0;height:0;z-index:50;pointer-events:none}
 .meet{position:absolute;left:0;top:0;z-index:60;display:flex;align-items:flex-start;gap:2px;padding:0;background:none;border:0;color:var(--ink);cursor:pointer;opacity:0;transition:opacity .6s var(--out),color .3s}
 .meet.on{opacity:1}
