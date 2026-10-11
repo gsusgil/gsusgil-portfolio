@@ -38,7 +38,7 @@ export default {
     { src: "/projects/event-identity/park-guell.png", caption: "2024 · Park Güell" },
     { src: "/projects/event-identity/casa-batllo.png", caption: "2025 · Casa Batlló + panot" },
     { src: "/projects/event-identity/mies-van-rhode.png", caption: "2026 · Multi-landmark system" },
-    { video: "/projects/event-identity/resumen-stw-2025-b.mp4", poster: "/projects/event-identity/hotel-w.png", caption: "2025 · Applied to the live event" },
+    { video: "/projects/event-identity/resumen-stw-2025-web.mp4", poster: "/projects/event-identity/resumen-poster.jpg", caption: "2025 · Applied to the live event" },
   ],
 
   creditsNote: "Performance, content and alumni teams",
