@@ -35,9 +35,9 @@ export default {
   // panoramic cell (s4) instead of a small 9:7 one — same 5 captions, no text changed.
   shots: [
     { video: "/projects/event-identity/resumen-stw-2025-web.mp4", poster: "/projects/event-identity/resumen-poster.jpg", caption: "2025 · Applied to the live event" },
-    { src: "/projects/event-identity/2026-torre-collserola.webp", caption: "2026 · Torre de Collserola", pos: "40% 50%" },
-    { src: "/projects/event-identity/2026-pabellon-mies.webp", caption: "2026 · Pabellón Mies van der Rohe", pos: "35% 50%" },
-    { src: "/projects/event-identity/2026-torre-montjuic.webp", caption: "2026 · Torre de Montjuïc", pos: "50% 0%" },
+    { src: "/projects/event-identity/2027-preview.webp", caption: "2027 · Preview", pos: "50% 25%" },
+    { src: "/projects/event-identity/2025-preview.webp", caption: "2025 · Casa Batlló" },
+    { src: "/projects/event-identity/2024-preview.webp", caption: "2024 · Casa Batlló" },
   ],
 
   creditsNote: "Performance, content and alumni teams",
