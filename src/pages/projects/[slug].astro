@@ -75,12 +75,10 @@ const isLong = Boolean(project.long);
           const cls = `${isLong ? "b" : "s"}${n}`;
           const sfLong = isLong && n < 2;
           return (
-            <figure class={`shot ${cls}${shot.video ? " vid" : ""}${shot.group ? " grp" : ""}`}>
+            <figure class={`shot ${cls}${shot.video ? " vid" : ""}`}>
               <div class={`sf${sfLong ? " long" : ""}`}>
                 {shot.video ? (
                   <video src={shot.video} poster={shot.poster} autoplay muted loop playsinline preload="metadata" />
-                ) : shot.group ? (
-                  <div class="g4">{shot.group.map((g) => <img src={g.src} alt={g.alt} loading="lazy" />)}</div>
                 ) : shot.placeholder ? (
                   <div class="pending">Pending</div>
                 ) : (
