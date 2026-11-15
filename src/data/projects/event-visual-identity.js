@@ -13,12 +13,12 @@ export default {
 
   idea: "Barcelona’s architecture as an identity system.",
   key: "Keep the structure fixed and change only the landmark, so every edition is new and still recognisable.",
-  d1: "A recurring event identity built on Barcelona’s architecture. It began with single landmarks and grew into a broader system, keeping the same structural anchors so every edition is recognisably the same event.",
-  d2: "I set the concept and directed its evolution edition after edition: from Casa Batlló and the panot pattern to a 2026 system that spans several landmarks, and a first look at 2027.",
-  out: "Four editions on one system. Each year keeps the structure and adds a new landmark.",
+  d1: "An identity for Student Week, a week in Barcelona for around 230 students from all over the world. The city’s architecture is the hero, and every edition changes what it shows while the structure stays the same.",
+  d2: "I set the concept and directed its evolution: first the city’s most iconic landmark, then Gaudí and the tiles he designed, then the most renowned architects with work in Barcelona. In 2027 a blue refresh keeps the thread and goes inside the landmarks, to the details that make them monuments.",
+  out: "One system across editions. Each year keeps the structure and renews what the city shows.",
 
   stats: [
-    ["4", "Editions"],
+    ["~230", "Students per edition"],
     ["5", "Landmarks in the 2026 system"],
   ],
 
