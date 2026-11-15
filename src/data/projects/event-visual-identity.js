@@ -7,14 +7,14 @@ export default {
   slug: "event-visual-identity",
   name: "Student Week",
   disc: "Event Identity",
-  year: "2023-26",
+  year: "2023-27",
   client: CL,
   role: "Visual direction, concept evolution, identity system",
 
   idea: "Barcelona’s architecture as an identity system.",
   key: "Keep the structure fixed and change only the landmark, so every edition is new and still recognisable.",
   d1: "A recurring event identity built on Barcelona’s architecture. It began with single landmarks and grew into a broader system, keeping the same structural anchors so every edition is recognisably the same event.",
-  d2: "I set the concept and directed its evolution across four editions: Sagrada Família, Park Güell, Casa Batlló with the panot pattern, and a 2026 system that spans several landmarks.",
+  d2: "I set the concept and directed its evolution edition after edition: from Casa Batlló and the panot pattern to a 2026 system that spans several landmarks, and a first look at 2027.",
   out: "Four editions on one system. Each year keeps the structure and adds a new landmark.",
 
   stats: [
@@ -25,10 +25,10 @@ export default {
   cover: { src: "/home/grid/event.webp", alt: "Student Week identity based on Sagrada Família" },
   hero: { src: "/projects/event-identity/hero.webp", alt: "Student Week 2026 identity system" },
   thumbs: [
-    { src: "/home/list/event-1.webp", alt: "2023 — Sagrada Família" },
-    { src: "/home/list/event-2.webp", alt: "2024 — Park Güell" },
-    { src: "/home/list/event-3.webp", alt: "2025 — Casa Batlló + panot" },
-    { src: "/home/list/event-4.webp", alt: "2026 — Hotel W" },
+    { src: "/home/list/event-1.webp", alt: "2024 — Casa Batlló" },
+    { src: "/home/list/event-2.webp", alt: "2025 — Casa Batlló + panot" },
+    { src: "/home/list/event-3.webp", alt: "2026 — Torre de Collserola" },
+    { src: "/home/list/event-4.webp", alt: "2027 — Preview" },
   ],
 
   // Note: reordered vs. the prototype's shot order so the 16:9 recap video lands in the
