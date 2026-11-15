@@ -34,10 +34,10 @@ export default {
   // Note: reordered vs. the prototype's shot order so the 16:9 recap video lands in the
   // panoramic cell (s4) instead of a small 9:7 one — same 5 captions, no text changed.
   shots: [
-    { video: "/projects/event-identity/resumen-stw-2025-web.mp4", poster: "/projects/event-identity/resumen-poster.jpg", caption: "2025 · Applied to the live event" },
-    { src: "/projects/event-identity/2027-vertical.webp", caption: "2027 · Preview", pos: "50% 25%" },
-    { src: "/projects/event-identity/2024-preview.webp", caption: "2024 · Casa Batlló" },
-    { src: "/projects/event-identity/2025-preview.webp", caption: "2025 · Casa Batlló" },
+    { video: "/projects/event-identity/resumen-stw-2025-web.mp4", poster: "/projects/event-identity/resumen-poster.jpg", caption: "2025 · Live event", note: "The system in motion" },
+    { src: "/projects/event-identity/2027-vertical.webp", caption: "2027 · Preview", note: "New direction, same hexagon pattern", pos: "50% 25%" },
+    { src: "/projects/event-identity/2024-preview.webp", caption: "2024 · Casa Batlló", note: "A Gaudí detail as the hero" },
+    { src: "/projects/event-identity/2025-preview.webp", caption: "2025 · Casa Batlló", note: "Hexagon pattern + date lockup join in" },
   ],
 
   creditsNote: "Performance, content and alumni teams",

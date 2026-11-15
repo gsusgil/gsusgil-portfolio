@@ -88,6 +88,7 @@ const isLong = Boolean(project.long);
               </div>
               <figcaption>
                 <span>{shot.caption}</span>
+                {shot.note && <span class="mute note">{shot.note}</span>}
                 {sfLong && <span class="mute">Full length · scrolls with the page</span>}
               </figcaption>
             </figure>
