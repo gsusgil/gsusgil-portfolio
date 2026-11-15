@@ -102,7 +102,7 @@ function initProjectPage() {
       L.y += (pr * mx - L.y) * 0.1;
       L.c.style.transform = `translate3d(0,${(-L.y).toFixed(1)}px,0)`;
     }
-    if (desc && zone && innerWidth > 640) {
+    if (desc && zone && innerWidth > 900) {
       const max = Math.max(0, zone.clientHeight - 32 - desc.offsetHeight);
       const tg = Math.min(max, Math.max(0, scrollY * 0.55));
       dy += (tg - dy) * 0.09;

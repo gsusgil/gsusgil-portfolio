@@ -241,7 +241,8 @@ html.vt-switch::view-transition-new(root){animation:vt-fade-in .35s linear both}
   .idea{grid-column:1/-1;grid-row:auto}.desc,.info{grid-row:auto}
   .proof{position:static;grid-column:1/-1;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;max-width:100%;margin-top:28px}
   .intro{padding-bottom:clamp(48px,9vw,96px)}
-  .info{grid-column:1}
+  .info{grid-column:1/-1}.desc{transform:none!important}
+  .ctext{min-height:0;gap:32px;padding-block:20px 32px}
   .profile .big{grid-column:1/-1}.profile dl{margin-top:32px}
 }
 
