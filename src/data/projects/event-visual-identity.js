@@ -7,7 +7,7 @@ export default {
   slug: "event-visual-identity",
   name: "Student Week",
   disc: "Event Identity",
-  year: "2023-27",
+  year: "2024-27",
   client: CL,
   role: "Visual direction, concept evolution, identity system",
 
@@ -35,9 +35,9 @@ export default {
   // panoramic cell (s4) instead of a small 9:7 one — same 5 captions, no text changed.
   shots: [
     { video: "/projects/event-identity/resumen-stw-2025-web.mp4", poster: "/projects/event-identity/resumen-poster.jpg", caption: "2025 · Applied to the live event" },
-    { src: "/projects/event-identity/2027-preview.webp", caption: "2027 · Preview", badge: "Preview", pos: "50% 25%" },
-    { src: "/projects/event-identity/2025-preview.webp", caption: "2025 · Casa Batlló" },
+    { src: "/projects/event-identity/2027-preview.webp", caption: "2027 · Preview", veil: "Preview", pos: "50% 25%" },
     { src: "/projects/event-identity/2024-preview.webp", caption: "2024 · Casa Batlló" },
+    { src: "/projects/event-identity/2025-preview.webp", caption: "2025 · Casa Batlló" },
   ],
 
   creditsNote: "Performance, content and alumni teams",

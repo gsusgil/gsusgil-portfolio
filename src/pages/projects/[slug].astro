@@ -84,7 +84,7 @@ const isLong = Boolean(project.long);
                 ) : (
                   <img src={shot.src} alt={shot.caption} loading="lazy" style={shot.pos ? `object-position:${shot.pos}` : undefined} />
                 )}
-                {shot.badge && <span class="badge">{shot.badge}</span>}
+                {shot.veil && <div class="veil"><span>{shot.veil}</span></div>}
               </div>
               <figcaption>
                 <span>{shot.caption}</span>
