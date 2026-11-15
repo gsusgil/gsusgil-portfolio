@@ -34,11 +34,10 @@ export default {
   // Note: reordered vs. the prototype's shot order so the 16:9 recap video lands in the
   // panoramic cell (s4) instead of a small 9:7 one — same 5 captions, no text changed.
   shots: [
-    { src: "/projects/event-identity/sagrada-familia.png", caption: "2023 · Sagrada Família" },
-    { src: "/projects/event-identity/park-guell.png", caption: "2024 · Park Güell" },
-    { src: "/projects/event-identity/casa-batllo.png", caption: "2025 · Casa Batlló + panot" },
-    { src: "/projects/event-identity/mies-van-rhode.png", caption: "2026 · Multi-landmark system" },
     { video: "/projects/event-identity/resumen-stw-2025-web.mp4", poster: "/projects/event-identity/resumen-poster.jpg", caption: "2025 · Applied to the live event" },
+    { src: "/projects/event-identity/2026-torre-collserola.webp", caption: "2026 · Torre de Collserola", pos: "40% 50%" },
+    { src: "/projects/event-identity/2026-pabellon-mies.webp", caption: "2026 · Pabellón Mies van der Rohe", pos: "35% 50%" },
+    { src: "/projects/event-identity/2026-torre-montjuic.webp", caption: "2026 · Torre de Montjuïc", pos: "50% 0%" },
   ],
 
   creditsNote: "Performance, content and alumni teams",

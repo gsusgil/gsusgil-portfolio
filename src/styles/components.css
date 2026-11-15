@@ -174,8 +174,8 @@ footer{border-top:1px solid var(--line);padding-block:12px 0}
    to the video. Paula/Arita: the big left cell (k0/m0) is 16:9 and the two stills on the
    other side stretch to share its height. */
 .shot.vid .sf{flex:none;aspect-ratio:16/9}.shots .sf img,.shots .sf video{max-height:none}
-.shots:has(.s4.vid){grid-template-rows:repeat(2,clamp(180px,27vw,480px));grid-auto-rows:auto}
-.shots .s4.vid{grid-row:3;justify-self:center;width:min(100%,calc((100svh - 120px)*16/9))}
+.shots:has(.s0.vid){grid-template-rows:auto clamp(180px,27vw,480px);grid-auto-rows:auto}
+.shots:has(.s0.vid) .shot:not(.vid) .sf img{position:absolute;inset:0}
 .shots:has(.k0.vid),.shots:has(.m0.vid){grid-template-rows:repeat(2,1fr);grid-auto-rows:auto}
 .shots:has(.k0.vid) .shot:not(.vid) .sf img,.shots:has(.m0.vid) .shot:not(.vid) .sf img{position:absolute;inset:0}
 .shot figcaption{display:flex;flex-wrap:wrap;justify-content:space-between;gap:2px 12px;padding:0 2px}
