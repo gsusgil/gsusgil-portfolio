@@ -151,7 +151,7 @@ footer{border-top:1px solid var(--line);padding-block:12px 0}
 /* Case study */
 .in-wrap{max-width:1440px;margin-inline:auto;padding-inline:var(--gut);padding-block:calc(8px + env(safe-area-inset-top,0px)) 96px}
 .hero{height:min(78vh,62vw);min-height:240px;overflow:hidden;border-radius:6px;background:var(--plate)}
-.hero img,.hero video{display:block;width:100%;height:118%;max-height:80svh;object-fit:cover;will-change:transform}
+.hero img,.hero video{display:block;width:100%;height:118%;max-height:none;object-fit:cover;will-change:transform}
 .ctext{position:relative;align-items:start;min-height:clamp(420px,78vh,760px);padding-block:16px}
 .idea{grid-column:1 / span 2;grid-row:1;align-self:start;font-size:clamp(26px,4.4vw,60px);line-height:1;letter-spacing:-.05em;text-wrap:balance;max-width:16em}
 .endcta{border-top:1px solid var(--line);padding-block:12px clamp(48px,8vw,96px)}
@@ -175,7 +175,7 @@ footer{border-top:1px solid var(--line);padding-block:12px 0}
    other side stretch to share its height. */
 .shot.vid .sf{flex:none;aspect-ratio:16/9}.shots .sf img,.shots .sf video{max-height:none}
 .shots:has(.s4.vid){grid-template-rows:repeat(2,clamp(180px,27vw,480px));grid-auto-rows:auto}
-.shots .s4.vid{grid-row:3}
+.shots .s4.vid{grid-row:3;justify-self:center;width:min(100%,calc((100svh - 120px)*16/9))}
 .shots:has(.k0.vid),.shots:has(.m0.vid){grid-template-rows:repeat(2,1fr);grid-auto-rows:auto}
 .shots:has(.k0.vid) .shot:not(.vid) .sf img,.shots:has(.m0.vid) .shot:not(.vid) .sf img{position:absolute;inset:0}
 .shot figcaption{display:flex;flex-wrap:wrap;justify-content:space-between;gap:2px 12px;padding:0 2px}

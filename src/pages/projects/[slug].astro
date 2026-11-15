@@ -82,7 +82,7 @@ const isLong = Boolean(project.long);
                 ) : shot.placeholder ? (
                   <div class="pending">Pending</div>
                 ) : (
-                  <img src={shot.src} alt={shot.caption} loading="lazy" />
+                  <img src={shot.src} alt={shot.caption} loading="lazy" style={shot.pos ? `object-position:${shot.pos}` : undefined} />
                 )}
               </div>
               <figcaption>
@@ -128,7 +128,7 @@ const isLong = Boolean(project.long);
                   ) : shot.placeholder ? (
                     <div class="pending">Pending</div>
                   ) : (
-                    <img src={shot.src} alt={shot.caption} loading="lazy" />
+                    <img src={shot.src} alt={shot.caption} loading="lazy" style={shot.pos ? `object-position:${shot.pos}` : undefined} />
                   )}
                 </div>
                 <figcaption><span>{shot.caption}</span></figcaption>

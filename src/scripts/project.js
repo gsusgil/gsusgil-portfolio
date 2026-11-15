@@ -45,7 +45,27 @@ function initProjectPage() {
     $$(".shots video[autoplay]").forEach((v) => {
       v.removeAttribute("autoplay");
       v.pause();
+      v.controls = true; // poster only, but the visitor can still press play
     });
+  } else {
+    // Play while on screen, pause when off screen. If the browser refuses autoplay
+    // (low-power mode, data saver...), fall back to native controls instead of a dead poster.
+    const vids = $$(".shots video");
+    if (vids.length && IO) {
+      const vo = new IntersectionObserver(
+        (es) =>
+          es.forEach((e) => {
+            const v = e.target;
+            if (e.isIntersecting) v.play().catch(() => (v.controls = true));
+            else v.pause();
+          }),
+        { threshold: 0.25 }
+      );
+      vids.forEach((v) => {
+        v.muted = true;
+        vo.observe(v);
+      });
+    }
   }
 
   /* ---------- Stats count up from 0 once, on load ---------- */
