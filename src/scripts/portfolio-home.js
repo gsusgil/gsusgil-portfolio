@@ -756,7 +756,7 @@ function initHome() {
         const sp = (r.top + r.height / 2 - vh / 2) / vh;
         s.x += (s.tx - s.x) * 0.05;
         s.y += (s.ty - s.y) * 0.05;
-        s.img.style.transform = `translate3d(${(s.x * 10).toFixed(2)}px,${(-sp * 32 + s.y * 10).toFixed(2)}px,0) rotate(${(s.x * 0.6).toFixed(2)}deg)`;
+        s.img.style.transform = `translate3d(${(s.x * 6).toFixed(2)}px,${(-sp * 20 + s.y * 6).toFixed(2)}px,0) rotate(${(s.x * 0.6).toFixed(2)}deg)`;
         if (!touch) {
           s.gx += (s.mx - s.gx) * 0.16;
           s.gy += (s.my - s.gy) * 0.16;

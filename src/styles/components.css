@@ -104,7 +104,7 @@ footer .name{padding-block:40px}
 .cap em:first-child{transition:transform .6s var(--out)}
 .cap em + em{color:var(--mute)}
 .frame{position:relative;flex:1;min-height:0;overflow:hidden;border-radius:4px;background:var(--line)}
-.frame img,.frame video{position:absolute;inset:-8%;width:116%;height:116%;max-width:none;object-fit:cover;will-change:transform}
+.frame img,.frame video{position:absolute;inset:-4%;width:108%;height:108%;max-width:none;object-fit:cover;will-change:transform}
 .tag{position:absolute;left:0;top:0;z-index:2;height:28px;display:flex;align-items:center;padding:0 10px;border-radius:4px;background:var(--accent);color:var(--on-art);pointer-events:none;opacity:0;scale:.6;transition:opacity .3s,scale .5s var(--out);white-space:nowrap}
 .cell.hot{padding:4px;gap:6px;z-index:3}
 .cell.hot .cap{padding:6px 8px 0}
