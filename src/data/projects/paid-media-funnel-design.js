@@ -27,10 +27,10 @@ export default {
   cover: { src: "/home/grid/hvac.webp", alt: "HVAC Master Launch — awareness stage" },
   hero: { src: "/projects/ig-funnel/hero.webp", alt: "HVAC Master Launch — consideration stage" },
   thumbs: [
-    { src: "/home/list/hvac-1.webp", alt: "Awareness" },
-    { src: "/home/list/hvac-2.webp", alt: "Consideration" },
-    { src: "/home/list/hvac-3.webp", alt: "Conversion" },
-    { src: "/home/list/hvac-4.webp", alt: "Launch week" },
+    { src: "/home/list/hvac-1.webp", alt: "Carousel 1 — market size" },
+    { src: "/home/list/hvac-2.webp", alt: "Carousel 2 — what HVAC systems do" },
+    { src: "/home/list/hvac-3.webp", alt: "Carousel 3 — the equipment" },
+    { src: "/home/list/hvac-4.webp", alt: "Carousel 4 — call to action" },
   ],
 
   shots: [
