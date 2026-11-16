@@ -75,7 +75,7 @@ const isLong = Boolean(project.long);
           const cls = `${isLong ? "b" : "s"}${n}`;
           const sfLong = isLong && n < 2;
           return (
-            <figure class={`shot ${cls}${shot.video ? " vid" : ""}`}>
+            <figure class={`shot ${cls}${shot.video ? " vid" : ""}`} style={shot.ar ? `--ar:${shot.ar}` : undefined}>
               <div class={`sf${sfLong ? " long" : ""}`}>
                 {shot.video ? (
                   <video src={shot.video} poster={shot.poster} autoplay muted loop playsinline preload="metadata" />

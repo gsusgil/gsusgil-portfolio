@@ -284,6 +284,13 @@ html.vt-switch::view-transition-new(root){animation:vt-fade-in .35s linear both}
   .s0,.s3,.s4{grid-column:1/-1;grid-row:span 2}.s1,.s2{grid-column:auto;grid-row:auto}
   .k0,.m0{grid-column:1/-1;grid-row:span 2}.k1,.k2,.m1,.m2{grid-column:auto;grid-row:auto}
   .shots:has(.vid){grid-template-rows:none;grid-auto-rows:auto}.shots:has(.vid) .shot:not(.vid) .sf{flex:none;aspect-ratio:1}.shots .vid{grid-row:auto}.shots:has(.s0.vid){grid-template-rows:none;grid-auto-rows:auto}
+  /* Shots that declare their own aspect ratio (--ar) keep it on mobile: nothing is cropped. s0 full width, s1 tall on the left, s2/s3 stacked on the right. */
+  .shots:has([style*="--ar"]){grid-template-rows:none;grid-auto-rows:auto;align-items:start}
+  .shots:has([style*="--ar"]) .shot{grid-row:auto}
+  .shots:has([style*="--ar"]) .sf{flex:none;aspect-ratio:var(--ar,1)}
+  .shots:has([style*="--ar"]) .sf img{position:absolute;inset:0}
+  .shots:has([style*="--ar"]) .s1{grid-column:1;grid-row:span 2;align-self:stretch}
+  .shots:has([style*="--ar"]) .s2,.shots:has([style*="--ar"]) .s3{grid-column:2}
   .chap h3,.chap > span{grid-column:1/-1}.chap > span{grid-row:1;margin-bottom:8px}
   .sub{gap:28px}.sub .info{grid-row:auto}.cdesc{font-size:17px;line-height:1.2}
   .b0,.b1{grid-column:1/-1;grid-row:span 3}.b2{grid-column:1/-1;grid-row:auto}.b3,.b4{grid-column:auto;grid-row:auto}
