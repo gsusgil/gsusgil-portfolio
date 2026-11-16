@@ -28,16 +28,16 @@ export default {
   hero: { src: "/projects/ig-funnel/hero.webp", alt: "HVAC Master Launch — Instagram carousel system" },
   thumbs: [
     { src: "/home/list/hvac-1.webp", alt: "Carousel 1 — market size" },
-    { src: "/home/list/hvac-2.webp", alt: "Carousel 2 — what HVAC systems do", pos: "50% 0%" },
+    { src: "/home/list/hvac-2.webp", alt: "Carousel 2 — what HVAC systems do" },
     { src: "/home/list/hvac-3.webp", alt: "Carousel 3 — the equipment" },
     { src: "/home/list/hvac-4.webp", alt: "Carousel 4 — call to action" },
   ],
 
   shots: [
-    { src: "/projects/ig-funnel/linkedin-mofu.webp", caption: "Consideration · LinkedIn, the master's value up front", pos: "50% 22%" },
+    { src: "/projects/ig-funnel/linkedin-mofu.webp", caption: "Consideration · LinkedIn, the master's value up front" },
     { src: "/projects/ig-funnel/story-mofu.webp", caption: "Consideration · Stories, full-screen with a clear call to action" },
-    { src: "/projects/ig-funnel/tofu-market.webp", caption: "Awareness · the market opportunity in one number", pos: "50% 0%" },
-    { src: "/projects/ig-funnel/tofu-systems.webp", caption: "Awareness · what HVAC systems do", pos: "50% 0%" },
+    { src: "/projects/ig-funnel/tofu-market.webp", caption: "Awareness · the market opportunity in one number" },
+    { src: "/projects/ig-funnel/tofu-systems.webp", caption: "Awareness · what HVAC systems do" },
   ],
 
   creditsNote: "Performance, content and alumni teams",
