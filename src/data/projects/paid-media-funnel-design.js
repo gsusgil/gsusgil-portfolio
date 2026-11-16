@@ -24,8 +24,8 @@ export default {
     ["17", "Slides across 3 stages"],
   ],
 
-  cover: { src: "/home/grid/hvac.webp", alt: "HVAC Master Launch — Instagram carousels" },
-  hero: { src: "/projects/ig-funnel/hero.webp", alt: "HVAC Master Launch — consideration stage" },
+  cover: { src: "/home/grid/hvac.webp", alt: "HVAC Master Launch — awareness stage" },
+  hero: { src: "/projects/ig-funnel/hero.webp", alt: "HVAC Master Launch — Instagram carousel system" },
   thumbs: [
     { src: "/home/list/hvac-1.webp", alt: "Carousel 1 — market size" },
     { src: "/home/list/hvac-2.webp", alt: "Carousel 2 — what HVAC systems do" },
