@@ -38,7 +38,6 @@ export default {
     { src: "/projects/ig-funnel/carousel-2/01.jpg", caption: "Consideration · depth and academic credibility" },
     { src: "/projects/ig-funnel/carousel-3/01.jpg", caption: "Conversion · outcomes, trust, a visible call to action" },
     { src: "/projects/ig-funnel/carousel-1/02.jpg", caption: "One system across 17 slides" },
-    { src: "/projects/ig-funnel/carousel-3/04.jpg", caption: "Launch week" },
   ],
 
   creditsNote: "Performance, content and alumni teams",
