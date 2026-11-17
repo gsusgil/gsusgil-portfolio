@@ -36,13 +36,10 @@ export default {
     { src: "/home/list/email-4.webp", alt: "Newsletter" },
   ],
 
-  // shots[0..1] render as the two long, scroll-driven emails; shots[2..4] as detail crops.
+  // Two long, scroll-driven emails (shots[0..1]).
   shots: [
     { src: "/projects/email-design/email-1.png", caption: "Newsletter · editorial nurturing" },
     { src: "/projects/email-design/email-2.png", caption: "Post-event · contextual follow-up" },
-    { src: "/projects/email-design/banner-mail-system.png", caption: "Detail · header and hierarchy" },
-    { placeholder: true, caption: "Detail · modular content block" },
-    { placeholder: true, caption: "Detail · call to action" },
   ],
 
   creditsNote: "Performance, content and alumni teams",
