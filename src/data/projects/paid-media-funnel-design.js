@@ -16,7 +16,7 @@ export default {
   key: "One visual language across all three stages. Only hierarchy and depth change with intent.",
   d1: "A paid media system across Instagram and LinkedIn that moves architects and engineers from awareness to enrolment: three funnel stages, 17 carousel slides, one campaign language.",
   d2: "I directed the visual system and shaped each stage around intent: high-impact hierarchy to stop the scroll, academic depth for consideration, then outcomes and a clear call to action for conversion.",
-  out: "Qualified leads and the first enrolments within a week of launch.",
+  out: "230K+ impressions and 1.5K+ clicks across the three stages, and three enrolments in the first week.",
 
   stats: [
     ["230K+", "Impressions"],
