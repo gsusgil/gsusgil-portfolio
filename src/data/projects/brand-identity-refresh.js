@@ -61,9 +61,10 @@ export default {
       out: "A logo with its uses, a basic brand manual and every version needed online and offline.",
       key: "Make every purchase feel like a safe place.",
       shots: [
+        { placeholder: true, ar: "4/5", caption: "Brand manual, logo and uses" },
+        { placeholder: true, ar: "4/5", caption: "Brand manual, palette and applications" },
         { placeholder: true, caption: "Logo in the brand palette" },
         { placeholder: true, caption: "Logo versions and uses" },
-        { placeholder: true, caption: "Basic brand manual" },
       ],
     },
   ],
