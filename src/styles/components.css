@@ -285,6 +285,7 @@ html.vt-switch::view-transition-new(root){animation:vt-fade-in .35s linear both}
   .soc a{display:inline-flex;align-items:center;min-height:44px}
   .pill.copy{height:44px;padding:0 14px}
   .hero{height:auto;aspect-ratio:4/5;max-width:100%}
+  .hero img{object-position:var(--hp,50%) 50%}
   .ctext{min-height:0;gap:32px;padding-block:20px 32px}
   .endcta > div{grid-column:1/-1;margin-top:12px}
   .info{grid-row:auto}

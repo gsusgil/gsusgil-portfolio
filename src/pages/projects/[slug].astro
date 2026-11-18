@@ -28,7 +28,7 @@ const isLong = Boolean(project.long);
 <BaseLayout title={`${project.name} — gsusgil`} description={project.idea}>
   <main class="in-wrap">
     <div class="stag">
-      <div class="hero">
+      <div class="hero" style={project.hero.pos ? `--hp:${project.hero.pos}` : undefined}>
         <img src={project.hero.src} alt={project.hero.alt} />
       </div>
       <div class="thirds ctext">

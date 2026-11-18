@@ -28,7 +28,7 @@ export default {
   ],
 
   cover: { src: "/home/grid/email.webp", alt: "Newsletter and post-event email side by side" },
-  hero: { src: "/projects/email-design/hero.webp", alt: "Email system: newsletter and post-event email" },
+  hero: { src: "/projects/email-design/hero.webp", alt: "Email system: newsletter and post-event email", pos: "6%" },
   thumbs: [
     { src: "/home/list/email-1.webp", alt: "Newsletter — header and Learn section" },
     { src: "/home/list/email-2.webp", alt: "Newsletter — HVAC news block" },
