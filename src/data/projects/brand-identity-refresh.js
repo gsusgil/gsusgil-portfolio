@@ -48,7 +48,7 @@ export default {
         { src: "/projects/paula-belil/paula-pillows.webp", ar: "4/5", caption: "Logo in use, lifestyle photography" },
         { src: "/projects/paula-belil/paula-on-set.webp", ar: "4/5", caption: "Logo in use, on set" },
         { src: "/projects/paula-belil/paula-wordmark-palette.webp", caption: "Serif wordmark and palette" },
-        { src: "/projects/paula-belil/brand-system.png", caption: "Brand system in use" },
+        { src: "/projects/paula-belil/paula-camera.webp", caption: "Logo in use, behind the camera" },
       ],
     },
     {
