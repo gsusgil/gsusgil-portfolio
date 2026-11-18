@@ -52,10 +52,10 @@ export default {
       client: "Arita · Pilates essentials",
       year: "2026",
       role: "Identity design, logo system, brand guidelines",
-      d1: "An identity for Arita, a pilates essentials brand positioned as accessible luxury: a premium, sustainable alternative to names like Alo Yoga, for women whose lifestyle is built around wellness.",
-      d2: "I designed a simple, recognisable logo that holds up across formats, in a palette of rose, chocolate, cream and berry red chosen to feel current. The brand is meant to be a safe place for women who want to feel good and look good.",
+      d1: "An identity for Arita, a pilates essentials brand for women whose lifestyle is built around wellness, around feeling good and looking good. The goal was for shopping with Arita to feel like a safe place: premium, sustainable and made for her.",
+      d2: "I designed a simple, recognisable logo that holds up across formats, in a palette of rose, chocolate, cream and berry red chosen to feel current, so every touchpoint, online and offline, feels warm and consistent.",
       out: "A logo with its uses, a basic brand manual and every version needed online and offline.",
-      key: "Make a premium brand feel like a safe place.",
+      key: "Make every purchase feel like a safe place.",
       shots: [
         { placeholder: true, caption: "Logo in the brand palette" },
         { placeholder: true, caption: "Logo versions and uses" },
