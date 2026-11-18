@@ -39,7 +39,7 @@ export default {
   // Two long, scroll-driven emails (shots[0..1]).
   shots: [
     { src: "/projects/email-design/email-1.png", caption: "Newsletter · editorial nurturing" },
-    { src: "/projects/email-design/email-2.png", caption: "Post-event · contextual follow-up" },
+    { src: "/projects/email-design/email-2.png", caption: "Post-event · follow-up that also promotes programmes" },
   ],
 
   creditsNote: "Performance, content and alumni teams",
