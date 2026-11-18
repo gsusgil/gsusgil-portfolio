@@ -20,7 +20,7 @@ export default {
 
   stats: [],
 
-  cover: { src: "/home/grid/paula.webp", alt: "Paula Belil PB monogram" },
+  cover: { src: "/home/grid/paula-arita.webp", alt: "Paula Belil and Arita identities side by side" },
   hero: { src: "/projects/paula-belil/hero.webp", alt: "Paula Belil and Arita brand identities", pos: "13%" },
   thumbs: [
     { src: "/home/list/paula-1.webp", alt: "Paula Belil logo" },
