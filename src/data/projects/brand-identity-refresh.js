@@ -53,7 +53,7 @@ export default {
       year: "2026",
       role: "Identity design, logo system, brand guidelines",
       d1: "An identity for Arita, a pilates essentials brand for women whose lifestyle is built around wellness, around feeling good and looking good. The goal was for shopping with Arita to feel like a safe place: premium, sustainable and made for her.",
-      d2: "I designed a simple, recognisable logo that holds up across formats, in a palette of rose, chocolate, cream and berry red chosen to feel current, so every touchpoint, online and offline, feels warm and consistent.",
+      d2: "I designed a simple, recognisable logo that holds up across formats. The palette moves through soft rose, cream, chocolate and berry red: subtle tones that guide the eye and mark a path from one touchpoint to the next, online and offline.",
       out: "A logo with its uses, a basic brand manual and every version needed online and offline.",
       key: "Make every purchase feel like a safe place.",
       shots: [
