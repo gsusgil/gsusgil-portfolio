@@ -13,7 +13,7 @@ export default {
   client: CL,
   role: "Email design, content hierarchy, nurturing structure",
   long: true, // full-length scrollable email windows (handoff §3 "Emails largos")
-  bench: true,
+  bench: false,
 
   idea: "One system, two speeds.",
   key: "Two modes on one modular structure: editorial depth for nurturing, a single action for follow‑up.",
