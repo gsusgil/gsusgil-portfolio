@@ -28,7 +28,7 @@ export default {
   ],
 
   cover: { src: "/home/grid/email.webp", alt: "Email system overview" },
-  hero: { src: "/projects/email-design/hero.webp", alt: "Newsletter email design" },
+  hero: { src: "/projects/email-design/hero.webp", alt: "Email system: post-event email and newsletter" },
   thumbs: [
     { src: "/home/list/email-1.webp", alt: "Newsletter" },
     { src: "/home/list/email-2.webp", alt: "Post-event" },
