@@ -122,8 +122,8 @@ const isLong = Boolean(project.long);
             </div>
           </div>
           <div class="shots">
-            {ch.shots.map((shot, n) => (
-              <figure class={`shot ${c % 2 ? "m" : "k"}${n}${n === 0 ? " vid" : ""}`}>
+            {ch.shots.filter((shot) => !shot.hidden).map((shot, n) => (
+              <figure class={`shot ${c % 2 ? "m" : "k"}${n}${n === 0 && !shot.ar ? " vid" : ""}${shot.ar ? " r45" : ""}`}>
                 <div class="sf">
                   {shot.video ? (
                     <video src={shot.video} poster={shot.poster} autoplay muted loop playsinline preload="metadata" />

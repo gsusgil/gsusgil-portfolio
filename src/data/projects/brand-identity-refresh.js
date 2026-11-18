@@ -42,7 +42,11 @@ export default {
       out: "An identity that presents Paula as an experienced visual professional, refined yet contemporary, with a monogram and typography that bring recognition and consistency.",
       key: "Let a monogram do the work where the full name cannot.",
       shots: [
-        { video: "/projects/paula-belil/brandboard.mp4", poster: "/projects/paula-belil/monograma-pb.png", caption: "Brandboard" },
+        // STANDBY: brandboard video kept here, hidden for now. Remove `hidden: true` to bring it back
+        // (and drop the two 4:5 pieces below so the bento returns to the video layout).
+        { hidden: true, video: "/projects/paula-belil/brandboard.mp4", poster: "/projects/paula-belil/monograma-pb.png", caption: "Brandboard" },
+        { placeholder: true, ar: "4/5", caption: "Brand manual, logo and palette" },
+        { placeholder: true, ar: "4/5", caption: "Brand manual, in use" },
         { placeholder: true, caption: "Serif wordmark and palette" },
         { src: "/projects/paula-belil/brand-system.png", caption: "Brand system in use" },
       ],
