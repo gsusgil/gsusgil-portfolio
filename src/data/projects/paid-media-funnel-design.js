@@ -7,7 +7,7 @@ export default {
   slug: "paid-media-funnel-design",
   name: "HVAC Master Launch",
   disc: "Campaign Direction",
-  year: "", // To be added — handoff §5
+  year: "2025-26",
   client: CL,
   role: "Visual direction, funnel structure, campaign design",
   bench: false, // set true once the account-average benchmark is available

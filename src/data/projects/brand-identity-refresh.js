@@ -9,7 +9,7 @@ export default {
   name: "Paula Belil + Arita",
   disc: "Brand Identity",
   year: "2025-26",
-  client: "Paula Belil · Arita",
+  client: "Freelance · Paula Belil, Arita",
   role: "Concept direction, identity design, visual system",
 
   idea: "Two identities, each built from what the client already had.",
@@ -29,12 +29,12 @@ export default {
     { src: "/home/list/paula-4.webp", alt: "Arita pilates" },
   ],
 
-  creditsNote: null, // client !== in-house → "Collaborators (To be added)"
+  creditsNote: "Paula Belil, Arita",
 
   chapters: [
     {
       name: "Paula Belil",
-      client: "Paula Belil · Photographer and filmmaker",
+      client: "Freelance · Photographer and filmmaker",
       year: "2025",
       role: "Concept direction, monogram design, visual system",
       d1: "An identity refresh for photographer and filmmaker Paula Belil: a serif wordmark, a natural palette and a custom PB monogram that carries the brand where the full name cannot.",
@@ -49,7 +49,7 @@ export default {
     },
     {
       name: "Arita",
-      client: "Arita · Pilates essentials",
+      client: "Freelance · Pilates essentials",
       year: "2026",
       role: "Identity design, logo system, brand guidelines",
       d1: "An identity for Arita, a pilates essentials brand for women whose lifestyle is built around wellness, around feeling good and looking good. The goal was for shopping with Arita to feel like a safe place: premium, sustainable and made for her.",

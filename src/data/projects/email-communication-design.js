@@ -9,7 +9,7 @@ export default {
   slug: "email-communication-design",
   name: "Email System",
   disc: "CRM Design",
-  year: "",
+  year: "2026",
   client: CL,
   role: "Email design, content hierarchy, nurturing structure",
   long: true, // full-length scrollable email windows (handoff §3 "Emails largos")
