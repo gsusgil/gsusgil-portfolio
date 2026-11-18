@@ -19,7 +19,7 @@ export default {
   key: "Two modes on one modular structure: editorial depth for nurturing, a single action for follow‑up.",
   d1: "A modular email system for a 65K+ contact database, built to work in two modes: long-form editorial nurturing and short, high-intent follow-up after events.",
   d2: "I designed the repeatable structure and the hierarchy rules behind it. The newsletter is built for scanning. The post-event email strips back to context and one clear action.",
-  out: "The post-event email clicked through well above the account average.",
+  out: "A newsletter opened by 47.36% of its audience and a post-event email with a 39.29% clickthrough.",
 
   stats: [
     ["65K+", "Contact database"],

@@ -12,10 +12,10 @@ export default {
   client: "Freelance · Paula Belil, Arita",
   role: "Concept direction, identity design, visual system",
 
-  idea: "Two identities, each built from what the client already had.",
+  idea: "Two identities built to hold up in every format.",
   key: "",
-  d1: "Two identity projects, approached the same way: start from what the client already has and turn it into a system.",
-  d2: "Two clients are presented here, each with its own brief, system and result.",
+  d1: "Two freelance identity projects: the personal brand of a photographer and filmmaker, and a pilates essentials brand. Each needed a mark that is simple, recognisable and flexible.",
+  d2: "Each started from one distinctive mark and grew into a palette and a system the client can keep using.",
   out: "Two identities, each with a system the client can keep using.",
 
   stats: [],
@@ -37,8 +37,8 @@ export default {
       client: "Freelance · Photographer and filmmaker",
       year: "2025",
       role: "Concept direction, monogram design, visual system",
-      d1: "An identity refresh for photographer and filmmaker Paula Belil: a serif wordmark, a natural palette and a custom PB monogram that carries the brand where the full name cannot.",
-      d2: "I led concept and design, then built the system for editorial, digital and social use.",
+      d1: "An identity refresh for photographer and filmmaker Paula Belil: a serif wordmark, a natural palette and a custom PB monogram.",
+      d2: "I led concept and design, from the monogram to the system built around it for editorial, digital and social use.",
       out: "One system for her editorial, digital and social work.",
       key: "Let a monogram do the work where the full name cannot.",
       shots: [
