@@ -27,13 +27,13 @@ export default {
     ["39.29%", "Post-event clickthrough"],
   ],
 
-  cover: { src: "/home/grid/email.webp", alt: "Email system overview" },
+  cover: { src: "/home/grid/email.webp", alt: "Newsletter and post-event email side by side" },
   hero: { src: "/projects/email-design/hero.webp", alt: "Email system: newsletter and post-event email" },
   thumbs: [
-    { src: "/home/list/email-1.webp", alt: "Newsletter" },
-    { src: "/home/list/email-2.webp", alt: "Post-event" },
-    { src: "/home/list/email-3.webp", alt: "Email system" },
-    { src: "/home/list/email-4.webp", alt: "Newsletter" },
+    { src: "/home/list/email-1.webp", alt: "Newsletter — header and Learn section" },
+    { src: "/home/list/email-2.webp", alt: "Newsletter — HVAC news block" },
+    { src: "/home/list/email-3.webp", alt: "Post-event email — EstructuraVIVA" },
+    { src: "/home/list/email-4.webp", alt: "Post-event email — programme card" },
   ],
 
   // Two long, scroll-driven emails (shots[0..1]).
