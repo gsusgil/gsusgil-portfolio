@@ -24,7 +24,7 @@ export default {
     ["17", "Slides across 3 stages"],
   ],
 
-  cover: { src: "/home/grid/hvac.webp", alt: "HVAC Master Launch — awareness stage" },
+  cover: { src: "/home/grid/hvac.webp", alt: "HVAC Master Launch — LinkedIn, market data and Stories pieces" },
   hero: { src: "/projects/ig-funnel/hero.webp", alt: "HVAC Master Launch — Instagram carousel system" },
   thumbs: [
     { src: "/home/list/hvac-1.webp", alt: "Carousel 1 — market size" },
