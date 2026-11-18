@@ -39,7 +39,7 @@ export default {
       role: "Concept direction, monogram design, visual system",
       d1: "An identity refresh for photographer and filmmaker Paula Belil: a serif wordmark, a natural palette and a custom PB monogram.",
       d2: "I led concept and design, from the monogram to the system built around it.",
-      out: "One system for her editorial, digital and social work.",
+      out: "An identity that presents Paula as an experienced visual professional, refined yet contemporary, with a monogram and typography that bring recognition and consistency.",
       key: "Let a monogram do the work where the full name cannot.",
       shots: [
         { video: "/projects/paula-belil/brandboard.mp4", poster: "/projects/paula-belil/monograma-pb.png", caption: "Brandboard" },
