@@ -19,14 +19,14 @@ export const projects = [eventIdentity, brandRefresh, paidMediaFunnel, emailDesi
 export const getProjectBySlug = (slug) => projects.find((p) => p.slug === slug);
 
 /**
- * Header photo-burst (handoff §11): 5 project images, at least one per project, pulled
- * straight from each project's own cover/thumbs — change a project's image here and the
- * burst picks it up too. The 6th card (portrait) is added separately by the script.
+ * Header photo-burst: 6 portraits of Jesús, shown in this order (first = back of the pile,
+ * last = front card). Files in /public/hero/, 4:5.
  */
 export const burstImages = [
-  eventIdentity.cover,
-  brandRefresh.cover,
-  paidMediaFunnel.cover,
-  emailDesign.cover,
-  eventIdentity.thumbs[1],
+  { src: "/hero/jd-6.webp", alt: "Jesús Gil" },
+  { src: "/hero/jd-5.webp", alt: "Jesús Gil" },
+  { src: "/hero/jd-4.webp", alt: "Jesús Gil" },
+  { src: "/hero/jd-3.webp", alt: "Jesús Gil" },
+  { src: "/hero/jd-2.webp", alt: "Jesús Gil" },
+  { src: "/hero/jd-1.webp", alt: "Jesús Gil, portrait" },
 ];

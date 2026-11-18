@@ -286,17 +286,10 @@ function initHome() {
       for (let i = 0; i < 6; i++) {
         const d = document.createElement("div");
         d.className = "ph";
-        if (i === 5) {
-          const label = document.createElement("span");
-          label.className = "pending";
-          label.textContent = "Your portrait";
-          d.appendChild(label);
-        } else {
-          const img = document.createElement("img");
-          img.loading = "lazy";
-          img.alt = "";
-          d.appendChild(img);
-        }
+        const img = document.createElement("img");
+        img.loading = "lazy";
+        img.alt = "";
+        d.appendChild(img);
         pile.appendChild(d);
         cards.push(d);
         st.push({ x: 0, y: 0, s: 0, o: 0, r: 0, k: 0.07 + i * 0.012 });
@@ -411,10 +404,9 @@ function initHome() {
         if (v && !painted) {
           cards.forEach((el, k) => {
             const img = el.firstChild;
-            if (k < 5) {
-              img.src = burstImages[k].src;
-              img.alt = burstImages[k].alt;
-            } else el.classList.add("me");
+            img.src = burstImages[k].src;
+            img.alt = burstImages[k].alt;
+            if (k === 5) el.classList.add("me");
           });
           painted = true;
         }
@@ -474,17 +466,10 @@ function initHome() {
       for (let i = 0; i < 6; i++) {
         const d = document.createElement("div");
         d.className = `ph${i === 5 ? " me" : ""}`;
-        if (i === 5) {
-          const label = document.createElement("span");
-          label.className = "pending";
-          label.textContent = "Your portrait";
-          d.appendChild(label);
-        } else {
-          const img = document.createElement("img");
-          img.loading = "lazy";
-          img.alt = "";
-          d.appendChild(img);
-        }
+        const img = document.createElement("img");
+        img.loading = "lazy";
+        img.alt = "";
+        d.appendChild(img);
         box.appendChild(d);
         cards.push(d);
       }
@@ -513,10 +498,8 @@ function initHome() {
         if (!painted) {
           cards.forEach((el, k) => {
             const img = el.firstChild;
-            if (k < 5) {
-              img.src = burstImages[k].src;
-              img.alt = burstImages[k].alt;
-            }
+            img.src = burstImages[k].src;
+            img.alt = burstImages[k].alt;
           });
           painted = true;
         }
