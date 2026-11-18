@@ -282,8 +282,8 @@ function initHome() {
       const dotc = $(".dotc", cur);
       const ring = $(".ring", cur);
       let lx = 0, ly = 0;
-      const OFF = [[-0.42, -0.12, -9], [0.36, -0.2, 7], [-0.24, 0.2, -4], [0.32, 0.16, 10], [0.02, -0.3, -3], [0, 0, 0]];
-      for (let i = 0; i < 6; i++) {
+      const OFF = [[0.36, -0.2, 7], [-0.24, 0.2, -4], [0.32, 0.16, 10], [0.02, -0.3, -3], [0, 0, 0]];
+      for (let i = 0; i < burstImages.length; i++) {
         const d = document.createElement("div");
         d.className = "ph";
         const img = document.createElement("img");
@@ -406,7 +406,7 @@ function initHome() {
             const img = el.firstChild;
             img.src = burstImages[k].src;
             img.alt = burstImages[k].alt;
-            if (k === 5) el.classList.add("me");
+            if (k === burstImages.length - 1) el.classList.add("me");
           });
           painted = true;
         }
@@ -417,7 +417,7 @@ function initHome() {
             q.y = cy - cw * 0.625;
           }
           gsap.to(q, {
-            s: v ? (k === 5 ? 1.08 : 1) : 0,
+            s: v ? (k === burstImages.length - 1 ? 1.08 : 1) : 0,
             o: v ? 1 : 0,
             r: OFF[k][2],
             duration: v ? 0.5 : 0.3,
@@ -463,9 +463,9 @@ function initHome() {
       lab.setAttribute("aria-expanded", "false");
       hd.appendChild(lab);
       setT(0);
-      for (let i = 0; i < 6; i++) {
+      for (let i = 0; i < burstImages.length; i++) {
         const d = document.createElement("div");
-        d.className = `ph${i === 5 ? " me" : ""}`;
+        d.className = `ph${i === burstImages.length - 1 ? " me" : ""}`;
         const img = document.createElement("img");
         img.loading = "lazy";
         img.alt = "";
@@ -474,7 +474,7 @@ function initHome() {
         cards.push(d);
       }
       let painted = false;
-      const OFF = [[-0.38, -0.1, -9], [0.34, -0.22, 7], [-0.26, 0.18, -4], [0.3, 0.14, 10], [0.02, -0.32, -3], [0, 0, 0]];
+      const OFF = [[0.34, -0.22, 7], [-0.26, 0.18, -4], [0.3, 0.14, 10], [0.02, -0.32, -3], [0, 0, 0]];
       function geo() {
         const H = hd.getBoundingClientRect();
         const D = pt.parentNode.getBoundingClientRect();
@@ -511,7 +511,7 @@ function initHome() {
         if (bt) bt.kill();
         bt = gsap.timeline({ paused: true, onReverseComplete: () => cards.forEach((el) => gsap.set(el, { opacity: 0 })) });
         cards.forEach((el, k) => {
-          const o = OFF[k], me = k === 5;
+          const o = OFF[k], me = k === burstImages.length - 1;
           gsap.set(el, { left: px - cw / 2, top: py - chh / 2, width: cw, x: g.cx - px, y: g.cy - py, scale: 0, rotation: 0, opacity: 0 });
           bt.to(el, { x: o[0] * cw, y: o[1] * chh, scale: me ? 1.08 : 1, rotation: o[2], opacity: 1, duration: me ? 0.55 : 0.42, ease: "expo.out" }, k * 0.085);
         });

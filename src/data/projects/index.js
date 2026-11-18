@@ -19,11 +19,10 @@ export const projects = [eventIdentity, brandRefresh, paidMediaFunnel, emailDesi
 export const getProjectBySlug = (slug) => projects.find((p) => p.slug === slug);
 
 /**
- * Header photo-burst: 6 portraits of Jesús, shown in this order (first = back of the pile,
+ * Header photo-burst: 5 portraits of Jesús, shown in this order (first = back of the pile,
  * last = front card). Files in /public/hero/, 4:5.
  */
 export const burstImages = [
-  { src: "/hero/jd-6.webp", alt: "Jesús Gil" },
   { src: "/hero/jd-5.webp", alt: "Jesús Gil" },
   { src: "/hero/jd-4.webp", alt: "Jesús Gil" },
   { src: "/hero/jd-3.webp", alt: "Jesús Gil" },
