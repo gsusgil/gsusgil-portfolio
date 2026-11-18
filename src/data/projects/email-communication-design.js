@@ -16,9 +16,9 @@ export default {
   bench: false,
 
   idea: "One system, two speeds.",
-  key: "Two modes on one modular structure: editorial depth for nurturing, a single action for follow‑up.",
-  d1: "A modular email system for a 65K+ contact database, built to work in two modes: long-form editorial nurturing and short, high-intent follow-up after events.",
-  d2: "I designed the repeatable structure and the hierarchy rules behind it. The newsletter guides a long read through clear blocks, so it scans easily. The post-event email strips back to context and one action.",
+  key: "Two modes on one modular structure: editorial depth for nurturing, event context and clear next steps for follow‑up.",
+  d1: "A modular email system for a 65K+ contact database, built to work in two modes: long-form editorial nurturing and contextual follow-up after events.",
+  d2: "I designed the repeatable structure and the hierarchy rules behind it. The newsletter guides a long read through clear blocks, so it scans easily. The post-event email opens with the event, then moves to feedback and the programmes that connect to it.",
   out: "One reusable structure for every send, and results that back it.",
 
   stats: [
