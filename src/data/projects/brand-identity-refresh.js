@@ -45,9 +45,9 @@ export default {
         // STANDBY: brandboard video kept here, hidden for now. Remove `hidden: true` to bring it back
         // (and drop the two 4:5 pieces below so the bento returns to the video layout).
         { hidden: true, video: "/projects/paula-belil/brandboard.mp4", poster: "/projects/paula-belil/monograma-pb.png", caption: "Brandboard" },
-        { placeholder: true, ar: "4/5", caption: "Brand manual, logo and palette" },
-        { placeholder: true, ar: "4/5", caption: "Brand manual, in use" },
-        { placeholder: true, caption: "Serif wordmark and palette" },
+        { src: "/projects/paula-belil/paula-pillows.webp", ar: "4/5", caption: "Logo in use, lifestyle photography" },
+        { src: "/projects/paula-belil/paula-on-set.webp", ar: "4/5", caption: "Logo in use, on set" },
+        { src: "/projects/paula-belil/paula-wordmark-palette.webp", caption: "Serif wordmark and palette" },
         { src: "/projects/paula-belil/brand-system.png", caption: "Brand system in use" },
       ],
     },
@@ -61,10 +61,10 @@ export default {
       out: "A logo with its uses, a basic brand manual and every version needed online and offline.",
       key: "Make every purchase feel like a safe place.",
       shots: [
-        { placeholder: true, ar: "4/5", caption: "Brand manual, logo and uses" },
-        { placeholder: true, ar: "4/5", caption: "Brand manual, palette and applications" },
-        { placeholder: true, caption: "Logo in the brand palette" },
-        { placeholder: true, caption: "Logo versions and uses" },
+        { src: "/projects/arita/arita-poster.webp", ar: "4/5", caption: "Brand in use, campaign poster" },
+        { src: "/projects/arita/arita-social-grid.webp", ar: "4/5", caption: "Brand in use, social grid" },
+        { src: "/projects/arita/arita-logo.webp", caption: "Logo in the brand palette" },
+        { src: "/projects/arita/arita-palette.webp", caption: "Brand palette" },
       ],
     },
   ],
