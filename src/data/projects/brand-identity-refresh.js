@@ -45,8 +45,8 @@ export default {
         // STANDBY: brandboard video kept here, hidden for now. Remove `hidden: true` to bring it back
         // (and drop the two 4:5 pieces below so the bento returns to the video layout).
         { hidden: true, video: "/projects/paula-belil/brandboard.mp4", poster: "/projects/paula-belil/monograma-pb.png", caption: "Brandboard" },
-        { src: "/projects/paula-belil/paula-pillows.webp", ar: "4/5", caption: "Logo in use, lifestyle photography" },
         { src: "/projects/paula-belil/paula-on-set.webp", ar: "4/5", caption: "Logo in use, on set" },
+        { src: "/projects/paula-belil/paula-pillows.webp", ar: "4/5", caption: "Logo in use, lifestyle photography" },
         { src: "/projects/paula-belil/paula-wordmark-palette.webp", caption: "Serif wordmark and palette" },
         { src: "/projects/paula-belil/paula-camera.webp", caption: "Logo in use, behind the camera" },
       ],
