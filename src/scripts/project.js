@@ -40,12 +40,30 @@ function initProjectPage() {
   const gen = ++currentGen;
   const alive = () => gen === currentGen;
 
+  /* Centred play button for videos that cannot autoplay (reduced motion, low-power mode,
+     data saver...). Replaces the native control bar so the poster stays clean. */
+  const showPlay = (v) => {
+    const sf = v.parentElement;
+    if (!sf || sf.querySelector(".vplay")) return;
+    v.controls = false;
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "vplay";
+    b.setAttribute("aria-label", "Play video");
+    b.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
+    b.addEventListener("click", () => {
+      v.play().then(() => b.remove()).catch(() => { v.controls = true; b.remove(); });
+    });
+    v.addEventListener("playing", () => b.remove(), { once: true });
+    sf.appendChild(b);
+  };
+
   /* ---------- Video pieces: no autoplay under reduced motion, poster only ---------- */
   if (reduce) {
     $$(".shots video[autoplay]").forEach((v) => {
       v.removeAttribute("autoplay");
       v.pause();
-      v.controls = true; // poster only, but the visitor can still press play
+      showPlay(v); // poster only, but the visitor can still press the centred play button
     });
   } else {
     // Play while on screen, pause when off screen. If the browser refuses autoplay
@@ -56,7 +74,7 @@ function initProjectPage() {
         (es) =>
           es.forEach((e) => {
             const v = e.target;
-            if (e.isIntersecting) v.play().catch(() => (v.controls = true));
+            if (e.isIntersecting) v.play().catch(() => showPlay(v));
             else v.pause();
           }),
         { threshold: 0.25 }

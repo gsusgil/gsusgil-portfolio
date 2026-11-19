@@ -173,6 +173,9 @@ footer{border-top:1px solid var(--line);padding-block:12px 0}
 /* Video cells: the video's frame is always 16:9. Student Week: the panoramic s4 row sizes
    to the video. Paula/Arita: the big left cell (k0/m0) is 16:9 and the two stills on the
    other side stretch to share its height. */
+.vplay{position:absolute;left:50%;top:50%;width:72px;height:72px;margin:-36px 0 0 -36px;border:0;border-radius:50%;background:rgba(0,0,0,.55);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);display:grid;place-items:center;color:#fff;cursor:pointer;z-index:2;transition:transform .25s var(--out),background .25s}
+.vplay svg{width:28px;height:28px;fill:currentColor;margin-left:3px}
+.vplay:hover{transform:scale(1.06);background:rgba(0,0,0,.7)}.vplay:focus-visible{outline:2px solid #fff;outline-offset:3px}
 .shot.vid .sf{flex:none;aspect-ratio:16/9}.shots .sf img,.shots .sf video{max-height:none}
 .shots:has(.s0.vid){grid-template-rows:auto clamp(180px,27vw,480px);grid-auto-rows:auto}
 .shots:has(.s0.vid) .shot:not(.vid) .sf img{position:absolute;inset:0}
